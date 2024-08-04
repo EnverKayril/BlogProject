@@ -1,0 +1,81 @@
+﻿@model IEnumerable<BlogProject.SERVICE.DTOs.CategoryDTO>
+
+@{
+    ViewData["Title"] = "Kategoriler";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card mb-4 mt-3">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Kategoriler
+    </div>
+    <div class="card-body">
+            <a class="btn btn-primary me-0" asp-action="Create">Kategori Ekle</a>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            Düzenlenme Tarihi
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>
+                         <th>
+                            İşlemler
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @if (item.UpdateDate is not null)
+                                {
+                                    @item.UpdateDate.Value.ToString("dd/MM/yyyy HH:mm")
+                                }
+                                else
+                                {
+                                @item.CreateDate.ToString("dd/MM/yyyy HH:mm")
+                                }
+                            </td>
+                            <td>
+                                @item.Status.ToString()
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function() {
+            var table = new DataTable('#categoriesTable', {
+                language: {
+                    url: '/locales/tr.json'
+                }
+            });
+        });
+    </script>
+}

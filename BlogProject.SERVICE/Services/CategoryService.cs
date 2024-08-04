@@ -14,19 +14,18 @@ namespace BlogProject.SERVICE.Services
     public class CategoryService : ICategoryService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
 
         public CategoryService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
-            this.mapper = mapper;
+            _mapper = mapper;
         }
 
         public int CreateCategoryAsync(CategoryCreateDTO categoryDTO)
         {
-
             //var category = new Category { Name = categoryDTO.Name };
-            var category = mapper.Map<Category>(categoryDTO);
+            var category = _mapper.Map<Category>(categoryDTO);
             return _unitOfWork.CategoryRepo.Add(category);
         }
 
@@ -38,21 +37,27 @@ namespace BlogProject.SERVICE.Services
             return _unitOfWork.CategoryRepo.Delete(category);
         }
 
+        public async Task<IEnumerable<CategoryDTO>> GetAllActiveCategoriesAsync()
+        {
+            var categories = await _unitOfWork.CategoryRepo.GetAllAsync(c => c.Status != CORE.CoreModels.Enums.EntityStatus.Deleted);
+            return _mapper.Map<IEnumerable<CategoryDTO>>(categories);
+        }
+
         public async Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync()
         {
             var categories = await _unitOfWork.CategoryRepo.GetAllAsync();
-            return mapper.Map<IEnumerable<CategoryDTO>>(categories);
+            return _mapper.Map<IEnumerable<CategoryDTO>>(categories);
         }
 
         public async Task<CategoryDTO> GetCategoryByIdAsync(string id)
         {
             var category = await _unitOfWork.CategoryRepo.GetByIdAsync(id);
-            return mapper.Map<CategoryDTO>(category);
+            return _mapper.Map<CategoryDTO>(category);
         }
 
         public int UpdateCategoryAsync(CategoryDTO categoryDTO)
         {
-            var category = mapper.Map<Category>(categoryDTO);
+            var category = _mapper.Map<Category>(categoryDTO);
             category.UpdateDate = DateTime.Now;
             category.Status = CORE.CoreModels.Enums.EntityStatus.Updated;
             return _unitOfWork.CategoryRepo.Update(category);

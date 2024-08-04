@@ -13,5 +13,6 @@ namespace BlogProject.SERVICE.Utilities.IUnitOfWorks
         IArticleRepo ArticleRepo { get; }
         ICategoryRepo CategoryRepo { get; }
         ICommentRepo CommentRepo { get; }
+        IRoleRepo RoleRepo { get; }
     }
 }

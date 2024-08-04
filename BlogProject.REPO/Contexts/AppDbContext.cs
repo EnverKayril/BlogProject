@@ -17,17 +17,22 @@ namespace BlogProject.REPO.Contexts
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
-        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = ENVER\\SQLEXPRESS; Database = FinalProject; Trusted_Connection = True; TrustServerCertificate = True;");
+            optionsBuilder.UseSqlServer("Server = ENVER\\SQLEXPRESS01; Database = FinalProject; Trusted_Connection = True; TrustServerCertificate = True;");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new AppUserConfig());
+            builder.ApplyConfiguration(new ArticleConfig());
             builder.ApplyConfiguration(new CategoryConfig());
+            builder.ApplyConfiguration(new CommentConfig());
+            builder.ApplyConfiguration(new RoleConfig());
         }
     }
 }

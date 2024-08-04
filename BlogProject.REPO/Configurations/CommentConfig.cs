@@ -13,7 +13,8 @@ namespace BlogProject.REPO.Configurations
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
-            builder.HasOne(c => c.AppUser).WithMany(a => a.Comments).HasForeignKey(c => c.AppUserId).OnDelete(DeleteBehavior.NoAction);
+            builder.Property(c => c.Content).HasMaxLength(1000).IsRequired();
+            builder.HasOne(c => c.AppUser).WithMany(a => a.Comments).HasForeignKey(c => c.AppUserId).OnDelete(DeleteBehavior.NoAction);;
         }
     }
 }

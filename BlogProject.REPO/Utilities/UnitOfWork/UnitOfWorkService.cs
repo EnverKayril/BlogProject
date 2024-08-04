@@ -12,16 +12,18 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
 {
     public class UnitOfWorkService : IUnitOfWorkService
     {
-        private readonly IUnitOfWork _unitOfWorkService;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public UnitOfWorkService(IUnitOfWork unitOfWorkService, IMapper mapper)
         {
-            _unitOfWorkService = unitOfWorkService;
+            _unitOfWork = unitOfWorkService;
             _mapper = mapper;
-            CategoryService = new CategoryService(_unitOfWorkService, _mapper);
+            CategoryService = new CategoryService(_unitOfWork, _mapper);
         }
 
         public ICategoryService CategoryService { get; }
+
+        public IArticleService ArticleService {  get; }
     }
 }

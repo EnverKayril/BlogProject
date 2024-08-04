@@ -5,6 +5,8 @@ using BlogProject.REPO.Utilities.Logging;
 using BlogProject.REPO.Utilities.UnitOfWork;
 using BlogProject.SERVICE.IRepositories;
 using BlogProject.SERVICE.Mappers;
+using BlogProject.SERVICE.Services;
+using BlogProject.SERVICE.Services.IServices;
 using BlogProject.SERVICE.Utilities.ILogging;
 using BlogProject.SERVICE.Utilities.IUnitOfWorks;
 using Microsoft.AspNetCore.Identity;
@@ -37,8 +39,11 @@ namespace BlogProject_UI
             //Repository
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IUnitOfWorkService,  UnitOfWorkService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<IArticleService, ArticleService>();
 
             //AutoMapper
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
             builder.Services.AddAutoMapper(typeof(Mapping));
 
             var app = builder.Build();
@@ -57,6 +62,11 @@ namespace BlogProject_UI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.MapAreaControllerRoute(
+                name: "Admin",
+                areaName:"Admin",
+                pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",

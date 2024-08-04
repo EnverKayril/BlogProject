@@ -21,6 +21,7 @@ namespace BlogProject.REPO.Configurations
                 new Category {Name = "Bulut Sistemler" }
                 );
 
+            builder.Property(c => c.Name).IsRequired().HasMaxLength(70);
             builder.HasMany(c => c.Articles).WithOne(a => a.Category).HasForeignKey(a => a.CategoryId);
         }
     }

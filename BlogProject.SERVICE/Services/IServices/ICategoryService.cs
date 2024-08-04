@@ -10,6 +10,7 @@ namespace BlogProject.SERVICE.Services.IServices
     public interface ICategoryService
     {
         Task<CategoryDTO> GetCategoryByIdAsync(string id);
+        Task<IEnumerable<CategoryDTO>> GetAllActiveCategoriesAsync();
         Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync();
         int CreateCategoryAsync(CategoryCreateDTO categoryDTO);
         int UpdateCategoryAsync(CategoryDTO categoryDTO);

@@ -13,7 +13,13 @@ namespace BlogProject.REPO.Configurations
     {
         public void Configure(EntityTypeBuilder<Article> builder)
         {
-            builder.HasMany(a => a.Comments).WithOne(c => c.Article).HasForeignKey(c => c.ArticleId);
+            builder.Property(a => a.Title).HasMaxLength(100).IsRequired();
+            builder.Property(a => a.Content).IsRequired();
+            builder.Property(a => a.Content).HasColumnType("Nvarchar(Max)");
+            builder.Property(a => a.ViewsCount).IsRequired();
+            builder.Property(a => a.CommentCount).IsRequired();
+            builder.Property(a => a.Thumbnail).IsRequired();
+            builder.HasMany(a => a.Comments).WithOne(c => c.Article).HasForeignKey(a => a.ArticleId);
         }
     }
 }

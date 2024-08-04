@@ -9,6 +9,5 @@ namespace BlogProject.CORE.CoreModels.BaseModels
     // Marker Interface
     public interface IBaseEntity
     {
-
     }
 }

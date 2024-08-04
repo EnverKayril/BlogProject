@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogProject.REPO.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240727082410_initialCatalog")]
+    [Migration("20240729230922_initialCatalog")]
     partial class initialCatalog
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,7 @@ namespace BlogProject.REPO.Migrations
             modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.AppUser", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
@@ -45,11 +46,13 @@ namespace BlogProject.REPO.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -85,6 +88,9 @@ namespace BlogProject.REPO.Migrations
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -97,6 +103,10 @@ namespace BlogProject.REPO.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -105,7 +115,33 @@ namespace BlogProject.REPO.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "d3d38933-3f06-40f8-87d8-5af6f7ae0e7d",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "52dec236-adcf-4861-ba2b-eb8597f09177",
+                            Email = "enverkayril@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Enver",
+                            LastName = "Kayrıl",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ENVERKAYRIL@GMAIL.COM",
+                            NormalizedFirstName = "ENVER",
+                            NormalizedLastName = "KAYRIL",
+                            NormalizedUserName = "ENVERKAYRIL",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFUGScvAp5FPBvOg6FGay/JTcLhom06iWxyakZdBFRSJEhiGhkJvQu4eu2AcOQcQuw==",
+                            PhoneNumber = "999999999",
+                            PhoneNumberConfirmed = true,
+                            RoleId = 1,
+                            SecurityStamp = "0713e4c9-6600-4b0f-b744-ead92ed05882",
+                            TwoFactorEnabled = false,
+                            UserName = "enverkayril"
+                        });
                 });
 
             modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.Article", b =>
@@ -121,9 +157,12 @@ namespace BlogProject.REPO.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("CommentCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("Nvarchar(Max)");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -134,12 +173,20 @@ namespace BlogProject.REPO.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Thumbnail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ViewsCount")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -163,7 +210,8 @@ namespace BlogProject.REPO.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -178,36 +226,36 @@ namespace BlogProject.REPO.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d6424135-8f10-49c5-9cb7-839871c2304d",
-                            CreateDate = new DateTime(2024, 7, 27, 11, 24, 10, 682, DateTimeKind.Local).AddTicks(937),
+                            Id = "fa880840-df14-4f45-b2a8-1a650d5cc287",
+                            CreateDate = new DateTime(2024, 7, 30, 2, 9, 22, 610, DateTimeKind.Local).AddTicks(3797),
                             Name = "Yazılım",
                             Status = 0
                         },
                         new
                         {
-                            Id = "c64fcb25-844d-4509-a4c6-165c5446fbd4",
-                            CreateDate = new DateTime(2024, 7, 27, 11, 24, 10, 682, DateTimeKind.Local).AddTicks(950),
+                            Id = "b3917934-e80e-4e6f-9208-27a2539f1d59",
+                            CreateDate = new DateTime(2024, 7, 30, 2, 9, 22, 610, DateTimeKind.Local).AddTicks(3819),
                             Name = "Sistem",
                             Status = 0
                         },
                         new
                         {
-                            Id = "40e448b1-32af-44fc-9c3b-31b3dffd4cea",
-                            CreateDate = new DateTime(2024, 7, 27, 11, 24, 10, 682, DateTimeKind.Local).AddTicks(953),
+                            Id = "f5dcd830-c849-488e-8483-4961d742f0ca",
+                            CreateDate = new DateTime(2024, 7, 30, 2, 9, 22, 610, DateTimeKind.Local).AddTicks(3822),
                             Name = "Web Grafik",
                             Status = 0
                         },
                         new
                         {
-                            Id = "7d859c06-ea0c-4c5b-9258-7cd15cf14457",
-                            CreateDate = new DateTime(2024, 7, 27, 11, 24, 10, 682, DateTimeKind.Local).AddTicks(956),
+                            Id = "91d1e9d9-be76-4ce0-be70-fe96c633e3a3",
+                            CreateDate = new DateTime(2024, 7, 30, 2, 9, 22, 610, DateTimeKind.Local).AddTicks(3824),
                             Name = "Güvenlik",
                             Status = 0
                         },
                         new
                         {
-                            Id = "fdaf5e3b-f853-4f22-a308-b35533b9fbaf",
-                            CreateDate = new DateTime(2024, 7, 27, 11, 24, 10, 682, DateTimeKind.Local).AddTicks(959),
+                            Id = "882180e0-acea-4542-9ba3-ef83e7ac541e",
+                            CreateDate = new DateTime(2024, 7, 30, 2, 9, 22, 610, DateTimeKind.Local).AddTicks(3826),
                             Name = "Bulut Sistemler",
                             Status = 0
                         });
@@ -228,7 +276,8 @@ namespace BlogProject.REPO.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -249,6 +298,37 @@ namespace BlogProject.REPO.Migrations
                     b.HasIndex("ArticleId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Admin rolü tüm haklara sahiptir",
+                            Name = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -384,6 +464,17 @@ namespace BlogProject.REPO.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.AppUser", b =>
+                {
+                    b.HasOne("BlogProject.CORE.CoreModels.Models.Role", "Role")
+                        .WithMany("AppUsers")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.Article", b =>
                 {
                     b.HasOne("BlogProject.CORE.CoreModels.Models.AppUser", "AppUser")
@@ -408,7 +499,7 @@ namespace BlogProject.REPO.Migrations
                     b.HasOne("BlogProject.CORE.CoreModels.Models.AppUser", "AppUser")
                         .WithMany("Comments")
                         .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("BlogProject.CORE.CoreModels.Models.Article", "Article")
@@ -488,6 +579,11 @@ namespace BlogProject.REPO.Migrations
             modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.Category", b =>
                 {
                     b.Navigation("Articles");
+                });
+
+            modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.Role", b =>
+                {
+                    b.Navigation("AppUsers");
                 });
 #pragma warning restore 612, 618
         }

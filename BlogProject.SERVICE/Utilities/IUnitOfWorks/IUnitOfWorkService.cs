@@ -10,5 +10,6 @@ namespace BlogProject.SERVICE.Utilities.IUnitOfWorks
     public interface IUnitOfWorkService
     {
         ICategoryService CategoryService { get; }
+        IArticleService ArticleService { get; }
     }
 }

@@ -13,6 +13,7 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _context;
+
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
@@ -20,8 +21,9 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
             ArticleRepo = new ArticleRepo(context);
             CategoryRepo = new CategoryRepo(context);
             CommentRepo = new CommentRepo(context);
-
+            RoleRepo = new RoleRepo(context);
         }
+
         public IAppUserRepo AppUserRepo { get; }
 
         public IArticleRepo ArticleRepo { get; }
@@ -29,5 +31,7 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
         public ICategoryRepo CategoryRepo { get; }
 
         public ICommentRepo CommentRepo { get; }
+
+        public IRoleRepo RoleRepo { get; }
     }
 }

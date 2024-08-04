@@ -62,6 +62,7 @@ namespace BlogProject.SERVICE.Services
                     Title = x.Title,
                     CreateDate = x.CreateDate,
                     Content = x.Content,
+                    Thumbnail = x.Thumbnail,
                     CategoryId = x.CategoryId,
                     AppUserId = x.AppUserId
                 },
@@ -78,6 +79,7 @@ namespace BlogProject.SERVICE.Services
                     Title = x.Title,
                     CreateDate = x.CreateDate,
                     Content = x.Content,
+                    Thumbnail = x.Thumbnail,
                     CategoryId = x.CategoryId,
                     AppUserId = x.AppUserId,
                     FirstName = x.AppUser.FirstName,
@@ -88,14 +90,18 @@ namespace BlogProject.SERVICE.Services
                 );
         }
 
-        public Task<ArticleDTO> GetArticleByIdAsync(string id)
+        public async Task<ArticleDTO> GetArticleByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var article = await _unitOfWork.ArticleRepo.GetByIdAsync(id);
+            return _mapper.Map<ArticleDTO>(article);
         }
 
         public int UpdateArticle(ArticleDTO articleDTO)
         {
-            throw new NotImplementedException();
+            var article = _mapper.Map<Article>(articleDTO);
+            article.UpdateDate = DateTime.Now;
+            article.Status = CORE.CoreModels.Enums.EntityStatus.Updated;
+            return _unitOfWork.ArticleRepo.Update(article);
         }
     }
 }
