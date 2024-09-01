@@ -11,14 +11,11 @@ using System.Threading.Tasks;
 
 namespace BlogProject.REPO.Contexts
 {
-    public class AppDbContext : IdentityDbContext<AppUser>
+    public class AppDbContext : IdentityDbContext<AppUser, Role, string, AppUserClaim, AppUserRole, AppUserLogin, RoleClaim, AppUserToken>
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<AppUser> AppUsers { get; set; }
-        public DbSet<Role> Roles { get; set; }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,6 +29,11 @@ namespace BlogProject.REPO.Contexts
             builder.ApplyConfiguration(new ArticleConfig());
             builder.ApplyConfiguration(new CategoryConfig());
             builder.ApplyConfiguration(new CommentConfig());
+            builder.ApplyConfiguration(new AppUserClaimConfig());
+            builder.ApplyConfiguration(new AppUserLoginConfig());
+            builder.ApplyConfiguration(new AppUserRoleConfig());
+            builder.ApplyConfiguration(new AppUserTokenConfig());
+            builder.ApplyConfiguration(new RoleClaimConfig());
             builder.ApplyConfiguration(new RoleConfig());
         }
     }

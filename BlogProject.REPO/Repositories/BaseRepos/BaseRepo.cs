@@ -2,6 +2,8 @@
 using BlogProject.REPO.Contexts;
 using BlogProject.REPO.Utilities.Logging;
 using BlogProject.SERVICE.IRepositories.BaseRepos;
+using Microsoft.AspNetCore.Http.Metadata;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
@@ -42,7 +44,7 @@ namespace BlogProject.REPO.Repositories.BaseRepos
         {
             try
             {
-                _table.Update(entity);
+                _table.Remove(entity);
                 return _context.SaveChanges();
             }
             catch (Exception ex)
@@ -51,7 +53,6 @@ namespace BlogProject.REPO.Repositories.BaseRepos
                 logging.LogError(ex.Message);
                 throw new Exception();
             }
-            
         }
 
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> filter = null)

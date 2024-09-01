@@ -13,16 +13,30 @@ namespace BlogProject.REPO.Configurations
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.HasData(
-                new Role { Id = 1,Name = "Admin", Description = "Admin rolü tüm haklara sahiptir"}
-
-                );
-
+            // Primary key
             builder.HasKey(r => r.Id);
-            builder.Property(r => r.Id).ValueGeneratedOnAdd();
-            builder.Property(r => r.Name).HasMaxLength(30).IsRequired();
-            builder.Property(r => r.Description).HasMaxLength(250).IsRequired();
-            builder.HasMany(r => r.AppUsers).WithOne(u => u.Role).HasForeignKey(u => u.RoleId);
+
+            // Index for "normalized" role name to allow efficient lookups
+            builder.HasIndex(r => r.NormalizedName).HasDatabaseName("RoleNameIndex").IsUnique();
+
+            // Maps to the AspNetRoles table
+            builder.ToTable("AspNetRoles");
+
+            // A concurrency token for use with the optimistic concurrency checking
+            builder.Property(r => r.ConcurrencyStamp).IsConcurrencyToken();
+
+            // Limit the size of columns to use efficient database types
+            builder.Property(u => u.Name).HasMaxLength(50);
+            builder.Property(u => u.NormalizedName).HasMaxLength(50);
+
+            // The relationships between Role and other entity types
+            // Note that these relationships are configured with no navigation properties
+
+            // Each Role can have many entries in the UserRole join table
+            builder.HasMany<AppUserRole>().WithOne().HasForeignKey(ur => ur.RoleId).IsRequired();
+
+            // Each Role can have many associated RoleClaims
+            builder.HasMany<RoleClaim>().WithOne().HasForeignKey(rc => rc.RoleId).IsRequired();
         }
     }
 }

@@ -9,13 +9,18 @@ using System.Threading.Tasks;
 
 namespace BlogProject.SERVICE.DTOs
 {
-    public class CategoryDTO
+    public class RoleDTO
     {
-        [DisplayName("Kategori Id")]
+        [DisplayName("Rol Id")]
         public string Id { get; set; }
-        [DisplayName("Kategori Adı")]
-        [Required(ErrorMessage = "Kategori Adı boş geçilmemelidir.")]
+        [DisplayName("Rol Adı")]
+        [Required(ErrorMessage = "Rol Adı boş geçilmemelidir.")]
+        [MaxLength(30)]
         public string Name { get; set; }
+        [DisplayName("Açıklama")]
+        [Required(ErrorMessage = "Açıklama boş geçilmemelidir.")]
+        [MaxLength(250)]
+        public string Description { get; set; }
         [DisplayName("Oluşturulma Tarihi")]
         public DateTime CreateDate { get; set; }
         [DisplayName("Düzenlenme Tarihi")]

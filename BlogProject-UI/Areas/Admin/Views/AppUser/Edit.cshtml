@@ -1,0 +1,59 @@
+﻿@model BlogProject.SERVICE.DTOs.AppUserDTO
+
+@{
+    ViewData["Title"] = "Kullanıcı Düzenle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Kullanıcı Düzenle</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label">
+                    @Html.DisplayNameFor(model => model.UserName)
+                </label>
+                <input type="text" class="form-control" asp-for="UserName" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">
+                    @Html.DisplayNameFor(model => model.Email)
+                </label>
+                <input type="text" class="form-control" asp-for="Email"  />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label">
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </label>
+                <input type="text" class="form-control" asp-for="PhoneNumber" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo"></label><br />
+                <img class="img-fluid img-thumbnail" src="~/img/@Model.Photo" style="width:300px; height:auto;" alt="@Model.UserName" />
+            </div>
+            <div class="form-group">
+                <label for="Photo">Yeni Fotoğraf:</label>
+                <input type="file" id="photo" name="photo" class="form-control" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div
+            <div class="form-group mt-3">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

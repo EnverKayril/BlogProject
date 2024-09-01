@@ -1,6 +1,7 @@
 using BlogProject.CORE.CoreModels.Models;
 using BlogProject.REPO.Contexts;
 using BlogProject.REPO.Repositories;
+using BlogProject.REPO.Utilities.Extensions;
 using BlogProject.REPO.Utilities.Logging;
 using BlogProject.REPO.Utilities.UnitOfWork;
 using BlogProject.SERVICE.IRepositories;
@@ -41,10 +42,30 @@ namespace BlogProject_UI
             builder.Services.AddScoped<IUnitOfWorkService,  UnitOfWorkService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IArticleService, ArticleService>();
+            builder.Services.AddScoped<IAppUserService, AppUserService>();
+            builder.Services.AddScoped<UserManager<AppUser>>();
+            builder.Services.AddTransient<ImageHelper>();
 
             //AutoMapper
             builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            builder.Services.AddSession();
             builder.Services.AddAutoMapper(typeof(Mapping));
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = new PathString("/Admin/User/Login");
+                options.LogoutPath = new PathString("/Admin/User/Logout");
+                options.Cookie = new CookieBuilder
+                {
+                    Name = "BlogProject",
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.Strict,
+                    SecurePolicy = CookieSecurePolicy.SameAsRequest
+                };
+                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = TimeSpan.FromDays(7);
+                options.AccessDeniedPath = new PathString("/Admin/User/AccessDenied");
+            });
 
             var app = builder.Build();
 
@@ -56,9 +77,9 @@ namespace BlogProject_UI
                 app.UseHsts();
             }
 
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

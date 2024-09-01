@@ -13,14 +13,17 @@ namespace BlogProject.SERVICE.Mappers
     {
         public Mapping()
         {
-            CreateMap<AppUser, AppUserDTO>()
-                .ForMember(
-                dest => dest.FullName,
-                opt => opt.MapFrom(src => src.FirstName + " " + src.LastName));
+            CreateMap<AppUser, AppUserDTO>().ReverseMap();
+            CreateMap<AppUserCreateDTO, AppUser>();
+
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<CategoryCreateDTO, Category>();
+
             CreateMap<ArticleDTO, Article>().ReverseMap();
             CreateMap<ArticleWithUserDTO, Article>();
+
+            CreateMap<Role, RoleDTO>().ReverseMap();
+            CreateMap<RoleCreateDTO, Role>();
         }
     }
 }

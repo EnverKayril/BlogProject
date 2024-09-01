@@ -82,8 +82,6 @@ namespace BlogProject.SERVICE.Services
                     Thumbnail = x.Thumbnail,
                     CategoryId = x.CategoryId,
                     AppUserId = x.AppUserId,
-                    FirstName = x.AppUser.FirstName,
-                    LastName = x.AppUser.LastName
                 },
                 where: x => x.Status != CORE.CoreModels.Enums.EntityStatus.Deleted & x.AppUserId == userId,
                 join: x => x.Include(x => x.AppUser)

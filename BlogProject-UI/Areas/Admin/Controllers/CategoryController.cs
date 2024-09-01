@@ -67,11 +67,11 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(string id,CategoryDTO model)
+        public async Task<IActionResult> DeleteAsync(string id,CategoryDTO model)
         {
             try
             {
-                _service.CategoryService.DeleteCategoryAsync(id);
+                await _service.CategoryService.DeleteCategoryAsync(id);
                 return RedirectToAction("Index");
             }
             catch

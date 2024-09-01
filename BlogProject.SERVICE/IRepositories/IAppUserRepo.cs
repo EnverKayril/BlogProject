@@ -1,6 +1,5 @@
 ﻿using BlogProject.CORE.CoreModels.Models;
 using BlogProject.SERVICE.IRepositories.BaseRepos;
-using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +10,5 @@ namespace BlogProject.SERVICE.IRepositories
 {
     public interface IAppUserRepo : IBaseRepo<AppUser>
     {
-        Task<AppUser> GetUserByNameAsync(string userName);
     }
 }

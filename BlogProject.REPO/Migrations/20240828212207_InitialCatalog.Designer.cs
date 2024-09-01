@@ -4,6 +4,7 @@ using BlogProject.REPO.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogProject.REPO.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240828212207_InitialCatalog")]
+    partial class InitialCatalog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,9 +69,6 @@ namespace BlogProject.REPO.Migrations
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -89,8 +88,6 @@ namespace BlogProject.REPO.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -262,36 +259,36 @@ namespace BlogProject.REPO.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4d187b45-883f-4036-8961-58b18ae36bef",
-                            CreateDate = new DateTime(2024, 8, 29, 3, 28, 59, 640, DateTimeKind.Local).AddTicks(5617),
+                            Id = "ad320577-dad8-4a9f-a854-863811e4a2ff",
+                            CreateDate = new DateTime(2024, 8, 29, 0, 22, 7, 643, DateTimeKind.Local).AddTicks(6132),
                             Name = "Yazılım",
                             Status = 0
                         },
                         new
                         {
-                            Id = "45b814b1-3aae-4caf-8359-b23d0d02c820",
-                            CreateDate = new DateTime(2024, 8, 29, 3, 28, 59, 640, DateTimeKind.Local).AddTicks(5628),
+                            Id = "c25976ae-9349-4811-bbf3-8ae0cafe7f21",
+                            CreateDate = new DateTime(2024, 8, 29, 0, 22, 7, 643, DateTimeKind.Local).AddTicks(6142),
                             Name = "Sistem",
                             Status = 0
                         },
                         new
                         {
-                            Id = "99780402-3bb6-47ad-b5a4-c4e77f154ffa",
-                            CreateDate = new DateTime(2024, 8, 29, 3, 28, 59, 640, DateTimeKind.Local).AddTicks(5638),
+                            Id = "484f07d5-302b-438a-a719-be1ee2171312",
+                            CreateDate = new DateTime(2024, 8, 29, 0, 22, 7, 643, DateTimeKind.Local).AddTicks(6144),
                             Name = "Web Grafik",
                             Status = 0
                         },
                         new
                         {
-                            Id = "a20d39ef-8808-4cb6-91ca-e7040858f466",
-                            CreateDate = new DateTime(2024, 8, 29, 3, 28, 59, 640, DateTimeKind.Local).AddTicks(5641),
+                            Id = "8f6fe5dd-4bbd-4f38-a98a-a19c03022988",
+                            CreateDate = new DateTime(2024, 8, 29, 0, 22, 7, 643, DateTimeKind.Local).AddTicks(6157),
                             Name = "Güvenlik",
                             Status = 0
                         },
                         new
                         {
-                            Id = "f2d8bd49-4231-44ff-9c16-cd005f275c53",
-                            CreateDate = new DateTime(2024, 8, 29, 3, 28, 59, 640, DateTimeKind.Local).AddTicks(5643),
+                            Id = "e3475b6e-ee64-4715-b1f0-770319d6b82e",
+                            CreateDate = new DateTime(2024, 8, 29, 0, 22, 7, 643, DateTimeKind.Local).AddTicks(6159),
                             Name = "Bulut Sistemler",
                             Status = 0
                         });
@@ -386,15 +383,6 @@ namespace BlogProject.REPO.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.AppUser", b =>
-                {
-                    b.HasOne("BlogProject.CORE.CoreModels.Models.Role", "Role")
-                        .WithMany("AppUsers")
-                        .HasForeignKey("RoleId");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.AppUserClaim", b =>
@@ -501,11 +489,6 @@ namespace BlogProject.REPO.Migrations
             modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.Category", b =>
                 {
                     b.Navigation("Articles");
-                });
-
-            modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.Role", b =>
-                {
-                    b.Navigation("AppUsers");
                 });
 #pragma warning restore 612, 618
         }

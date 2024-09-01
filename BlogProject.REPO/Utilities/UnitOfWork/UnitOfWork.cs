@@ -1,5 +1,6 @@
 ﻿using BlogProject.REPO.Contexts;
 using BlogProject.REPO.Repositories;
+using BlogProject.REPO.Repositories.BaseRepos;
 using BlogProject.SERVICE.IRepositories;
 using BlogProject.SERVICE.Utilities.IUnitOfWorks;
 using System;
@@ -17,14 +18,12 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
-            AppUserRepo = new AppUserRepo(context);
             ArticleRepo = new ArticleRepo(context);
             CategoryRepo = new CategoryRepo(context);
             CommentRepo = new CommentRepo(context);
-            RoleRepo = new RoleRepo(context);
+            AppUserRepo = new AppUserRepo(context);
         }
 
-        public IAppUserRepo AppUserRepo { get; }
 
         public IArticleRepo ArticleRepo { get; }
 
@@ -32,6 +31,6 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
 
         public ICommentRepo CommentRepo { get; }
 
-        public IRoleRepo RoleRepo { get; }
+        public IAppUserRepo AppUserRepo { get; }
     }
 }

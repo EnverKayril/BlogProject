@@ -1,4 +1,5 @@
 ﻿using BlogProject.CORE.CoreModels.BaseModels;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace BlogProject.CORE.CoreModels.Models
 {
-    public class Role : IBaseEntity
+    public class Role : IdentityRole<string> , IBaseEntity
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public ICollection<AppUser> AppUsers { get; set; }
+        public virtual ICollection<AppUser> AppUsers { get; set; }
     }
 }

@@ -1,4 +1,7 @@
-﻿using BlogProject.SERVICE.Services.IServices;
+﻿using BlogProject.CORE.CoreModels.Models;
+using BlogProject.SERVICE.IRepositories;
+using BlogProject.SERVICE.Services.IServices;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +14,8 @@ namespace BlogProject.SERVICE.Utilities.IUnitOfWorks
     {
         ICategoryService CategoryService { get; }
         IArticleService ArticleService { get; }
+        IAppUserService AppUserService { get; }
+        UserManager<AppUser> UserManager { get; }
+
     }
 }

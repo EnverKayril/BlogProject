@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogProject.REPO", "BlogPro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogProject.SERVICE", "BlogProject.SERVICE\BlogProject.SERVICE.csproj", "{09798952-0AE2-412B-9382-FB611D073EEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogProject-UI", "BlogProject-UI\BlogProject-UI.csproj", "{76440775-E99D-4C4F-87A7-65B33722A1A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogProject-UI", "BlogProject-UI\BlogProject-UI.csproj", "{76440775-E99D-4C4F-87A7-65B33722A1A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
