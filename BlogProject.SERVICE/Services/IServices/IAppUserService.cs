@@ -11,7 +11,6 @@ namespace BlogProject.SERVICE.Services.IServices
     {
         Task<AppUserDTO> GetAppUserByIdAsync(string id);
         Task<IEnumerable<AppUserDTO>> GetAllAppUserAsync();
-        Task<IEnumerable<AppUserDTO>> GetAppUserByRoleIdAsync(string roleId);
         int CreateAppUser(AppUserCreateDTO appUserCreateDTO);
         Task<int> UpdateAppUserAsync(AppUserDTO appUserDTO);
         Task<int> DeleteAppUser(string id);

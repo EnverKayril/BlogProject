@@ -35,9 +35,8 @@ namespace BlogProject.SERVICE.DTOs
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
         [DisplayName("Resim")]
-        [Required(ErrorMessage = "{0} boş geçilmemelidir.")]
         [DataType(DataType.Upload)]
-        public IFormFile PhotoFile { get; set; }
-        public string Photo { get; set; }
+        public IFormFile? PhotoFile { get; set; }
+        public string? Photo { get; set; }
     }
 }

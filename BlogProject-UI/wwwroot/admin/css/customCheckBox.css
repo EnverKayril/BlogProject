@@ -1,0 +1,46 @@
+﻿.email-checkbox {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+    .email-checkbox input[type="checkbox"] {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .email-checkbox .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 30px;
+        width: 30px;
+        background-color: #eee;
+        border-radius: 4px;
+    }
+
+    .email-checkbox input[type="checkbox"]:checked + .checkmark {
+        background-color: #007bff; /* Mavi renk */
+    }
+
+    .email-checkbox .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .email-checkbox input[type="checkbox"]:checked + .checkmark:after {
+        display: block;
+    }
+
+    .email-checkbox .checkmark:after {
+        left: 10px;
+        top: 6px;
+        width: 7px;
+        height: 15px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+    }

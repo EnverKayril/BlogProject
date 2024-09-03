@@ -14,7 +14,7 @@ namespace BlogProject.SERVICE.Mappers
         public Mapping()
         {
             CreateMap<AppUser, AppUserDTO>().ReverseMap();
-            CreateMap<AppUserCreateDTO, AppUser>();
+            CreateMap<AppUserCreateDTO, AppUser>().ReverseMap();
 
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<CategoryCreateDTO, Category>();

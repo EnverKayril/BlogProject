@@ -20,6 +20,8 @@ namespace BlogProject.SERVICE.DTOs
         public string PhoneNumber { get; set; }
         [DisplayName("Rol Id")]
         public string? RoleId { get; set; }
+        [DisplayName("Email Onayı")]
+        public bool? EmailConfirmed { get; set; }
         [DisplayName("Resim")]
         public string? Photo { get; set; }
     }

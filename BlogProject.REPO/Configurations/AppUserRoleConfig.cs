@@ -18,6 +18,18 @@ namespace BlogProject.REPO.Configurations
 
             // Maps to the AspNetUserRoles table
             builder.ToTable("AspNetUserRoles");
+
+            builder.HasData(
+                new AppUserRole
+                {
+                    RoleId = "1",
+                    UserId = "1",
+                },
+                new AppUserRole
+                {
+                    RoleId = "2",
+                    UserId = "2",
+                });
         }
     }
 }

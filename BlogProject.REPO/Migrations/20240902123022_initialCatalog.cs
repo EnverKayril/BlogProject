@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BlogProject.REPO.Migrations
 {
-    public partial class InitialCatalog : Migration
+    public partial class initialCatalog : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -235,16 +235,44 @@ namespace BlogProject.REPO.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "1", "e8d6ff70-fa46-49c3-8b64-5f78f3504f2b", "Admin", "ADMIN" },
+                    { "2", "52d75531-62ea-47e3-8738-28bd70b3c30d", "Editor", "EDITOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Photo", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "1", 0, "e89de0fc-63f3-46ad-87e7-38d66d0f8309", "admin@mail.com", true, false, null, "ADMIN@MAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEI+9/IFMiyb8h6gNEFHn5AF4UU3cIi5Z3KXqUsn2QV8MiuLE5j54JAYw+4N98eg2ZA==", "1234567890", true, "Admin.jpg", "74c9bd90-bb73-4679-a4d4-22418b94cd07", false, "admin" },
+                    { "2", 0, "bfc7f69a-73a7-4c18-99d8-ecadf0a69f49", "editor@mail.com", true, false, null, "EDITOR@MAIL.COM", "EDITOR", "AQAAAAEAACcQAAAAEAxOJ1nDxBpLSr0Sx4bwD9uKyG/F5h8HkWpohEP2T6/nL2fxySX5eOg4cPTcnb11Qg==", "1234567890", true, "Editor.jpg", "e0c107d8-b817-4b4b-a0e9-347e4358ec8d", false, "editor" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreateDate", "DeleteDate", "Name", "Status", "UpdateDate" },
                 values: new object[,]
                 {
-                    { "484f07d5-302b-438a-a719-be1ee2171312", new DateTime(2024, 8, 29, 0, 22, 7, 643, DateTimeKind.Local).AddTicks(6144), null, "Web Grafik", 0, null },
-                    { "8f6fe5dd-4bbd-4f38-a98a-a19c03022988", new DateTime(2024, 8, 29, 0, 22, 7, 643, DateTimeKind.Local).AddTicks(6157), null, "Güvenlik", 0, null },
-                    { "ad320577-dad8-4a9f-a854-863811e4a2ff", new DateTime(2024, 8, 29, 0, 22, 7, 643, DateTimeKind.Local).AddTicks(6132), null, "Yazılım", 0, null },
-                    { "c25976ae-9349-4811-bbf3-8ae0cafe7f21", new DateTime(2024, 8, 29, 0, 22, 7, 643, DateTimeKind.Local).AddTicks(6142), null, "Sistem", 0, null },
-                    { "e3475b6e-ee64-4715-b1f0-770319d6b82e", new DateTime(2024, 8, 29, 0, 22, 7, 643, DateTimeKind.Local).AddTicks(6159), null, "Bulut Sistemler", 0, null }
+                    { "228bc37f-b107-46e1-bf9e-4e40cff20bbc", new DateTime(2024, 9, 2, 15, 30, 21, 913, DateTimeKind.Local).AddTicks(4367), null, "Bulut Sistemler", 0, null },
+                    { "47743466-81fc-4518-9288-b615c7f62258", new DateTime(2024, 9, 2, 15, 30, 21, 913, DateTimeKind.Local).AddTicks(4362), null, "Web Grafik", 0, null },
+                    { "946b2d41-828e-4c42-b5cf-eb5d0e4b1903", new DateTime(2024, 9, 2, 15, 30, 21, 913, DateTimeKind.Local).AddTicks(4341), null, "Yazılım", 0, null },
+                    { "a1f21420-2b34-49dd-9f03-c5364446ea50", new DateTime(2024, 9, 2, 15, 30, 21, 913, DateTimeKind.Local).AddTicks(4364), null, "Güvenlik", 0, null },
+                    { "a7aa2695-7c2a-4d2f-b8dd-401289386f86", new DateTime(2024, 9, 2, 15, 30, 21, 913, DateTimeKind.Local).AddTicks(4351), null, "Sistem", 0, null }
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "1", "1" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "2", "2" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Articles_AppUserId",

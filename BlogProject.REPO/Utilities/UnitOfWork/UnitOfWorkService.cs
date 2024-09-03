@@ -18,15 +18,18 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public UnitOfWorkService(IUnitOfWork unitOfWorkService, IMapper mapper, UserManager<AppUser> userManager)
+        public UnitOfWorkService(IUnitOfWork unitOfWorkService, IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _unitOfWork = unitOfWorkService;
             _mapper = mapper;
             _userManager = userManager;
+            _signInManager = signInManager;
 
             CategoryService = new CategoryService(_unitOfWork, _mapper);
             AppUserService = new AppUserService(_unitOfWork, _mapper, _userManager);
+            _signInManager = signInManager;
         }
 
         public ICategoryService CategoryService { get; }
@@ -36,5 +39,6 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
         public IAppUserService AppUserService { get; }
 
         public UserManager<AppUser> UserManager => _userManager;
+        public SignInManager<AppUser> SignInManager => _signInManager;
     }
 }

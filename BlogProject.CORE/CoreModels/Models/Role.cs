@@ -10,6 +10,5 @@ namespace BlogProject.CORE.CoreModels.Models
 {
     public class Role : IdentityRole<string> , IBaseEntity
     {
-        public virtual ICollection<AppUser> AppUsers { get; set; }
     }
 }

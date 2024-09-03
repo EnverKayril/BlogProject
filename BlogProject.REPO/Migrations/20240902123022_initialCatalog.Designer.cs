@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogProject.REPO.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240829002859_AppUserRole")]
-    partial class AppUserRole
+    [Migration("20240902123022_initialCatalog")]
+    partial class initialCatalog
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,9 +69,6 @@ namespace BlogProject.REPO.Migrations
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -92,9 +89,45 @@ namespace BlogProject.REPO.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("RoleId");
-
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e89de0fc-63f3-46ad-87e7-38d66d0f8309",
+                            Email = "admin@mail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@MAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI+9/IFMiyb8h6gNEFHn5AF4UU3cIi5Z3KXqUsn2QV8MiuLE5j54JAYw+4N98eg2ZA==",
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = true,
+                            Photo = "Admin.jpg",
+                            SecurityStamp = "74c9bd90-bb73-4679-a4d4-22418b94cd07",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bfc7f69a-73a7-4c18-99d8-ecadf0a69f49",
+                            Email = "editor@mail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "EDITOR@MAIL.COM",
+                            NormalizedUserName = "EDITOR",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAxOJ1nDxBpLSr0Sx4bwD9uKyG/F5h8HkWpohEP2T6/nL2fxySX5eOg4cPTcnb11Qg==",
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = true,
+                            Photo = "Editor.jpg",
+                            SecurityStamp = "e0c107d8-b817-4b4b-a0e9-347e4358ec8d",
+                            TwoFactorEnabled = false,
+                            UserName = "editor"
+                        });
                 });
 
             modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.AppUserClaim", b =>
@@ -159,6 +192,18 @@ namespace BlogProject.REPO.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "2",
+                            RoleId = "2"
+                        });
                 });
 
             modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.AppUserToken", b =>
@@ -264,36 +309,36 @@ namespace BlogProject.REPO.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4d187b45-883f-4036-8961-58b18ae36bef",
-                            CreateDate = new DateTime(2024, 8, 29, 3, 28, 59, 640, DateTimeKind.Local).AddTicks(5617),
+                            Id = "946b2d41-828e-4c42-b5cf-eb5d0e4b1903",
+                            CreateDate = new DateTime(2024, 9, 2, 15, 30, 21, 913, DateTimeKind.Local).AddTicks(4341),
                             Name = "Yazılım",
                             Status = 0
                         },
                         new
                         {
-                            Id = "45b814b1-3aae-4caf-8359-b23d0d02c820",
-                            CreateDate = new DateTime(2024, 8, 29, 3, 28, 59, 640, DateTimeKind.Local).AddTicks(5628),
+                            Id = "a7aa2695-7c2a-4d2f-b8dd-401289386f86",
+                            CreateDate = new DateTime(2024, 9, 2, 15, 30, 21, 913, DateTimeKind.Local).AddTicks(4351),
                             Name = "Sistem",
                             Status = 0
                         },
                         new
                         {
-                            Id = "99780402-3bb6-47ad-b5a4-c4e77f154ffa",
-                            CreateDate = new DateTime(2024, 8, 29, 3, 28, 59, 640, DateTimeKind.Local).AddTicks(5638),
+                            Id = "47743466-81fc-4518-9288-b615c7f62258",
+                            CreateDate = new DateTime(2024, 9, 2, 15, 30, 21, 913, DateTimeKind.Local).AddTicks(4362),
                             Name = "Web Grafik",
                             Status = 0
                         },
                         new
                         {
-                            Id = "a20d39ef-8808-4cb6-91ca-e7040858f466",
-                            CreateDate = new DateTime(2024, 8, 29, 3, 28, 59, 640, DateTimeKind.Local).AddTicks(5641),
+                            Id = "a1f21420-2b34-49dd-9f03-c5364446ea50",
+                            CreateDate = new DateTime(2024, 9, 2, 15, 30, 21, 913, DateTimeKind.Local).AddTicks(4364),
                             Name = "Güvenlik",
                             Status = 0
                         },
                         new
                         {
-                            Id = "f2d8bd49-4231-44ff-9c16-cd005f275c53",
-                            CreateDate = new DateTime(2024, 8, 29, 3, 28, 59, 640, DateTimeKind.Local).AddTicks(5643),
+                            Id = "228bc37f-b107-46e1-bf9e-4e40cff20bbc",
+                            CreateDate = new DateTime(2024, 9, 2, 15, 30, 21, 913, DateTimeKind.Local).AddTicks(4367),
                             Name = "Bulut Sistemler",
                             Status = 0
                         });
@@ -363,6 +408,22 @@ namespace BlogProject.REPO.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "e8d6ff70-fa46-49c3-8b64-5f78f3504f2b",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "52d75531-62ea-47e3-8738-28bd70b3c30d",
+                            Name = "Editor",
+                            NormalizedName = "EDITOR"
+                        });
                 });
 
             modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.RoleClaim", b =>
@@ -388,15 +449,6 @@ namespace BlogProject.REPO.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.AppUser", b =>
-                {
-                    b.HasOne("BlogProject.CORE.CoreModels.Models.Role", "Role")
-                        .WithMany("AppUsers")
-                        .HasForeignKey("RoleId");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.AppUserClaim", b =>
@@ -503,11 +555,6 @@ namespace BlogProject.REPO.Migrations
             modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.Category", b =>
                 {
                     b.Navigation("Articles");
-                });
-
-            modelBuilder.Entity("BlogProject.CORE.CoreModels.Models.Role", b =>
-                {
-                    b.Navigation("AppUsers");
                 });
 #pragma warning restore 612, 618
         }

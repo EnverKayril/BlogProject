@@ -16,8 +16,4 @@
     <ProjectReference Include="..\BlogProject.REPO\BlogProject.REPO.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\img\" />
-  </ItemGroup>
-
 </Project>

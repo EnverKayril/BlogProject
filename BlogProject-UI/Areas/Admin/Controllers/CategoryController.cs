@@ -1,11 +1,13 @@
 ﻿using BlogProject.REPO.Utilities.UnitOfWork;
 using BlogProject.SERVICE.DTOs;
 using BlogProject.SERVICE.Utilities.IUnitOfWorks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogProject_UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWorkService _service;

@@ -25,7 +25,7 @@ namespace BlogProject_UI
 
             //Contexts
             builder.Services.AddDbContext<AppDbContext>();
-            builder.Services.AddIdentity<AppUser, IdentityRole>(option =>
+            builder.Services.AddIdentity<AppUser, Role>(option =>
             {
                 option.Password.RequiredLength = 3;
                 option.Password.RequireNonAlphanumeric = false;
@@ -53,8 +53,8 @@ namespace BlogProject_UI
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = new PathString("/Admin/User/Login");
-                options.LogoutPath = new PathString("/Admin/User/Logout");
+                options.LoginPath = new PathString("/Admin/AppUser/Login");
+                options.LogoutPath = new PathString("/Admin/AppUser/Logout");
                 options.Cookie = new CookieBuilder
                 {
                     Name = "BlogProject",
@@ -64,7 +64,7 @@ namespace BlogProject_UI
                 };
                 options.SlidingExpiration = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(7);
-                options.AccessDeniedPath = new PathString("/Admin/User/AccessDenied");
+                options.AccessDeniedPath = new PathString("/Admin/AppUser/AccessDenied");
             });
 
             var app = builder.Build();

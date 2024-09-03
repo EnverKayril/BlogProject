@@ -11,8 +11,6 @@ namespace BlogProject.CORE.CoreModels.Models
     public class AppUser : IdentityUser<string> , IBaseEntity
     {
         public string? Photo { get; set; }
-        public string? RoleId { get; set; }
-        public Role Role { get; set; }
 
         public virtual ICollection<Article> Articles { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

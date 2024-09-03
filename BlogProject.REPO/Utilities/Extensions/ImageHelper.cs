@@ -12,6 +12,7 @@ namespace BlogProject.REPO.Utilities.Extensions
     public class ImageHelper
     {
         private readonly IWebHostEnvironment _web;
+        private static readonly string ImgDirectory = "wwwroot/img/";
 
         public ImageHelper(IWebHostEnvironment web)
         {
@@ -20,6 +21,11 @@ namespace BlogProject.REPO.Utilities.Extensions
 
         public async Task<string> ImageUpload(IFormFile photoFile)
         {
+            if (photoFile == null)
+            {
+                return "DefaultUser.jpg";
+            }
+
             string fileExtension = Path.GetExtension(photoFile.FileName);
             DateTime dateTime = DateTime.Now;
             string fileName = $"{dateTime.FullDateAndTimeStringWithUnderscore()}{fileExtension}";
@@ -31,6 +37,16 @@ namespace BlogProject.REPO.Utilities.Extensions
                 await photoFile.CopyToAsync(stream);
             }
             return fileName;
+        }
+
+        public void DeleteImage(string fileName)
+        {
+            var filePath = Path.Combine(ImgDirectory, fileName);
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BlogProject.CORE.CoreModels.Models;
+using BlogProject.REPO.Utilities.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -46,6 +47,40 @@ namespace BlogProject.REPO.Configurations
 
             // Each User can have many entries in the UserRole join table
             builder.HasMany<AppUserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+
+            var adminUser = new AppUser
+            {
+                Id = "1",
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                Email = "admin@mail.com",
+                NormalizedEmail = "ADMIN@MAIL.COM",
+                PhoneNumber = "1234567890",
+                Photo = "DefaultUser.jpg",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            adminUser.PasswordHash = AppUserHelper.CreatePasswordHash(adminUser, "adminuser");
+
+            var editorUser = new AppUser
+            {
+                Id = "2",
+                UserName = "editor",
+                NormalizedUserName = "EDITOR",
+                Email = "editor@mail.com",
+                NormalizedEmail = "EDITOR@MAIL.COM",
+                PhoneNumber = "1234567890",
+                Photo = "DefaultUser.jpg",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            editorUser.PasswordHash = AppUserHelper.CreatePasswordHash(editorUser, "editoruser");
+
+            builder.HasData(adminUser, editorUser);
         }
+
+
     }
 }
