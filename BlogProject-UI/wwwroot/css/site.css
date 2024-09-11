@@ -1,18 +1,39 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
 body {
-  margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin-bottom: 60px; /* Footer için alan býrakýr */
+}
+
+/* Layout ve Flexbox ayarlarý */
+#layoutSidenav {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#layoutSidenav_content {
+    flex: 1;
+}
+
+/* Footer ayarlarý */
+footer {
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: #f8f9fa; /* Arka plan rengi */
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Form Gruplarý */
+.form-group {
+    margin-bottom: 1rem;
 }

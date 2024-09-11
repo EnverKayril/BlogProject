@@ -1,4 +1,5 @@
-﻿using BlogProject.SERVICE.DTOs;
+﻿using BlogProject.CORE.CoreModels.Models;
+using BlogProject.SERVICE.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,12 @@ namespace BlogProject.SERVICE.Services.IServices
         Task<IEnumerable<ArticleDTO>> GetAllActiveArticlesAsync();
         Task<IEnumerable<ArticleWithUserDTO>> GetAllArticlesByUserIdAsync(string userId);
         Task<IEnumerable<ArticleDTO>> GetAllArticlesByCategoryIdAsync(string categoryId);
-        int CreateArticle(ArticleDTO articleDTO);
-        int UpdateArticle(ArticleDTO articleDTO);
-        Task<int> DeleteArticle(string id);
+        int CreateArticle(ArticleCreateDTO articleCreateDTO);
+        Task<int> CreateArticleAsync(Article article);
+        Task<int> UpdateArticleAsync(ArticleDTO articleDTO);
+        Task<int> DeleteArticleAsync(string id);
+        Task<int> CountAsync();
+        Task<List<ArticleWithUserDTO>> GetAllArticlesWithUserAsync();
+        Task<List<Article>> GetArticlesWithCategoryAndUserAsync();
     }
 }

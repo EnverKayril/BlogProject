@@ -25,6 +25,15 @@ namespace BlogProject.SERVICE.Services
             _userManager = userManager;
         }
 
+        public async Task<int> CountAsync()
+        {
+            if (_unitOfWork.ArticleRepo == null)
+            {
+                return 0;
+            }
+            return await _unitOfWork.AppUserRepo.CountAsync();
+        }
+
         public int CreateAppUser(AppUserCreateDTO appUserCreateDTO)
         {
             var appUser = _mapper.Map<AppUser>(appUserCreateDTO);

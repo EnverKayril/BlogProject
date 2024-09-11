@@ -17,9 +17,14 @@ namespace BlogProject.REPO.Contexts
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server = ENVER\\SQLEXPRESS01; Database = FinalProject; Trusted_Connection = True; TrustServerCertificate = True;");
+        //}
+
+        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
         {
-            optionsBuilder.UseSqlServer("Server = ENVER\\SQLEXPRESS01; Database = FinalProject; Trusted_Connection = True; TrustServerCertificate = True;");
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

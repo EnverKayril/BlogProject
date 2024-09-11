@@ -1,4 +1,7 @@
-﻿using BlogProject_UI.Models;
+﻿using BlogProject.REPO.Utilities.UnitOfWork;
+using BlogProject.SERVICE.Utilities.IUnitOfWorks;
+using BlogProject_UI.Areas.Admin.Models.VMs;
+using BlogProject_UI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,16 +12,27 @@ namespace BlogProject_UI.Areas.Admin.Controllers
     [Authorize(Roles = "Admin, Editor")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWorkService _service;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IUnitOfWorkService service, IUnitOfWork unitOfWork)
         {
-            _logger = logger;
+            _service = service;
+            _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+
+            var model = new DashboardViewModel
+            {
+                CategoriesCount = await _unitOfWork.CategoryRepo.CountAsync(),
+                ArticlesCount = await _unitOfWork.ArticleRepo.CountAsync(),
+                CommentsCount = await _unitOfWork.CommentRepo.CountAsync(),
+                UsersCount = await _unitOfWork.AppUserRepo.CountAsync(),
+                Articles = (await _unitOfWork.ArticleRepo.GetArticlesWithCategoryAndUserAsync()).ToList()
+            };
+            return View(model);
         }
 
         public IActionResult Privacy()
@@ -26,10 +40,6 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
     }
 }

@@ -22,6 +22,15 @@ namespace BlogProject.SERVICE.Services
             _mapper = mapper;
         }
 
+        public async Task<int> CountAsync()
+        {
+            if (_unitOfWork.CategoryRepo == null)
+            {
+                return 0;
+            }
+            return await _unitOfWork.CategoryRepo.CountAsync();
+        }
+
         public int CreateCategoryAsync(CategoryCreateDTO categoryDTO)
         {
             //var category = new Category { Name = categoryDTO.Name };

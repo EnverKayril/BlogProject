@@ -1,4 +1,5 @@
 ﻿using BlogProject.SERVICE.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace BlogProject.SERVICE.Services.IServices
         int CreateCategoryAsync(CategoryCreateDTO categoryDTO);
         int UpdateCategoryAsync(CategoryDTO categoryDTO);
         Task<int> DeleteCategoryAsync(string id);
+        Task<int> CountAsync();
     }
 }

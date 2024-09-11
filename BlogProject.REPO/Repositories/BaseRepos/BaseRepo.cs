@@ -29,10 +29,14 @@ namespace BlogProject.REPO.Repositories.BaseRepos
         public int Add(T entity)
         {
             _table.Add(entity);
-            Logging logging = new Logging();
-            logging.LogInfo($"Entity {entity.ToString()} Ekleme İşlemi Gerçekleşti.");
             return _context.SaveChanges();
 
+        }
+
+        public async Task<int> AddAsync(T entity)
+        {
+            await _table.AddAsync(entity);
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
@@ -40,19 +44,26 @@ namespace BlogProject.REPO.Repositories.BaseRepos
             return await _table.AnyAsync(filter);
         }
 
+        public async Task<int> CountAsync()
+        {
+            if (_table == null)
+            {
+                return 0;
+            }
+
+            return await _table.CountAsync();
+        }
+
         public int Delete(T entity)
         {
-            try
-            {
-                _table.Remove(entity);
-                return _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                Logging logging = new Logging();
-                logging.LogError(ex.Message);
-                throw new Exception();
-            }
+            _table.Remove(entity);
+            return _context.SaveChanges();
+        }
+
+        public async Task<int> DeleteAsync(T entity)
+        {
+            _table.Remove(entity);
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> filter = null)
@@ -65,6 +76,11 @@ namespace BlogProject.REPO.Repositories.BaseRepos
             {
                 return await _table.Where(filter).ToListAsync();
             }
+        }
+
+        public T GetById(string id)
+        {
+            return _table.Find(id);
         }
 
         public async Task<T> GetByIdAsync(string id)
@@ -112,6 +128,12 @@ namespace BlogProject.REPO.Repositories.BaseRepos
         {
             _table.Update(entity);
             return _context.SaveChanges();
+        }
+
+        public async Task<int> UpdateAsync(T entity)
+        {
+            _table.Update(entity);
+            return await _context.SaveChangesAsync();
         }
     }
 }

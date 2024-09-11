@@ -1,7 +1,124 @@
-﻿@{
+﻿@model BlogProject_UI.Areas.Admin.Models.VMs.DashboardViewModel
+
+@{
     Layout = "_Layout";
-    ViewData["Title"] = "Home Page";
+    ViewBag.Title = "Yönetim Paneli";
 }
 
-<h1>Admin Area</h1>
-<a asp-area="" asp-controller="Home" asp-action="Index">Blog Area'ya Geç</a>
+<ol class="breadcrumb mb-3 mt-2">
+    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
+    <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Yönetim Paneli</a></li>
+</ol>
+
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Kategoriler @Model.CategoriesCount</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" asp-area="Admin" asp-controller="Category" asp-action="Index">Detaylar</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-warning text-white mb-4">
+            <div class="card-body">Makaleler @Model.ArticlesCount</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" asp-area="Admin" asp-controller="Article" asp-action="Index">Detaylar</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-success text-white mb-4">
+            <div class="card-body">Yorumlar @Model.CommentsCount</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" asp-area="Admin" asp-controller="Comment" asp-action="Index">Detaylar</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-danger text-white mb-4">
+            <div class="card-body">Kullanıcılar @Model.UsersCount</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" asp-area="Admin" asp-controller="AppUser" asp-action="Index">Detaylar</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Son Paylaşılan Makaleler
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered" id="articlesTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Kategori Adı</th>
+                    <th>Kullanıcı Adı</th>
+                    <th>Başlık</th>
+                    <th>Küçük Resim</th>
+                    <th>İçerik</th>
+                    <th>Tarih</th>
+                    <th>Okunma Sayısı</th>
+                    <th>Yorum Sayısı</th>
+                    <th>Durumu</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Articles != null)
+                {
+                    @foreach (var article in Model.Articles)
+                    {
+                        <tr>
+                            <td>@article.Category.Name</td>
+                            <td>@article.AppUser.UserName</td>
+                            <td>@article.Title</td>
+                            <td><img src="~/img//ArticleImages/@article.Thumbnail" class="img-thumbnail" style="width:100px; height:auto;" /></td>
+                            <td>@article.Content</td>
+                            <td>
+                                @if (article.UpdateDate != null)
+                                {
+                                    @article.UpdateDate?.ToShortDateString()
+                                }
+                                else
+                                {
+                                    @article.CreateDate.ToShortDateString()
+                                }
+                            </td>
+                            <td>@article.ViewsCount</td>
+                            <td>@article.CommentCount</td>
+                            <td>@article.Status.ToString()</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="9">Gösterilecek makale yok.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = new DataTable('#articlesTable', {
+                language: {
+                    url: '/locales/tr.json'
+                }
+            });
+        });
+    </script>
+}

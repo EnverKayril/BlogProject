@@ -3,6 +3,7 @@ using BlogProject.REPO.Contexts;
 using BlogProject.REPO.Repositories.BaseRepos;
 using BlogProject.SERVICE.IRepositories;
 using BlogProject.SERVICE.IRepositories.BaseRepos;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,27 @@ namespace BlogProject.REPO.Repositories
 {
     public class ArticleRepo : BaseRepo<Article>, IArticleRepo
     {
+        private readonly AppDbContext _context;
         public ArticleRepo(AppDbContext context) : base(context)
         {
+            _context = context;
+        }
+
+        public async Task<List<Article>> GetAllWithIncludesAsync()
+        {
+            return await _context.Articles
+            .Include(a => a.Category)
+            .Include(a => a.AppUser)
+            .Include(a => a.Comments)
+            .ToListAsync();
+        }
+
+        public async Task<List<Article>> GetArticlesWithCategoryAndUserAsync()
+        {
+            return await _context.Articles
+                             .Include(a => a.Category)
+                             .Include(a => a.AppUser)
+                             .ToListAsync();
         }
     }
 }

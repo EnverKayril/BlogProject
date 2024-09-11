@@ -11,7 +11,7 @@ namespace BlogProject.SERVICE.DTOs
     public class AppUserDTO
     {
         [DisplayName("Kullanıcı Id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
         [DisplayName("Kullanıcı Adı")]
         public string UserName { get; set; }
         [DisplayName("Email")]

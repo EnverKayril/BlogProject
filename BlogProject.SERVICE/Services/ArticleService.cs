@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using BlogProject.CORE.CoreModels.Enums;
 using BlogProject.CORE.CoreModels.Models;
 using BlogProject.SERVICE.DTOs;
+using BlogProject.SERVICE.IRepositories;
 using BlogProject.SERVICE.Services.IServices;
 using BlogProject.SERVICE.Utilities.IUnitOfWorks;
 using Microsoft.EntityFrameworkCore;
@@ -23,20 +25,34 @@ namespace BlogProject.SERVICE.Services
             _mapper = mapper;
         }
 
-        public int CreateArticle(ArticleDTO articleDTO)
+        public async Task<int> CountAsync()
         {
-            var article = _mapper.Map<Article>(articleDTO);
+            if (_unitOfWork.ArticleRepo == null)
+            {
+                return 0;
+            }
+            return await _unitOfWork.ArticleRepo.CountAsync();
+        }
+
+        public int CreateArticle(ArticleCreateDTO articleCreateDTO)
+        {
+            var article = _mapper.Map<Article>(articleCreateDTO);
             return _unitOfWork.ArticleRepo.Add(article);
         }
 
-        public async Task<int> DeleteArticle(string id)
+        public async Task<int> CreateArticleAsync(Article article)
+        {
+            return await _unitOfWork.ArticleRepo.AddAsync(article);
+        }
+
+        public async Task<int> DeleteArticleAsync(string id)
         {
             var article = await _unitOfWork.ArticleRepo.GetByIdAsync(id);
             if (article is not null)
             {
                 article.DeleteDate = DateTime.Now;
                 article.Status = CORE.CoreModels.Enums.EntityStatus.Deleted;
-                return _unitOfWork.ArticleRepo.Delete(article);
+                return await _unitOfWork.ArticleRepo.UpdateAsync(article);
             }
             return 0;
         }
@@ -60,14 +76,19 @@ namespace BlogProject.SERVICE.Services
                 {
                     Id = x.Id,
                     Title = x.Title,
-                    CreateDate = x.CreateDate,
                     Content = x.Content,
                     Thumbnail = x.Thumbnail,
+                    CreateDate = x.CreateDate,
+                    UpdateDate = x.UpdateDate,
+                    AppUserId = x.AppUserId,
                     CategoryId = x.CategoryId,
-                    AppUserId = x.AppUserId
+                    CategoryName = x.Category.Name,
+                    UserName = x.AppUser.UserName,
+                    Status = x.Status
                 },
-                where: x => x.CategoryId == categoryId,
-                orderBy: x => x.OrderBy(x => x.Content));
+                where: x => x.CategoryId == categoryId && x.Status != EntityStatus.Deleted,
+                orderBy: x => x.OrderBy(x => x.CreateDate)
+            );
         }
 
         public async Task<IEnumerable<ArticleWithUserDTO>> GetAllArticlesByUserIdAsync(string userId)
@@ -77,29 +98,70 @@ namespace BlogProject.SERVICE.Services
                 {
                     Id = x.Id,
                     Title = x.Title,
-                    CreateDate = x.CreateDate,
                     Content = x.Content,
                     Thumbnail = x.Thumbnail,
-                    CategoryId = x.CategoryId,
+                    CreateDate = x.CreateDate,
+                    UpdateDate = x.UpdateDate,
                     AppUserId = x.AppUserId,
+                    CategoryId = x.CategoryId,
+                    CategoryName = x.Category.Name,
+                    UserName = x.AppUser.UserName,
+                    Status = x.Status,
+                    ViewsCount = x.ViewsCount,
+                    CommentCount = x.Comments.Count
                 },
-                where: x => x.Status != CORE.CoreModels.Enums.EntityStatus.Deleted & x.AppUserId == userId,
+                where: x => x.Status != EntityStatus.Deleted && x.AppUserId == userId,
                 join: x => x.Include(x => x.AppUser)
+                    .Include(x => x.Category)
+                    .Include(x => x.Comments)
                 );
+        }
+
+        public async Task<List<ArticleWithUserDTO>> GetAllArticlesWithUserAsync()
+        {
+            var articles = await _unitOfWork.ArticleRepo.GetAllWithIncludesAsync();
+            return articles.Select(article => new ArticleWithUserDTO
+            {
+                Id = article.Id,
+                Title = article.Title,
+                Content = article.Content,
+                Thumbnail = article.Thumbnail,
+                CreateDate = article.CreateDate,
+                UpdateDate = article.UpdateDate,
+                AppUserId = article.AppUserId,
+                CategoryId = article.CategoryId,
+                CategoryName = article.Category.Name,
+                UserName = article.AppUser.UserName,
+                Status = article.Status,
+                ViewsCount = article.ViewsCount,
+                CommentCount = article.Comments.Count
+            }).ToList();
         }
 
         public async Task<ArticleDTO> GetArticleByIdAsync(string id)
         {
-            var article = await _unitOfWork.ArticleRepo.GetByIdAsync(id);
+            //var article = await _unitOfWork.ArticleRepo.GetByIdAsync(id);
+            //return _mapper.Map<ArticleDTO>(article);
+            var articles = await _unitOfWork.ArticleRepo.GetAllAsync();
+            var article = articles.FirstOrDefault(x => x.Id == id);
+
             return _mapper.Map<ArticleDTO>(article);
+
         }
 
-        public int UpdateArticle(ArticleDTO articleDTO)
+        public async Task<List<Article>> GetArticlesWithCategoryAndUserAsync()
         {
-            var article = _mapper.Map<Article>(articleDTO);
+            return await _unitOfWork.ArticleRepo.GetArticlesWithCategoryAndUserAsync();
+        }
+
+        public async Task<int> UpdateArticleAsync(ArticleDTO articleDTO)
+        {
+            var article = await _unitOfWork.ArticleRepo.GetByIdAsync(articleDTO.Id);
+
+            _mapper.Map(articleDTO, article);
             article.UpdateDate = DateTime.Now;
-            article.Status = CORE.CoreModels.Enums.EntityStatus.Updated;
-            return _unitOfWork.ArticleRepo.Update(article);
+            article.Status = EntityStatus.Updated;
+            return await _unitOfWork.ArticleRepo.UpdateAsync(article);
         }
     }
 }

@@ -11,6 +11,8 @@ using BlogProject.SERVICE.Services.IServices;
 using BlogProject.SERVICE.Utilities.ILogging;
 using BlogProject.SERVICE.Utilities.IUnitOfWorks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BlogProject_UI
 {
@@ -18,13 +20,18 @@ namespace BlogProject_UI
     {
         public static void Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             //Contexts
-            builder.Services.AddDbContext<AppDbContext>();
+            //builder.Services.AddDbContext<AppDbContext>();
+
+            var conn = builder.Configuration.GetConnectionString("DefaultConn");
+            builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn));
+
             builder.Services.AddIdentity<AppUser, Role>(option =>
             {
                 option.Password.RequiredLength = 3;
@@ -39,9 +46,10 @@ namespace BlogProject_UI
 
             //Repository
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddScoped<IUnitOfWorkService,  UnitOfWorkService>();
+            builder.Services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IArticleService, ArticleService>();
+            builder.Services.AddScoped<ICommentService, CommentService>();
             builder.Services.AddScoped<IAppUserService, AppUserService>();
             builder.Services.AddScoped<UserManager<AppUser>>();
             builder.Services.AddTransient<ImageHelper>();
@@ -86,7 +94,7 @@ namespace BlogProject_UI
 
             app.MapAreaControllerRoute(
                 name: "Admin",
-                areaName:"Admin",
+                areaName: "Admin",
                 pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(

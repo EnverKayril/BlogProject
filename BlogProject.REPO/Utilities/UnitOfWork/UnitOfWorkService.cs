@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BlogProject.CORE.CoreModels.Models;
+using BlogProject.REPO.Utilities.Extensions;
 using BlogProject.SERVICE.IRepositories;
 using BlogProject.SERVICE.Services;
 using BlogProject.SERVICE.Services.IServices;
@@ -19,17 +20,20 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
         private readonly IMapper _mapper;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly ImageHelper _imageHelper;
 
-        public UnitOfWorkService(IUnitOfWork unitOfWorkService, IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public UnitOfWorkService(IUnitOfWork unitOfWorkService, IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ImageHelper imageHelper)
         {
             _unitOfWork = unitOfWorkService;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
+            _signInManager = signInManager;
+            _imageHelper = imageHelper;
 
             CategoryService = new CategoryService(_unitOfWork, _mapper);
             AppUserService = new AppUserService(_unitOfWork, _mapper, _userManager);
-            _signInManager = signInManager;
+            ArticleService = new ArticleService(_unitOfWork, _mapper);
         }
 
         public ICategoryService CategoryService { get; }
@@ -38,7 +42,9 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
 
         public IAppUserService AppUserService { get; }
 
+        public ICommentService CommentService { get; }
         public UserManager<AppUser> UserManager => _userManager;
         public SignInManager<AppUser> SignInManager => _signInManager;
+
     }
 }

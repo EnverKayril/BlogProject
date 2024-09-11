@@ -14,5 +14,6 @@ namespace BlogProject.SERVICE.Services.IServices
         int CreateAppUser(AppUserCreateDTO appUserCreateDTO);
         Task<int> UpdateAppUserAsync(AppUserDTO appUserDTO);
         Task<int> DeleteAppUser(string id);
+        Task<int> CountAsync();
     }
 }

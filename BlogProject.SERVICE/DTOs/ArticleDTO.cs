@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BlogProject.CORE.CoreModels.Enums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -10,15 +12,21 @@ namespace BlogProject.SERVICE.DTOs
     public class ArticleDTO
     {
         public string Id { get; set; }
-        [Required(ErrorMessage = "{0} alanı boş geçilmemelidir.")]
-        [MaxLength(100)]
+        [DisplayName("Başlık")]
+        [Required(ErrorMessage = "{0} boş geçilmemelidir.")]
+        [MaxLength(100, ErrorMessage = "{0} {1} karakterden fazla olmamalıdır.")]
         public string Title { get; set; }
-        [Required(ErrorMessage = "{0} alanı boş geçilmemelidir.")]
+        [DisplayName("İçerik")]
+        [Required(ErrorMessage = "{0} boş geçilmemelidir.")]
         public string Content { get; set; }
-        [Required(ErrorMessage = "{0} alanı boş geçilmemelidir.")]
+        [DisplayName("Blog Görseli")]
         public string Thumbnail { get; set; }
         public DateTime CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
         public string AppUserId { get; set; }
         public string CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public string UserName { get; set; }
+        public EntityStatus Status { get; set; }
     }
 }

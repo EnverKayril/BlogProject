@@ -20,6 +20,7 @@ namespace BlogProject.SERVICE.Mappers
             CreateMap<CategoryCreateDTO, Category>();
 
             CreateMap<ArticleDTO, Article>().ReverseMap();
+            CreateMap<ArticleCreateDTO, Article>();
             CreateMap<ArticleWithUserDTO, Article>();
 
             CreateMap<Role, RoleDTO>().ReverseMap();

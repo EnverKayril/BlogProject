@@ -61,7 +61,7 @@ namespace BlogProject_UI.Areas.Admin.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index","Home");
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {
@@ -77,7 +77,7 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             }
             else
             {
-            return View("Login");
+                return View("Login");
             }
         }
 
@@ -98,7 +98,7 @@ namespace BlogProject_UI.Areas.Admin.Controllers
                 UserName = model.UserName,
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
-                Photo = await _imageHelper.ImageUpload(model.PhotoFile)
+                Photo = await _imageHelper.ImageUpload(model.PhotoFile, "UserImages")
             };
 
             var result = await _service.UserManager.CreateAsync(appUser, model.Password);
@@ -132,11 +132,11 @@ namespace BlogProject_UI.Areas.Admin.Controllers
                 }
                 else
                 {
-                    model.Photo = await _imageHelper.ImageUpload(photo);
+                    model.Photo = await _imageHelper.ImageUpload(photo, "UserImages");
 
                     if (oldPhoto != null && oldPhoto != "DefaultUser.jpg")
                     {
-                        _imageHelper.DeleteImage(oldPhoto);
+                        _imageHelper.DeleteImage(oldPhoto, "UserImages");
                     }
                 }
 
@@ -161,7 +161,7 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         public async Task<ViewResult> ChangeDetails()
         {
             var user = await _service.UserManager.GetUserAsync(HttpContext.User);
-            var userDTO = new AppUserCreateDTO
+            var userDTO = new AppUserDTO
             {
                 UserName = user.UserName,
                 Email = user.Email,
@@ -171,38 +171,91 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             return View(userDTO);
         }
 
-        //[Authorize]
-        //[HttpGet]
-        //public async Task<ViewResult> ChangeDetails(AppUserCreateDTO model)
-        //{
-        //    var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> ChangeDetails(AppUserDTO model, IFormFile? photo)
+        {
+            var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+            var oldPhoto = user.Photo;
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (photo == null)
-        //        {
-        //            model.Photo = user.Photo;
-        //        }
-        //        else
-        //        {
-        //            model.Photo = await _imageHelper.ImageUpload(photo);
-        //        }
+            if (ModelState.IsValid)
+            {
+                if (photo == null)
+                {
+                    model.Photo = oldPhoto;
+                }
+                else
+                {
+                    model.Photo = await _imageHelper.ImageUpload(photo, "UserImages");
 
-        //        user.UserName = model.UserName;
-        //        user.Email = model.Email;
-        //        user.PhoneNumber = model.PhoneNumber;
-        //        user.Photo = model.Photo;
+                    if (oldPhoto != null && oldPhoto != "DefaultUser.jpg")
+                    {
+                        _imageHelper.DeleteImage(oldPhoto, "UserImages");
+                    }
+                }
 
-        //        await _service.AppUserService.UpdateAppUserAsync(user);
-        //        return RedirectToAction("Index");
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+                user.PhoneNumber = model.PhoneNumber;
+                user.Photo = model.Photo;
 
-        //    }
-        //    foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-        //    {
-        //        Console.WriteLine(error.ErrorMessage);
-        //    }
-        //    return View(model);
-        //}
+                //await _service.AppUserService.UpdateAppUserAsync(user);
+                await _service.UserManager.UpdateAsync(user);
+                return RedirectToAction("Index");
+
+            }
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ViewResult PasswordChange()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> PasswordChange(UserPasswordChanceDTO userPasswordChanceDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+                var isVerified = await _service.UserManager.CheckPasswordAsync(user, userPasswordChanceDTO.CurrentPassword);
+                if (isVerified)
+                {
+                    var result = await _service.UserManager.ChangePasswordAsync(user, userPasswordChanceDTO.CurrentPassword, userPasswordChanceDTO.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        await _service.UserManager.UpdateSecurityStampAsync(user);
+                        await _service.SignInManager.SignOutAsync();
+                        await _service.SignInManager.PasswordSignInAsync(user, userPasswordChanceDTO.NewPassword, true, false);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                        return View(userPasswordChanceDTO);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Lütfen girmiş olduğunuz şifrenizi kontrol ediniz.");
+                    return View(userPasswordChanceDTO);
+                }
+            }
+            else
+            {
+                return View();
+            }
+        }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
@@ -218,7 +271,13 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         {
             try
             {
-                await _service.AppUserService.DeleteAppUser(id.ToString());
+                var user = await _service.UserManager.FindByIdAsync(id);
+
+                await _service.UserManager.DeleteAsync(user);
+                if (user.Photo != "DefaultUser.jpg")
+                {
+                    _imageHelper.DeleteImage(user.Photo, "UserImages");
+                }
                 return RedirectToAction("Index");
             }
             catch

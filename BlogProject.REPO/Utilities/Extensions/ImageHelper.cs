@@ -19,11 +19,18 @@ namespace BlogProject.REPO.Utilities.Extensions
             _web = web;
         }
 
-        public async Task<string> ImageUpload(IFormFile photoFile)
+        public async Task<string> ImageUpload(IFormFile photoFile, string path)
         {
             if (photoFile == null)
             {
-                return "DefaultUser.jpg";
+                if (path == "UserImages")
+                {
+                    return "DefaultUser.jpg";
+                }
+                else if (path == "ArticleImages")
+                {
+                    return "DefaultThumbnail.jpg";
+                }
             }
 
             string fileExtension = Path.GetExtension(photoFile.FileName);
@@ -31,17 +38,17 @@ namespace BlogProject.REPO.Utilities.Extensions
             string fileName = $"{dateTime.FullDateAndTimeStringWithUnderscore()}{fileExtension}";
             string wwwroot = _web.WebRootPath;
             //var path = Path.Combine($"{wwwroot}/img", fileName);
-            var path = Path.Combine(wwwroot, "img", fileName);
-            await using (var stream = new FileStream(path, FileMode.Create))
+            var filepath = Path.Combine(wwwroot, "img", path, fileName);
+            await using (var stream = new FileStream(filepath, FileMode.Create))
             {
                 await photoFile.CopyToAsync(stream);
             }
             return fileName;
         }
 
-        public void DeleteImage(string fileName)
+        public void DeleteImage(string fileName, string path)
         {
-            var filePath = Path.Combine(ImgDirectory, fileName);
+            var filePath = Path.Combine(ImgDirectory, path, fileName);
 
             if (File.Exists(filePath))
             {
