@@ -65,7 +65,6 @@
                     <th>Kullanıcı Adı</th>
                     <th>Başlık</th>
                     <th>Küçük Resim</th>
-                    <th>İçerik</th>
                     <th>Tarih</th>
                     <th>Okunma Sayısı</th>
                     <th>Yorum Sayısı</th>
@@ -82,7 +81,6 @@
                             <td>@article.AppUser.UserName</td>
                             <td>@article.Title</td>
                             <td><img src="~/img//ArticleImages/@article.Thumbnail" class="img-thumbnail" style="width:100px; height:auto;" /></td>
-                            <td>@article.Content</td>
                             <td>
                                 @if (article.UpdateDate != null)
                                 {

@@ -127,6 +127,8 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(string id)
         {
             var model = await _service.ArticleService.GetArticleByIdAsync(id);
+            var category = await _service.CategoryService.GetCategoryByIdAsync(model.CategoryId);
+            ViewBag.CategoryName = category.Name;
             return View(model);
         }
 

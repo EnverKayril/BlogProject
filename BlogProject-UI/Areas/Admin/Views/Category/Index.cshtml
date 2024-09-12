@@ -9,57 +9,42 @@
     <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
     <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Category" asp-action="Index">Kategoriler</a></li>
 </ol>
+
 <div class="card mb-4 mt-3">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
         Kategoriler
     </div>
     <div class="card-body">
-            <a class="btn btn-primary me-0" asp-action="Create">Kategori Ekle</a>
-        <div class="table-responsive">
+        <a class="btn btn-primary me-0" asp-action="Create">Kategori Ekle</a>
+        <div class="table-responsive mt-3">
             <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Id)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Name)
-                        </th>
-                        <th>
-                            Düzenlenme Tarihi
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Status)
-                        </th>
-                         <th>
-                            İşlemler
-                        </th>
+                        <th>@Html.DisplayNameFor(model => model.First().Id)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Name)</th>
+                        <th>Düzenlenme Tarihi</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Status)</th>
+                        <th>İşlemler</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @if (item.UpdateDate is not null)
+                                @if (item.UpdateDate.HasValue)
                                 {
                                     @item.UpdateDate.Value.ToString("dd/MM/yyyy HH:mm")
                                 }
                                 else
                                 {
-                                @item.CreateDate.ToString("dd/MM/yyyy HH:mm")
+                                    @item.CreateDate.ToString("dd/MM/yyyy HH:mm")
                                 }
                             </td>
-                            <td>
-                                @item.Status.ToString()
-                            </td>
+                            <td>@item.Status</td>
                             <td>
                                 <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
                                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
@@ -71,10 +56,10 @@
         </div>
     </div>
 </div>
-@section Scripts
-{
+
+@section Scripts {
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var table = new DataTable('#categoriesTable', {
                 language: {
                     url: '/locales/tr.json'

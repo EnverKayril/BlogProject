@@ -7,46 +7,67 @@
 
 <ol class="breadcrumb mb-3 mt-2">
     <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
-    <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="AppUser" asp-action="Index">Kullanıcılar</a></li>
-    <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="AppUser" asp-action="Create">Yeni</a></li>
+    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="AppUser" asp-action="Index">Kullanıcılar</a></li>
+    <li class="breadcrumb-item active">Yeni</li>
 </ol>
-<h1>Kullanıcı Ekle</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+
+<div class="card mb-4 mt-3">
+    <div class="card-header">
+        <i class="fas fa-plus me-1"></i>
+        Kullanıcı Ekle
+    </div>
+    <div class="card-body">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="UserName" class="form-label">
+                    @Html.DisplayNameFor(model => model.UserName)
+                </label>
                 <input asp-for="UserName" class="form-control" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
+
+            <div class="form-group mb-3">
+                <label asp-for="Password" class="form-label">
+                    @Html.DisplayNameFor(model => model.Password)
+                </label>
+                <input asp-for="Password" type="password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="form-label">
+                    @Html.DisplayNameFor(model => model.Email)
+                </label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="PhoneNumber" class="form-label">
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </label>
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group mt-3">
-                <label asp-for="PhotoFile" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="PhotoFile" class="form-label">
+                    @Html.DisplayNameFor(model => model.PhotoFile)
+                </label>
                 <input asp-for="PhotoFile" type="file" class="form-control-file" />
                 <span asp-validation-for="PhotoFile" class="text-danger"></span>
             </div>
+
             <div class="form-group mt-3">
                 <input type="submit" value="Ekle" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-danger">İptal</a>
             </div>
         </form>
     </div>
 </div>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

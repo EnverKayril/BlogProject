@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<BlogProject.SERVICE.DTOs.ArticleWithUserDTO>
+
 @{
-    Layout = "_Layout";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Makaleler";
 }
 
@@ -8,6 +9,7 @@
     <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
     <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Article" asp-action="Index">Makaleler</a></li>
 </ol>
+
 <div class="card mb-4">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
@@ -15,40 +17,19 @@
     </div>
     <div class="card-body">
         <a class="btn btn-primary me-0" asp-action="Create">Makale Ekle</a>
-        <div class="table-responsive">
-            <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered" id="articlesTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>
-                            @Html.DisplayNameFor(Model => Model.CategoryName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(Model => Model.UserName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(Model => Model.Title)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(Model => Model.Thumbnail)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(Model => Model.Content)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(Model => Model.UpdateDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(Model => Model.ViewsCount)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(Model => Model.CommentCount)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(Model => Model.Status)
-                        </th>
-                        <th>
-                            İşlemler
-                        </th>
+                        <th>@Html.DisplayNameFor(model => model.First().CategoryName)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().UserName)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Title)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Thumbnail)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().UpdateDate)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().ViewsCount)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().CommentCount)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Status)</th>
+                        <th>İşlemler</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,8 +41,16 @@
                                 <td>@article.CategoryName</td>
                                 <td>@article.UserName</td>
                                 <td>@article.Title</td>
-                                <td><img src="~/img/ArticleImages/@article.Thumbnail" class="img-thumbnail" style="width:100px; height:auto; alt="Thumbnail" /></td>
-                                <td>@article.Content</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(article.Thumbnail))
+                                    {
+                                        <img src="~/img/ArticleImages/@article.Thumbnail" class="img-thumbnail" style="width:100px; height:auto;" alt="Thumbnail" />
+                                    }
+                                    else
+                                    {
+                                        <span>Resim Yok</span>
+                                    }
+                                </td>
                                 <td>
                                     @if (article.UpdateDate.HasValue)
                                     {
@@ -74,7 +63,7 @@
                                 </td>
                                 <td>@article.ViewsCount</td>
                                 <td>@article.CommentCount</td>
-                                <td>@article.Status.ToString()</td>
+                                <td>@article.Status</td>
                                 <td>
                                     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@article.Id">Düzenle</a> |
                                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@article.Id">Sil</a>
@@ -87,16 +76,15 @@
         </div>
     </div>
 </div>
-@section Scripts
-{
+
+@section Scripts {
     <script>
         $(document).ready(function () {
-            var table = new DataTable('#categoriesTable', {
+            $('#articlesTable').DataTable({
                 language: {
                     url: '/locales/tr.json'
                 }
             });
-            console.log($('#categoriesTable').DataTable().settings().init());
         });
     </script>
 }

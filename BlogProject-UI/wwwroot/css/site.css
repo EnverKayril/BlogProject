@@ -1,39 +1,90 @@
-html, body {
-    height: 100%;
-    margin: 0;
+/* Trumbowyg Editor CSS Import */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.27.3/ui/trumbowyg.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.27.3/plugins/colors/ui/trumbowyg.colors.min.css');
+@import url('https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css');
+
+/* Content Wrapper (Remove positioning and size constraints) */
+.content-wrapper {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin-bottom: 60px; /* Footer için alan býrakýr */
-}
-
-/* Layout ve Flexbox ayarlarý */
-#layoutSidenav {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-#layoutSidenav_content {
-    flex: 1;
-}
-
-/* Footer ayarlarý */
-footer {
+/* Paragraph Styling */
+p {
     width: 100%;
-    box-sizing: border-box;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    background-color: #f8f9fa; /* Arka plan rengi */
-    text-align: center;
-    padding: 1rem;
+    max-width: 60ch;
+    overflow-wrap: break-word;
 }
 
-/* Form Gruplarý */
-.form-group {
-    margin-bottom: 1rem;
+/* Remove Trumbowyg Box Maximum Width and Margin */
+.trumbowyg-box {
+    margin: 0; /* Reset the margin */
+    max-width: none; /* Allow it to expand to fit its container */
+}
+
+/* Trumbowyg Editor Styling */
+.trumbowyg-editor {
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    .content-wrapper {
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 769px) {
+    .content-wrapper {
+        max-width: 100%;
+    }
+}
+
+/* Action Buttons Styling */
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.action-button {
+    margin: 0 5px;
+}
+
+/* Container Styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Custom Editor Toolbar and Editor Styling (Keep Original Structure) */
+.trumbowyg-button-pane {
+    background-color: #f5f5f5;
+}
+
+.trumbowyg-button {
+    color: #333;
+}
+
+    .trumbowyg-button:hover {
+        background-color: #e0e0e0;
+    }
+
+.trumbowyg-dropdown {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+}
+
+    .trumbowyg-dropdown button:hover {
+        background-color: #ddd;
+    }
+
+.trumbowyg-editor {
+    background-color: #ffffff;
+    color: #000;
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }

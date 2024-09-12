@@ -7,51 +7,57 @@
 
 <ol class="breadcrumb mb-3 mt-2">
     <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
-    <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="AppUser" asp-action="Index">Kullanıcılar</a></li>
-    <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="AppUser" asp-action="Edit">Düzenle</a></li>
+    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="AppUser" asp-action="Index">Kullanıcılar</a></li>
+    <li class="breadcrumb-item active">Düzenle</li>
 </ol>
-<h1>Kullanıcı Düzenle</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-6">
+<div class="card mb-4 mt-3">
+    <div class="card-header">
+        <i class="fas fa-edit me-1"></i>
+        Kullanıcı Düzenle
+    </div>
+    <div class="card-body">
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label">
+            <div class="form-group mb-3">
+                <label asp-for="UserName" class="form-label">
                     @Html.DisplayNameFor(model => model.UserName)
                 </label>
-                <input type="text" class="form-control" asp-for="UserName" />
+                <input asp-for="UserName" class="form-control" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Email" class="control-label">
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="form-label">
                     @Html.DisplayNameFor(model => model.Email)
                 </label>
-                <input type="text" class="form-control" asp-for="Email"  />
+                <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label">
+            <div class="form-group mb-3">
+                <label asp-for="PhoneNumber" class="form-label">
                     @Html.DisplayNameFor(model => model.PhoneNumber)
                 </label>
-                <input type="text" class="form-control" asp-for="PhoneNumber" />
+                <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Photo"></label><br />
-                <img class="img-fluid img-thumbnail" src="~/img/UserImages/@Model.Photo" style="width:300px; height:auto;" alt="@Model.UserName" />
+
+            <div class="form-group mb-3">
+                <label class="form-label">Mevcut Fotoğraf:</label><br />
+                <img src="~/img/UserImages/@Model.Photo" class="img-fluid img-thumbnail" style="width:300px; height:auto;" alt="@Model.UserName" />
             </div>
-            <div class="form-group">
-                <label for="Photo">Yeni Fotoğraf:</label>
-                <input type="file" id="photo" name="photo" class="form-control" />
+
+            <div class="form-group mb-3">
+                <label asp-for="Photo" class="form-label">Yeni Fotoğraf:</label>
+                <input asp-for="Photo" type="file" class="form-control-file" />
                 <span asp-validation-for="Photo" class="text-danger"></span>
-            </div
-            <div class="form-group">
-                <input type="submit" value="Kaydet" class="btn btn-primary mt-3" />
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-danger">İptal</a>
             </div>
         </form>
     </div>
