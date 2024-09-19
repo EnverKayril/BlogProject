@@ -1,6 +1,7 @@
 ﻿using BlogProject.CORE.CoreModels.Models;
 using BlogProject.REPO.Contexts;
 using BlogProject.REPO.Repositories.BaseRepos;
+using BlogProject.SERVICE.DTOs;
 using BlogProject.SERVICE.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -23,5 +24,26 @@ namespace BlogProject.REPO.Repositories
         {
             return await _appDbContext.Comments.Where(c => c.ArticleId == articleId).ToListAsync();
         }
+
+
+        public async Task<List<CommentWithUserDTO>> GetCommentsWithArticleAndUserAsync()
+        {
+            var comments = await _appDbContext.Comments
+            .Include(c => c.AppUser) // AppUser tablosuyla ilişkili veriyi çek
+            .Include(c => c.Article) // Article tablosuyla ilişkili veriyi çek
+            .Select(comment => new CommentWithUserDTO
+            {
+                CommentId = comment.Id,
+                CommentContent = comment.Content,
+                CreateDate = comment.CreateDate,
+                UserName = comment.AppUser.UserName,
+                ArticleTitle = comment.Article.Title,
+                Status = comment.Status
+            })
+            .ToListAsync();
+
+            return comments;
+        }
+
     }
 }

@@ -29,6 +29,56 @@ namespace BlogProject.REPO.Configurations
                 {
                     RoleId = "2",
                     UserId = "2",
+                },
+                new AppUserRole
+                {
+                    RoleId = "3",
+                    UserId = "3",
+                },
+                new AppUserRole
+                {
+                    RoleId = "4",
+                    UserId = "4",
+                },
+                new AppUserRole
+                {
+                    RoleId = "4",
+                    UserId = "5",
+                },
+                new AppUserRole
+                {
+                    RoleId = "3",
+                    UserId = "6",
+                },
+                new AppUserRole
+                {
+                    RoleId = "3",
+                    UserId = "7",
+                },
+                new AppUserRole
+                {
+                    RoleId = "3",
+                    UserId = "8",
+                },
+                new AppUserRole
+                {
+                    RoleId = "3",
+                    UserId = "9",
+                },
+                new AppUserRole
+                {
+                    RoleId = "3",
+                    UserId = "10",
+                },
+                new AppUserRole
+                {
+                    RoleId = "3",
+                    UserId = "11",
+                },
+                new AppUserRole
+                {
+                    RoleId = "3",
+                    UserId = "12",
                 });
         }
     }

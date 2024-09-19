@@ -1,7 +1,6 @@
 ﻿using BlogProject.REPO.Utilities.UnitOfWork;
 using BlogProject.SERVICE.Utilities.IUnitOfWorks;
 using BlogProject_UI.Areas.Admin.Models.VMs;
-using BlogProject_UI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,7 +8,7 @@ using System.Diagnostics;
 namespace BlogProject_UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin, Editor")]
+    [Authorize(Roles = "Admin, Editor, verifieduser")]
     public class HomeController : Controller
     {
         private readonly IUnitOfWorkService _service;

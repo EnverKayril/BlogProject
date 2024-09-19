@@ -3,11 +3,7 @@ using BlogProject.REPO.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace BlogProject.REPO.Contexts
 {
@@ -17,14 +13,16 @@ namespace BlogProject.REPO.Contexts
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Server = ENVER\\SQLEXPRESS01; Database = FinalProject; Trusted_Connection = True; TrustServerCertificate = True;");
-        //}
-
-        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=ENVER\\SQLEXPRESS01;Database=FinalProject;Trusted_Connection=True;TrustServerCertificate=True;");
+            }
+        }
 
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

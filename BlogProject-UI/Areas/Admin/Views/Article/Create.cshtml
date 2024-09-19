@@ -2,16 +2,11 @@
 
 @{
     ViewData["Title"] = "Makale Ekle";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    // Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<ol class="breadcrumb mb-3 mt-2">
-    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
-    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Article" asp-action="Index">Makaleler</a></li>
-    <li class="breadcrumb-item active">Ekle</li>
-</ol>
-
-<div class="card mb-4 mt-3">
+<div class="card mb-4 mt-5">
     <div class="card-header">
         <i class="fas fa-plus me-1"></i>
         Makale Ekle
@@ -55,8 +50,7 @@
 </div>
 
 @section Scripts {
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    <script src="~/js/site.js"></script> 
+    <script src="~/js/site.js"></script>
 }
 @section Styles {
     <link rel="stylesheet" href="~/css/site.css" />

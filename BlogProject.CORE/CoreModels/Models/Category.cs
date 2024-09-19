@@ -12,7 +12,7 @@ namespace BlogProject.CORE.CoreModels.Models
     {
         public string Name { get; set; }
         public string DetailUrl { get { return NormalizedUrl.TurkishToEnglish(Name); } }
-
+        public string Description { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
     }
 }

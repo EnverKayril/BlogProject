@@ -1,49 +1,56 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BlogProject_UI</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BlogProject_UI.styles.css" asp-append-version="true" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Agency HTML Template">
+    <meta name="author" content="Themefisher">
+    <meta name="generator" content="Themefisher Classified Marketplace Template v1.0">
+    @await Html.PartialAsync("_LayoutBlogCssPartial")
+    @RenderSection("Styles", required: false)
 </head>
-<body>
+
+<body class="body-wrapper">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BlogProject_UI</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    @await Html.PartialAsync("Components/Navbar")
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
+
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
+        <main role="main" class="row">
+            <div class="col-lg-8">
+                @RenderBody()
+            </div>
+            <div class="col-lg-4">
+                @await Component.InvokeAsync("Sidebar")
+            </div>
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - BlogProject_UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="py-4 bg-light">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Tüm Hakları Saklıdır. © 2024 Blog Projesi by Enver Kayrıl</div>
+                <div>
+                    <a asp-controller="Home" asp-action="Index" class="text-muted mx-2">Blog</a>
+                    <span class="text-muted">|</span>
+                    <a asp-controller="Home" asp-action="About" class="text-muted mx-2">Hakkımızda</a>
+                    <span class="text-muted">|</span>
+                    <a asp-controller="Home" asp-action="Privacy" class="text-muted mx-2">Gizlilik Politikası</a>
+                    <span class="text-muted">|</span>
+                    <a asp-controller="Home" asp-action="Terms" class="text-muted mx-2">Kullanım Koşulları</a>
+                </div>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    @await Html.PartialAsync("_LayoutBlogJsPartial")
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

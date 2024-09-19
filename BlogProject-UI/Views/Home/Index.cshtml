@@ -1,6 +1,43 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<BlogProject.SERVICE.DTOs.ArticleDTO>
+@{
+    ViewData["Title"] = "Anasayfa";
 }
 
-<h1>Home Area</h1>
-<a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Area'ya Geç'</a>
+
+<div class="mt-5">
+    @foreach (var article in Model)
+    {
+        <!-- Article -->
+        <article class="mb-4">
+            <!-- Post Image -->
+            <div class="image">
+                <img class="thumbnail" src="/img/ArticleImages/@article.Thumbnail" alt="@article.Title">
+            </div>
+            <!-- Post Title -->
+            <h3>@article.Title</h3>
+            <ul class="list-inline">
+                <li class="list-inline-item">by @article.UserName</li>
+                <li class="list-inline-item">@article.CreateDate.ToString("MMM dd, yyyy")</li>
+            </ul>
+            <!-- Post Description -->
+            <p>@article.Content</p>
+            <!-- Read more button -->
+            <a href="@Url.Action("Details", "Article", new { id = article.Id })" class="btn btn-outline-primary">Keşfet</a>
+        </article>
+    }
+</div>
+
+<!-- Pagination -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>

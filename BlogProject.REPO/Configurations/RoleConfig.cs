@@ -53,6 +53,22 @@ namespace BlogProject.REPO.Configurations
                     Name = "Editor",
                     NormalizedName = "EDITOR",
                     ConcurrencyStamp = Guid.NewGuid().ToString()
+                },
+
+                new Role
+                {
+                    Id = "3",
+                    Name = "Verifieduser",
+                    NormalizedName = "VERIFIEDUSER",
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                },
+
+                new Role
+                {
+                    Id = "4",
+                    Name = "Newuser",
+                    NormalizedName = "NEWUSER",
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
                 });
 
         }

@@ -22,9 +22,14 @@ namespace BlogProject.SERVICE.Mappers
             CreateMap<ArticleDTO, Article>().ReverseMap();
             CreateMap<ArticleCreateDTO, Article>();
             CreateMap<ArticleWithUserDTO, Article>();
+            CreateMap<Article, ArticleDetailDTO>().ReverseMap();
 
             CreateMap<Role, RoleDTO>().ReverseMap();
             CreateMap<RoleCreateDTO, Role>();
+
+            CreateMap<Comment, CommentDTO>().ReverseMap();
+            CreateMap<CommentCreateDTO, Comment>();
+            CreateMap<CommentWithUserDTO, Comment>();
         }
     }
 }

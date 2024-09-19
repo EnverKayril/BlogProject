@@ -1,0 +1,38 @@
+﻿@model BlogProject_UI.Models.VMs.SidebarViewModel
+
+<div class="sidebar mt-5">
+	<!-- Search Widget -->
+	<div class="widget search p-0">
+		<div class="input-group">
+			<input type="text" class="form-control" id="expire" placeholder="Type &amp; hit enter to search">
+			<span class="input-group-addon"><i class="fa fa-search px-3"></i></span>
+		</div>
+	</div>
+	<!-- Category Widget -->
+	<div class="widget category">
+		<!-- Widget Header -->
+		<h5 class="widget-header">Kategoriler</h5>
+		<ul class="category-list">
+			@foreach (var category in Model.Categories)
+			{
+				<li>
+					<a asp-controller="Article" asp-action="ListByCategory" asp-route-categoryId="@category.CategoryId">
+						@category.CategoryName <span class="float-right">(@category.ArticleCount)</span>
+					</a>
+				</li>
+			}
+		</ul>
+	</div>
+	<!-- Archive Widget -->
+	<div class="widget archive">
+		<!-- Widget Header -->
+		<h5 class="widget-header">Archives</h5>
+		<ul class="archive-list">
+			<li><a href="ad-list-view.html">January 2017</a></li>
+			<li><a href="ad-list-view.html">February 2017</a></li>
+			<li><a href="ad-list-view.html">March 2017</a></li>
+			<li><a href="ad-list-view.html">April 2017</a></li>
+			<li><a href="ad-list-view.html">May 2017</a></li>
+		</ul>
+	</div>
+</div>

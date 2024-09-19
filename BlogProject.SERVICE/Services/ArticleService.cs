@@ -34,6 +34,11 @@ namespace BlogProject.SERVICE.Services
             return await _unitOfWork.ArticleRepo.CountAsync();
         }
 
+        public async Task<int> CountByCategoryId(string categoryId)
+        {
+            return await _unitOfWork.ArticleRepo.CountAsync(a => a.CategoryId == categoryId);
+        }
+
         public int CreateArticle(ArticleCreateDTO articleCreateDTO)
         {
             var article = _mapper.Map<Article>(articleCreateDTO);
@@ -149,6 +154,24 @@ namespace BlogProject.SERVICE.Services
 
         }
 
+        public async Task<List<ArticleDTO>> GetArticlesForHomePageAsync()
+        {
+            var articles = await _unitOfWork.ArticleRepo.GetFilteredModelListAysnc(
+                select: article => new ArticleDTO
+                {
+                    Id = article.Id,
+                    Title = article.Title,
+                    Content = article.Content.Length > 100 ? article.Content.Substring(0, 100) + "..." : article.Content,
+                    Thumbnail = article.Thumbnail ?? "default-thumbnail.jpg",
+                    CreateDate = article.CreateDate,
+                    UserName = article.AppUser.UserName,
+                    CategoryName = article.Category.Name
+                },
+                where: article => article.Status != EntityStatus.Deleted,
+                join: article => article.Include(a => a.AppUser).Include(a => a.Category));
+            return articles.ToList();
+        }
+
         public async Task<List<Article>> GetArticlesWithCategoryAndUserAsync()
         {
             return await _unitOfWork.ArticleRepo.GetArticlesWithCategoryAndUserAsync();
@@ -163,5 +186,29 @@ namespace BlogProject.SERVICE.Services
             article.Status = EntityStatus.Updated;
             return await _unitOfWork.ArticleRepo.UpdateAsync(article);
         }
+
+        public async Task<ArticleDetailDTO> GetArticleDetailByIdAsync(string id)
+        {
+            var article = await _unitOfWork.ArticleRepo.GetFilteredModelAysnc(
+                select: x => new ArticleDetailDTO
+                {
+                    ArticleId = x.Id,
+                    Title = x.Title,
+                    Content = x.Content,
+                    Thumbnail = x.Thumbnail ?? "default-thumbnail.jpg",
+                    CreateDate = x.CreateDate,
+                    CategoryName = x.Category.Name,
+                    UserName = x.AppUser.UserName,
+                    UserProfileImage = x.AppUser.Photo ?? "default-user.jpg",
+                    ViewCount = x.ViewsCount,
+                    CommentCount = x.Comments.Count
+                },
+                where: x => x.Id == id,
+                join: x => x.Include(x => x.Category).Include(x => x.AppUser).Include(x => x.Comments)
+            );
+
+            return article;
+        }
+
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,11 @@ namespace BlogProject.REPO.Repositories
         public ArticleRepo(AppDbContext context) : base(context)
         {
             _context = context;
+        }
+
+        public async Task<int> CountAsync(Expression<Func<Article, bool>> predicate)
+        {
+            return await _context.Articles.CountAsync(predicate);
         }
 
         public async Task<List<Article>> GetAllWithIncludesAsync()

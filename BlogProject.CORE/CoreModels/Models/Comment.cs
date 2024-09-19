@@ -12,6 +12,7 @@ namespace BlogProject.CORE.CoreModels.Models
         public string Content { get; set; }
         public string AppUserId { get; set; }
         public string ArticleId { get; set; }
+        public bool Approved { get; set; }
 
         public virtual AppUser AppUser { get; set; }
         public virtual Article Article { get; set; }

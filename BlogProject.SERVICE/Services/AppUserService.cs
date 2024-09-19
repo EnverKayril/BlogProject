@@ -53,7 +53,20 @@ namespace BlogProject.SERVICE.Services
         public async Task<IEnumerable<AppUserDTO>> GetAllAppUserAsync()
         {
             var appUsers = await _unitOfWork.AppUserRepo.GetAllAsync();
-            return _mapper.Map<IEnumerable<AppUserDTO>>(appUsers);
+
+            var appUserDTOs = new List<AppUserDTO>();
+
+            foreach (var user in appUsers)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+
+                var userDto = _mapper.Map<AppUserDTO>(user);
+                userDto.Roles = roles.ToList();
+
+                appUserDTOs.Add(userDto);
+            }
+
+            return appUserDTOs;
         }
 
         public async Task<AppUserDTO> GetAppUserByIdAsync(string id)

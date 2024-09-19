@@ -19,6 +19,7 @@ namespace BlogProject.SERVICE.Utilities.IUnitOfWorks
         IAppUserService AppUserService { get; }
         ICommentService CommentService { get; }
         UserManager<AppUser> UserManager { get; }
+        RoleManager<Role> RoleManager { get; }
         SignInManager<AppUser> SignInManager { get; }
     }
 }

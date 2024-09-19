@@ -12,7 +12,6 @@ using BlogProject.SERVICE.Utilities.ILogging;
 using BlogProject.SERVICE.Utilities.IUnitOfWorks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
 
 namespace BlogProject_UI
 {
@@ -20,31 +19,30 @@ namespace BlogProject_UI
     {
         public static void Main(string[] args)
         {
-
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            // Database Connection without appsettings.json
+            var connectionString = "Server=ENVER\\SQLEXPRESS01;Database=FinalProject;Trusted_Connection=True;TrustServerCertificate=True;";
 
-            //Contexts
-            //builder.Services.AddDbContext<AppDbContext>();
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(connectionString));
 
-            var conn = builder.Configuration.GetConnectionString("DefaultConn");
-            builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn));
-
-            builder.Services.AddIdentity<AppUser, Role>(option =>
+            // Add Identity services
+            builder.Services.AddIdentity<AppUser, Role>(options =>
             {
-                option.Password.RequiredLength = 3;
-                option.Password.RequireNonAlphanumeric = false;
-                option.Password.RequireUppercase = false;
-                option.Password.RequireLowercase = false;
-                option.Password.RequireDigit = false;
-            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+                options.Password.RequiredLength = 3;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireDigit = false;
+            })
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders();
 
-            //Logger
+            // Logger
             builder.Services.AddScoped<ILogging, Logging>();
 
-            //Repository
+            // Repositories and Services
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -54,15 +52,16 @@ namespace BlogProject_UI
             builder.Services.AddScoped<UserManager<AppUser>>();
             builder.Services.AddTransient<ImageHelper>();
 
-            //AutoMapper
+            // Add AutoMapper
             builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
             builder.Services.AddSession();
             builder.Services.AddAutoMapper(typeof(Mapping));
 
+            // Cookie configuration
             builder.Services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = new PathString("/Admin/AppUser/Login");
-                options.LogoutPath = new PathString("/Admin/AppUser/Logout");
+                options.LoginPath = new PathString("/Admin/Authorization/Login");
+                options.LogoutPath = new PathString("/Admin/Authorization/Logout");
                 options.Cookie = new CookieBuilder
                 {
                     Name = "BlogProject",
@@ -72,7 +71,7 @@ namespace BlogProject_UI
                 };
                 options.SlidingExpiration = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(7);
-                options.AccessDeniedPath = new PathString("/Admin/AppUser/AccessDenied");
+                options.AccessDeniedPath = new PathString("/Admin/Authorization/AccessDenied");
             });
 
             var app = builder.Build();
@@ -81,7 +80,6 @@ namespace BlogProject_UI
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -92,6 +90,7 @@ namespace BlogProject_UI
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // Routing
             app.MapAreaControllerRoute(
                 name: "Admin",
                 areaName: "Admin",

@@ -16,6 +16,9 @@ namespace BlogProject.SERVICE.DTOs
         [DisplayName("Kategori Adı")]
         [Required(ErrorMessage = "Kategori Adı boş geçilmemelidir.")]
         public string Name { get; set; }
+        [DisplayName("Açıklama")]
+        [Required(ErrorMessage = "Açıklama boş geçilmemelidir.")]
+        public string Description { get; set; }
         [DisplayName("Oluşturulma Tarihi")]
         public DateTime CreateDate { get; set; }
         [DisplayName("Düzenlenme Tarihi")]

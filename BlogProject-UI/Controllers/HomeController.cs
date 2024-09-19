@@ -1,3 +1,5 @@
+﻿using BlogProject.SERVICE.Utilities.IUnitOfWorks;
+using BlogProject_UI.Models.VMs;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -5,19 +7,31 @@ namespace BlogProject_UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWorkService _service;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IUnitOfWorkService service)
         {
-            _logger = logger;
+            _service = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
+        {
+            var articles = await _service.ArticleService.GetArticlesForHomePageAsync();
+
+            return View(articles);
+        }
+        
+        public IActionResult Privacy()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Terms()
         {
             return View();
         }
@@ -25,7 +39,9 @@ namespace BlogProject_UI.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
+
+
     }
 }

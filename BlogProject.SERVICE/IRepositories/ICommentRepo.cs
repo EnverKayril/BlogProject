@@ -1,4 +1,5 @@
 ﻿using BlogProject.CORE.CoreModels.Models;
+using BlogProject.SERVICE.DTOs;
 using BlogProject.SERVICE.IRepositories.BaseRepos;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,6 @@ namespace BlogProject.SERVICE.IRepositories
     public interface ICommentRepo : IBaseRepo<Comment>
     {
         Task<IEnumerable<Comment>> GetCommentsByArticleId(string articleId);
+        Task<List<CommentWithUserDTO>> GetCommentsWithArticleAndUserAsync();
     }
 }
