@@ -21,11 +21,9 @@ namespace BlogProject_UI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Database Connection without appsettings.json
-            var connectionString = "Server=ENVER\\SQLEXPRESS01;Database=FinalProject;Trusted_Connection=True;TrustServerCertificate=True;";
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(connectionString));
 
             // Add Identity services
             builder.Services.AddIdentity<AppUser, Role>(options =>

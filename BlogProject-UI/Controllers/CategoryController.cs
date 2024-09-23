@@ -1,4 +1,5 @@
 ﻿using BlogProject.SERVICE.Utilities.IUnitOfWorks;
+using BlogProject_UI.Models.VMs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogProject_UI.Controllers
@@ -18,5 +19,21 @@ namespace BlogProject_UI.Controllers
             var sortedcategories = categories.OrderBy(c => c.Name);
             return View(sortedcategories);
         }
+
+        public async Task<IActionResult> Detail(string Id)
+        {
+            var category = await _service.CategoryService.GetCategoryByIdAsync(Id);
+
+            var articles = await _service.ArticleService.GetArticlesForHomePageAsync(Id);
+
+            var model = new CategoryDetailViewModel
+            {
+                Category = category,
+                Articles = articles
+            };
+
+            return View(model);
+        }
+
     }
 }

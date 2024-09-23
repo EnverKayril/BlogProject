@@ -23,7 +23,7 @@ namespace BlogProject.SERVICE.Services.IServices
         Task<int> CountByCategoryId(string categoryId);
         Task<List<ArticleWithUserDTO>> GetAllArticlesWithUserAsync();
         Task<List<Article>> GetArticlesWithCategoryAndUserAsync();
-        Task<List<ArticleDTO>> GetArticlesForHomePageAsync();
+        Task<List<ArticleDTO>> GetArticlesForHomePageAsync(string categoryId = null);
         Task<ArticleDetailDTO> GetArticleDetailByIdAsync(string id);
     }
 }

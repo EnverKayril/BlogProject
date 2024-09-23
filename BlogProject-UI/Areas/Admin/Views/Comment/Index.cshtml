@@ -24,6 +24,7 @@
                         <th>@Html.DisplayNameFor(model => model.First().UserName)</th>
                         <th>@Html.DisplayNameFor(model => model.First().ArticleTitle)</th>
                         <th>@Html.DisplayNameFor(model => model.First().CommentContent)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Approved)</th>
                         <th>@Html.DisplayNameFor(model => model.First().CreateDate)</th>
                         <th>@Html.DisplayNameFor(model => model.First().Status)</th>
                         <th>İşlemler</th>
@@ -38,6 +39,12 @@
                                 <td>@comment.UserName</td>
                                 <td>@comment.ArticleTitle</td>
                                 <td>@comment.CommentContent</td>
+                                <td>
+                                    <label class="email-checkbox">
+                                        <input type="checkbox" @(comment.Approved ? "checked" : "") disabled>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
                                 <td>@comment.CreateDate.ToShortDateString()</td>
                                 <td>@comment.Status</td>
                                 <td>

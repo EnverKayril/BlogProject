@@ -29,6 +29,7 @@ namespace BlogProject.SERVICE.DTOs
         [DisplayName("Kategori Adı")]
         public string CategoryName { get; set; }
         public string UserName { get; set; }
+        public int ViewCount { get; set; }
         public EntityStatus Status { get; set; }
     }
 }

@@ -154,7 +154,7 @@ namespace BlogProject.SERVICE.Services
 
         }
 
-        public async Task<List<ArticleDTO>> GetArticlesForHomePageAsync()
+        public async Task<List<ArticleDTO>> GetArticlesForHomePageAsync(string categoryId = null)
         {
             var articles = await _unitOfWork.ArticleRepo.GetFilteredModelListAysnc(
                 select: article => new ArticleDTO
@@ -167,8 +167,9 @@ namespace BlogProject.SERVICE.Services
                     UserName = article.AppUser.UserName,
                     CategoryName = article.Category.Name
                 },
-                where: article => article.Status != EntityStatus.Deleted,
+                where: article => (categoryId == null || article.CategoryId == categoryId) && article.Status != EntityStatus.Deleted,
                 join: article => article.Include(a => a.AppUser).Include(a => a.Category));
+
             return articles.ToList();
         }
 
@@ -209,6 +210,5 @@ namespace BlogProject.SERVICE.Services
 
             return article;
         }
-
     }
 }

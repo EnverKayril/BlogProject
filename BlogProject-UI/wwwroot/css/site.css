@@ -12,7 +12,6 @@
 /* Paragraph Styling */
 p {
     width: 100%;
-    max-width: 60ch;
     overflow-wrap: break-word;
 }
 
@@ -132,3 +131,62 @@ p {
     max-height: 350px;
     object-fit: cover;
 }
+
+.user-thumbnail {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.comment-thumbnail {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.post-info {
+    margin-bottom: 15px;
+}
+
+    .post-info .user-name,
+    .post-info .category,
+    .post-info .date,
+    .post-info .comments,
+    .post-info .views {
+        margin-right: 10px;
+    }
+
+.comment-header {
+    margin-bottom: 5px;
+}
+
+.user-thumbnail {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.user-name a, .category a {
+    text-decoration: none;
+    color: #333;
+}
+
+.comments, .views, .date {
+    color: #6c757d;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+

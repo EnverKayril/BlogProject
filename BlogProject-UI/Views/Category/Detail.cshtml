@@ -1,0 +1,23 @@
+﻿@model BlogProject_UI.Models.VMs.CategoryDetailViewModel
+
+
+<div class="mt-5">
+    @foreach (var article in Model.Articles)
+    {
+        <article class="mb-4">
+            <div class="image">
+                <img class="thumbnail" src="/img/ArticleImages/@article.Thumbnail" alt="@article.Title">
+            </div>
+
+            <h3>@article.Title</h3>
+            <ul class="list-inline">
+                <li class="list-inline-item">by @article.UserName</li>
+                <li class="list-inline-item">@article.CreateDate.ToString("MMM dd, yyyy")</li>
+            </ul>
+
+            <p>@article.Content</p>
+
+            <a asp-controller="Article" asp-action="Detail" asp-route-id="@article.Id" class="btn btn-outline-primary">Keşfet</a>
+        </article>
+    }
+</div>

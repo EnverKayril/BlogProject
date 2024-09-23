@@ -71,7 +71,7 @@ namespace BlogProject.SERVICE.Services
 
         public async Task<IEnumerable<CommentDTO>> GetAllCommentsByArticleIdAsync(string articleId)
         {
-            return await _unitOfWork.CommentRepo.GetFilteredModelListAysnc(
+            var comments = await _unitOfWork.CommentRepo.GetFilteredModelListAysnc(
                 select: x => new CommentDTO
                 {
                     Id = x.Id,
@@ -81,9 +81,31 @@ namespace BlogProject.SERVICE.Services
                     UpdateDate = x.UpdateDate,
                     Status = x.Status
                 },
-                where: x => x.ArticleId == articleId && x.Status != CORE.CoreModels.Enums.EntityStatus.Deleted,
-                orderBy: x => x.OrderBy(x => x.CreateDate)
-                );
+                where: x => x.ArticleId == articleId && x.Status != CORE.CoreModels.Enums.EntityStatus.Deleted && x.Approved == true,
+                orderBy: x => x.OrderBy(x => x.CreateDate));
+
+            var userCache = new Dictionary<string, AppUser>();
+
+            foreach (var comment in comments)
+            {
+                if (!userCache.ContainsKey(comment.AppUserId))
+                {
+                    var user = await _unitOfWork.AppUserRepo.GetByIdAsync(comment.AppUserId);
+                    if (user != null)
+                    {
+                        userCache[comment.AppUserId] = user;
+                    }
+                }
+
+                var cachedUser = userCache[comment.AppUserId];
+                if (cachedUser != null)
+                {
+                    comment.UserName = cachedUser.UserName;
+                    comment.UserPhoto = cachedUser.Photo;
+                }
+            }
+
+            return comments;
         }
 
         public async Task<IEnumerable<CommentWithUserDTO>> GetAllCommentsByUserIdAsync(string userId)
@@ -123,7 +145,8 @@ namespace BlogProject.SERVICE.Services
                 CreateDate = comment.CreateDate,
                 UserName = comment.UserName,
                 ArticleTitle = comment.ArticleTitle,
-                Status = comment.Status
+                Status = comment.Status,
+                Approved = comment.Approved
             }).ToList();
 
             return commentDTO;

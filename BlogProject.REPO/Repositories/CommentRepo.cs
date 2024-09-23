@@ -29,8 +29,8 @@ namespace BlogProject.REPO.Repositories
         public async Task<List<CommentWithUserDTO>> GetCommentsWithArticleAndUserAsync()
         {
             var comments = await _appDbContext.Comments
-            .Include(c => c.AppUser) // AppUser tablosuyla ilişkili veriyi çek
-            .Include(c => c.Article) // Article tablosuyla ilişkili veriyi çek
+            .Include(c => c.AppUser)
+            .Include(c => c.Article)
             .Select(comment => new CommentWithUserDTO
             {
                 CommentId = comment.Id,
@@ -38,7 +38,8 @@ namespace BlogProject.REPO.Repositories
                 CreateDate = comment.CreateDate,
                 UserName = comment.AppUser.UserName,
                 ArticleTitle = comment.Article.Title,
-                Status = comment.Status
+                Status = comment.Status,
+                Approved = comment.Approved
             })
             .ToListAsync();
 

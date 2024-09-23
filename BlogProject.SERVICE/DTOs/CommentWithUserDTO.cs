@@ -26,6 +26,8 @@ namespace BlogProject.SERVICE.DTOs
         public DateTime CreateDate { get; set; }
         [DisplayName("Değişiklik Tarihi")]
         public DateTime? UpdateDate { get; set; }
+        [DisplayName("Onay")]
+        public bool Approved { get; set; }
         [DisplayName("Durum")]
         public EntityStatus Status { get; set; }
 

@@ -11,7 +11,7 @@
             <div class="card-body">
                 <h3 class="card-title">@category.Name</h3>
                 <p class="card-text">@category.Description</p>
-                <a href="@Url.Action("Details", "Article", new { categoryId = category.Id })" class="btn btn-outline-primary">Keşfet</a>
+                <a asp-controller="Category" asp-action="Detail" asp-route-id="@category.Id" class="btn btn-outline-primary">Keşfet</a>
             </div>
         </div>
     }

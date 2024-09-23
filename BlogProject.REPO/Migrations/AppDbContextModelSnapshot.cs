@@ -17,7 +17,7 @@ namespace BlogProject.REPO.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.32")
+                .HasAnnotation("ProductVersion", "6.0.33")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -94,17 +94,17 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ea548a91-a5d8-4397-bcf5-1592e58d6f8d",
+                            ConcurrencyStamp = "344f87b1-85e4-468f-ba4c-10632d2e4b56",
                             Email = "admin@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAECfv8FjY2hE+hkr3CFvND8DxcG6X9H8q67GqlyNC9+GrOLEG6HohDzfMb7Mc8QdOZA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI/sI4A7i/1eVW3uQZW7g854WMwZggCX2kgfr4reMBzkAkDx9E88DhIrjhd6cgk6Vw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Photo = "Admin.jpg",
-                            SecurityStamp = "947607a1-b5b6-4142-8d2c-c91982205cae",
+                            SecurityStamp = "48d70f75-4ed5-4f46-b68a-be9255283f3e",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -112,17 +112,17 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "196bff59-220d-4b1e-a465-4bfeaa21d2a5",
+                            ConcurrencyStamp = "048eff32-cdde-4b9b-a97b-578bc8b50e42",
                             Email = "editor@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EDITOR@MAIL.COM",
                             NormalizedUserName = "EDITOR",
-                            PasswordHash = "AQAAAAEAACcQAAAAENpjsmQcmmhPQsShHDxkOMs/gUJdD2czi8ra5LIiTYn7b9Bqa71XmJxxq+LMO9wR7Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFbeDzG2ILRbyj7bkfzOypSGT8fy6qA0LhsrcWGX3VuTt12qajPAeVMYKY230oo0pw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Photo = "Admin.jpg",
-                            SecurityStamp = "cda4569e-1663-4df8-8496-d22d24547d35",
+                            SecurityStamp = "50d0f16d-8f23-4db9-935b-39a4d19e4857",
                             TwoFactorEnabled = false,
                             UserName = "Editor"
                         },
@@ -130,17 +130,17 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "922c530a-fd44-4150-8950-f2848abf2263",
+                            ConcurrencyStamp = "8ed6bf0a-9199-423e-ae36-1d4333ea0f04",
                             Email = "verifieduser1@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "VERIFIEDUSER1@MAIL.COM",
                             NormalizedUserName = "VERIFIEDUSER1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOGbKLw7kO8cJuDc8bCrYMqFGTdK3ZzSWRH3ppdI2A1QTnrIlLny+5+8+b5syW+IsQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN3jlrMvMbMOnx+FaQZ6u3GXNrpSawbl+ulz72pcvA0LSC3brI7HYpWt0mUxdS06sg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Photo = "UserImage1.jpg",
-                            SecurityStamp = "de692562-cbdb-4712-99fc-4d56eeeda585",
+                            SecurityStamp = "266a0290-ebde-4f28-b8fe-a5b140ca2111",
                             TwoFactorEnabled = false,
                             UserName = "Verifieduser1"
                         },
@@ -148,17 +148,17 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4819c160-9887-4274-934d-a6be5af0e98b",
+                            ConcurrencyStamp = "24ea349d-67c3-4efd-9417-8cab19ca6781",
                             Email = "newuse1r@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "NEWUSER1@MAIL.COM",
                             NormalizedUserName = "NEWUSER1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAlh64eG+qvSQFgrJBbt4wkIeIq+UhJtTKH5aDMsY4bTR6PZjt6GNL8aUxlfzFfblQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAxQvzz/hf5ZvoBwZeB7lKY+eYRahQqO9WmCh6zqCA55e/HMvPwuJJlGzmbUbzPpGg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Photo = "DefaultUser.jpg",
-                            SecurityStamp = "e29e5107-9963-447b-b37c-61b2c942632d",
+                            SecurityStamp = "5f4b3683-cb1d-49cd-9c87-b3432cd83b36",
                             TwoFactorEnabled = false,
                             UserName = "Newuser1"
                         },
@@ -166,17 +166,17 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "32481c0c-4640-4aed-999d-5c67df2ef4b2",
+                            ConcurrencyStamp = "909ddb36-1ef6-4ac9-aba1-9ef48e29a9a5",
                             Email = "newuser2@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "NEWUSER2@MAIL.COM",
                             NormalizedUserName = "NEWUSER2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOnuCvTuUQ0s/R0467lBdjSQAKdosk2XNzlfdQ8wWO3N4DjEHnxNlOVxdu41OJSYfQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBuBDlasQlWPbzXFBtDvAHXt/Blmnypgos3Mwa19KH/H7vhC5ihZDfdukxJwhYUolA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Photo = "DefaultUser.jpg",
-                            SecurityStamp = "30d6b77e-ddc0-4b33-999a-7a69d199b307",
+                            SecurityStamp = "ddc2f7f4-0713-46a5-8dfd-efa4e76e051f",
                             TwoFactorEnabled = false,
                             UserName = "Newuser2"
                         },
@@ -184,17 +184,17 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "684f4f9f-7a9e-4551-abc5-f0840501a59e",
+                            ConcurrencyStamp = "611b87a6-a2d9-4fed-8875-4051fff4edf5",
                             Email = "verifieduser2@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "VERIFIEDUSER2@MAIL.COM",
                             NormalizedUserName = "VERIFIEDUSER2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOl8RbKmIVxk1w3Yo2WM/QRVTQPXClwSFpw4UzBg8DtZQ5omVb75D7LlpWBE/eVrwg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGwmXNT2o99OiNaGXau5+sH9xN9LT29t2La2davFYsB6Pzvv36ODl/AOb7WQVUjefg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Photo = "UserImage2.jpg",
-                            SecurityStamp = "ae3446fb-e41d-4e20-9d89-b65d72573366",
+                            SecurityStamp = "31d18320-9713-4a47-98fd-e3971b6dfafb",
                             TwoFactorEnabled = false,
                             UserName = "Verifieduser2"
                         },
@@ -202,17 +202,17 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "75d5cc13-0a7e-4821-8fba-23802394d545",
+                            ConcurrencyStamp = "3b624d55-7a32-46f8-b6d2-c73abbe3320e",
                             Email = "verifieduser3@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "VERIFIEDUSER3@MAIL.COM",
                             NormalizedUserName = "VERIFIEDUSER3",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGl79aBNRv1ET8tfV/O7F0+xn5lx5bLg37Vg9DtEG8xEnvF4S9MXL+Sx+MmEOqfPyA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN+Wj6iFFsCOSZDTIGN2tPhU+3spH8z1cy6To9K9aYxQGv+Y/M2hqSEdBGiZk8tLmA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Photo = "UserImage3.jpg",
-                            SecurityStamp = "30d3cf8d-fb1f-4886-9f37-8c9782dbeef8",
+                            SecurityStamp = "1b1c9b7e-0bb4-479b-8bb0-8270696dbedb",
                             TwoFactorEnabled = false,
                             UserName = "Verifieduser3"
                         },
@@ -220,17 +220,17 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cc6dd80f-71cc-4709-8a49-518841795f29",
+                            ConcurrencyStamp = "e3e31b14-df47-481e-a959-401d3bb3f203",
                             Email = "verifieduser4@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "VERIFIEDUSER4@MAIL.COM",
                             NormalizedUserName = "VERIFIEDUSER4",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGlPxsefivn+Gx0mlmvezIlBKlfzX3/QpO6dN/M3DlcgWXC5LckSNMTeeaotEu6wPg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFCfQNIt3oF5hqdsr27W71y6X2VYFdxdyRZONapJNwirF2Czzvd6ZpvIlbSnpXUieA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Photo = "UserImage4.jpg",
-                            SecurityStamp = "08b5841a-2621-48be-ae6d-6b93d82b0fa2",
+                            SecurityStamp = "231cd67f-8107-4106-8bce-cb80bb5e96c8",
                             TwoFactorEnabled = false,
                             UserName = "Verifieduser4"
                         },
@@ -238,17 +238,17 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "803bce24-2239-46ed-98f3-d71790d52869",
+                            ConcurrencyStamp = "36b48d07-7326-4ce5-af3a-f011f0e1fdf7",
                             Email = "verifieduser5@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "VERIFIEDUSER5@MAIL.COM",
                             NormalizedUserName = "VERIFIEDUSER5",
-                            PasswordHash = "AQAAAAEAACcQAAAAEL1GZvqWNjc3jUsf/uiVg59cfkR8dPvU+RAtze49TVR4tdC6h8cPTjDWGiZChGQi1A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHzczcENfEayt4eNsYWf6PrmITPbeHJk7Ycku3yLxFuCRjihwCEI7rCHFpC3X+KDxw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Photo = "UserImage5.jpg",
-                            SecurityStamp = "0d2811ef-0cc1-43b7-bb3f-4c47d5384bb9",
+                            SecurityStamp = "efd653a5-7dfa-4568-9234-99e52c7b5ad7",
                             TwoFactorEnabled = false,
                             UserName = "Verifieduser5"
                         },
@@ -256,17 +256,17 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "10",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "be3f7d0a-0361-4584-83c9-b77c7c63e156",
+                            ConcurrencyStamp = "62823dc7-3f3b-45c8-b991-fbb7d1f2b0a6",
                             Email = "verifieduser6@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "VERIFIEDUSER6@MAIL.COM",
                             NormalizedUserName = "VERIFIEDUSER6",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG5EglKGkiqrEATTj4mJmgCqDcaMGDtE6iFR2u+enB4jlkTZE0mO/R3ixMEg2S0DwA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENkX8LT2Sy0x5n1z3GuP2cdD+AwRySINLW9CyHqrZYIoS3B6j20q4kfo3141QrlAxA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Photo = "UserImage6.jpg",
-                            SecurityStamp = "fe587447-1dc7-4526-a5c9-3b35c41e5e85",
+                            SecurityStamp = "df66d6dd-8f75-409a-81c0-5761b5564a63",
                             TwoFactorEnabled = false,
                             UserName = "Verifieduser6"
                         },
@@ -274,17 +274,17 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "11",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b0ecaf1d-93d0-470d-931c-78853cf0338a",
+                            ConcurrencyStamp = "2c571703-29c7-4e3e-b2df-ab440ff158eb",
                             Email = "verifieduser7@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "VERIFIEDUSER7@MAIL.COM",
                             NormalizedUserName = "VERIFIEDUSER7",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMQUlGc1ZUwhP6+iqqZ/CbpmIrFyoNkSLZJysltHYv1YhMe1ikQJHvp4VhM+erxuIQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFeb3ruI5knIxxIFsjfqpXbolkAJO46Rh4PT7QxfecCndgRIMjucDrZ2p4kT8BBrGQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Photo = "UserImage7.jpg",
-                            SecurityStamp = "c6a1fcab-96b9-411e-8fc7-05dfaec6ecdd",
+                            SecurityStamp = "adad4cba-f922-492f-b218-8b69401d1586",
                             TwoFactorEnabled = false,
                             UserName = "Verifieduser7"
                         },
@@ -292,17 +292,17 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "12",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e76490e6-d1ba-49f8-8304-2ba2106a45d5",
+                            ConcurrencyStamp = "7feb8646-aee5-4531-b6d6-bce8fc5a60fa",
                             Email = "verifieduser8@mail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "VERIFIEDUSER8@MAIL.COM",
                             NormalizedUserName = "VERIFIEDUSER8",
-                            PasswordHash = "AQAAAAEAACcQAAAAEA37m1nAE3wnzj6wOE0bWJJU4qJIThBgCB48NYF1HOe625FxXZyc6mei2g83G+T67w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKgQgIptAihko61gITULJzpCPjyHBERtUlC//6VXXd+58aN+mdEQ9ePf8TF+x36DSw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Photo = "UserImage8.jpg",
-                            SecurityStamp = "32355345-546f-49e1-8835-dc8ba2a376a2",
+                            SecurityStamp = "3990a10f-77a2-4f94-964d-4ea57a2b1e0b",
                             TwoFactorEnabled = false,
                             UserName = "Verifieduser8"
                         });
@@ -515,7 +515,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "1",
                             CommentCount = 0,
                             Content = "C# dili, yazılım dünyasında geniş bir kullanım alanına sahip olup nesne yönelimli programlamanın (OOP) güçlü özelliklerini barındırır. Nesne yönelimli programlama, yazılım geliştiricilerine daha modüler ve sürdürülebilir bir kod yapısı oluşturma fırsatı tanır. Bu programlama paradigması, gerçek dünya objelerini sınıflar ve nesneler aracılığıyla temsil etmeyi sağlar.\r\n\r\nNesne yönelimli programlamada dört ana kavram bulunur: encapsulation (kapsülleme), inheritance (kalıtım), polymorphism (çok biçimlilik) ve abstraction (soyutlama). Kapsülleme, verileri ve fonksiyonları bir sınıf içinde saklayarak yalnızca gerektiğinde kullanılmasına olanak tanır. Kalıtım, bir sınıfın başka bir sınıftan özellikler ve metotlar almasını sağlar. Bu, kod tekrarını en aza indirerek daha sürdürülebilir yazılımlar oluşturmayı kolaylaştırır. Polimorfizm, nesnelerin farklı şekillerde davranabilme yeteneğidir, bu sayede aynı isimdeki bir metot, farklı parametrelerle farklı işlevler gösterebilir. Soyutlama ise gereksiz detaylardan kaçınarak sadece gerekli olan fonksiyonların dışarıya açılmasını sağlar.\r\n\r\nBu dört temel özellik, C#'ın güçlü bir nesne yönelimli dil olarak kullanılmasını sağlar. Özellikle büyük ölçekli projelerde, OOP yaklaşımı yazılımın yönetilebilir ve genişletilebilir olmasını sağlar. Örneğin, bir e-ticaret uygulaması geliştirirken ürün, kullanıcı ve sipariş gibi sınıflar oluşturulabilir ve bu sınıflar birbirleriyle etkileşimde bulunabilir. Bu şekilde, uygulamanın farklı parçaları arasında daha az bağımlılık olur ve değişiklikler daha kolay yapılabilir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4189),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9863),
                             Status = 0,
                             Thumbnail = "Article1.jpg",
                             Title = "C# ile Nesne Yönelimli Programlamanın Temelleri",
@@ -528,7 +528,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "1",
                             CommentCount = 0,
                             Content = "Yazılım geliştirme süreçlerinde esneklik ve hız kazanmak, günümüz projelerinde büyük bir gereklilik haline gelmiştir. Bu ihtiyacı karşılamak adına, Agile ve Scrum gibi yöntemler geliştirilmiştir. Agile metodolojisi, geleneksel yazılım geliştirme yöntemlerinden farklı olarak, kısa döngülerde müşteri geri bildirimlerini dikkate alarak projeyi sürekli geliştirmeyi hedefler. Bu süreçte esneklik ve müşteri memnuniyeti ön plandadır.\r\n\r\nScrum, Agile yönteminin bir uygulaması olup, genellikle ekipler tarafından tercih edilir. Scrum süreçlerinde belirli roller ve etkinlikler yer alır. Örneğin, Scrum Master, ekibin süreçlerine rehberlik eden ve engelleri ortadan kaldıran kişidir. Product Owner ise müşteri ihtiyaçlarını ve iş gereksinimlerini belirler ve ekibe yön verir. Geliştirme ekibi ise yazılımın kodlama, test ve dağıtım aşamalarını gerçekleştirir.\r\n\r\nScrum, sprint adı verilen kısa periyotlarla çalışır ve her sprint sonunda kullanılabilir bir ürün parçası sunulur. Sprint süreleri genellikle 1 ila 4 hafta arasında değişir. Her sprint sonunda ekip, retrospektif toplantılar yaparak süreci değerlendirir ve gelecekteki iyileştirmeler için geri bildirimler alır.\r\n\r\nAgile ve Scrum yöntemleri, özellikle hızla değişen müşteri taleplerine cevap vermek isteyen yazılım ekipleri için idealdir. Bu yöntemler, projelerin başarısını artırırken, ekiplerin daha düzenli çalışmasını ve müşteri memnuniyetinin artmasını sağlar.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4193),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9868),
                             Status = 0,
                             Thumbnail = "Article2.jpg",
                             Title = "Yazılım Mühendisliğinde Agile ve Scrum Yöntemleri",
@@ -541,7 +541,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "1",
                             CommentCount = 0,
                             Content = "Yazılım projelerinde veritabanı entegrasyonu, verilerin güvenli ve hızlı bir şekilde işlenmesini sağlar. ORM (Object-Relational Mapping), bu işlemi kolaylaştıran bir tekniktir. ORM, nesne tabanlı programlama dillerini kullanan yazılımcılar için veritabanı yönetimini kolaylaştıran bir araçtır. Bu araç, veritabanındaki tabloları ve sütunları programlama dilindeki nesneler ve özelliklerle ilişkilendirir.\r\n\r\nORM kullanımı, yazılım geliştirme sürecinde büyük avantajlar sunar. SQL sorgularını doğrudan yazmak yerine, veritabanı işlemlerini nesneler üzerinden gerçekleştirmek mümkündür. Bu sayede, hem kod okunabilirliği artar hem de veritabanı ile programlama dili arasında daha az geçiş yapılır. C# programlama dilinde yaygın olarak kullanılan ORM araçlarından biri Entity Framework'tür. Entity Framework, geliştiricilere veritabanı işlemlerini kod yazarak değil, nesnelerle çalışarak yönetme olanağı sağlar.\r\n\r\nVeritabanı işlemleri sırasında en önemli konulardan biri performanstır. ORM araçları, performansı artırmak için çeşitli optimizasyonlar sağlar. Ancak, büyük veritabanları söz konusu olduğunda dikkatli olmak gerekir. ORM kullanırken, özellikle büyük ölçekli projelerde sorgu optimizasyonları yapmak ve gereksiz veri yükünü azaltmak önemlidir.\r\n\r\nORM kullanımı, yazılım projelerinde veritabanı işlemlerinin daha güvenli ve hızlı bir şekilde gerçekleştirilmesini sağlar. Nesne tabanlı programlama yaklaşımı ile uyumlu olan bu araçlar, projelerdeki veritabanı işlemlerini büyük ölçüde basitleştirir ve geliştiricilere büyük bir esneklik sunar.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4196),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9872),
                             Status = 0,
                             Thumbnail = "Article3.jpg",
                             Title = "Veritabanı Entegrasyonu ve ORM Kullanımı",
@@ -554,7 +554,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "2",
                             CommentCount = 0,
                             Content = "Ağ yönetimi, modern bilgi sistemlerinin temel taşlarından biridir. Bir ağ, bilgisayarlar, sunucular ve diğer cihazlar arasındaki iletişimi sağlar. Ağ yönetimi, bu ağların sorunsuz bir şekilde çalışmasını sağlamak için yapılan işlemler ve uygulamalardır. Ağ yöneticileri, sistemlerin güvenliğini sağlamak, ağ trafiğini izlemek ve performans sorunlarını çözmekle sorumludur.\r\n\r\nAğ yönetiminde temel kavramlar arasında protokoller, IP adresleri ve yönlendirme bulunmaktadır. Protokoller, cihazlar arasındaki iletişimi düzenleyen kurallar bütünüdür. IP adresleri, her cihazın benzersiz bir kimlik numarasıdır ve bu adresler aracılığıyla cihazlar birbirleriyle iletişim kurabilir. Yönlendirme ise, verilerin doğru cihazlara ulaşmasını sağlayan süreçtir.\r\n\r\nAyrıca, ağ güvenliği, ağ yönetiminin kritik bir parçasıdır. Firewall'lar, antivirüs yazılımları ve şifreleme teknikleri gibi güvenlik önlemleri, ağın dış tehditlerden korunmasına yardımcı olur. Güçlü bir ağ yönetimi stratejisi, bir işletmenin veya kuruluşun verilerinin güvenli ve erişilebilir kalmasını sağlar.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4199),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9888),
                             Status = 0,
                             Thumbnail = "Article4.jpg",
                             Title = "Ağ Yönetimi ve Temel Kavramlar",
@@ -567,7 +567,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "2",
                             CommentCount = 0,
                             Content = "Sanal makineler (VM), fiziksel bir bilgisayar üzerinde sanal bir işletim sistemi çalıştırmak için kullanılan teknolojilerdir. Bu teknoloji, özellikle IT yöneticileri ve sistem mühendisleri için büyük bir avantaj sağlar. Hyper-V, Microsoft'un sanallaştırma platformudur ve Windows işletim sistemleri ile birlikte gelir.\r\n\r\nHyper-V, birden fazla sanal makineyi tek bir fiziksel sunucu üzerinde çalıştırma olanağı sunar. Bu, donanım maliyetlerini azaltırken, sistemlerin daha verimli kullanılmasını sağlar. Örneğin, bir geliştirme ortamında, Hyper-V ile farklı işletim sistemlerini ve yapılandırmaları aynı sunucu üzerinde test edebilirsiniz.\r\n\r\nHyper-V, aynı zamanda işletmelerin sistemlerini yedeklemelerini ve kurtarma planları yapmalarını da kolaylaştırır. Bir felaket durumunda, sanal makineler hızlı bir şekilde yeniden başlatılabilir ve işletmeler, veri kaybı yaşamadan iş süreçlerine devam edebilir. Sanallaştırma teknolojileri, sistem yönetimi süreçlerini daha esnek ve ölçeklenebilir hale getirir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4202),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9891),
                             Status = 0,
                             Thumbnail = "Article5.jpg",
                             Title = "Sanal Makineler ve Hyper-V Kullanımı",
@@ -580,7 +580,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "2",
                             CommentCount = 0,
                             Content = "Sunucu yönetimi, IT departmanları için önemli bir sorumluluktur. Özellikle büyük ağlarda, yüzlerce sunucunun manuel olarak yönetilmesi oldukça zor olabilir. Bu nedenle, otomasyon araçları ve script'ler, sunucu yönetimini büyük ölçüde kolaylaştırır. PowerShell, bu alanda yaygın olarak kullanılan bir komut satırı aracıdır ve Windows tabanlı sistemlerin yönetiminde güçlü bir otomasyon sağlar.\r\n\r\nPowerShell ile sunucular üzerinde otomatik görevler oluşturabilir, yazılım kurulumlarını gerçekleştirebilir ve sistem ayarlarını düzenleyebilirsiniz. Örneğin, yüzlerce sunucuda aynı yapılandırmayı yapmak gerektiğinde, PowerShell script'leri kullanarak bu işlemi hızlı bir şekilde gerçekleştirebilirsiniz.\r\n\r\nAyrıca, PowerShell'in modüler yapısı, sistem yöneticilerinin farklı görevleri kolayca entegre etmesine olanak tanır. Bu sayede, sunucuların izlenmesi, güncellenmesi ve performans analizleri gibi işlemler daha etkin bir şekilde yapılabilir. PowerShell ile sunucu yönetiminde otomasyon, insan hatalarını minimize eder ve iş süreçlerinin daha hızlı ilerlemesini sağlar.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4210),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9895),
                             Status = 0,
                             Thumbnail = "Article6.jpg",
                             Title = "Sunucu Yönetiminde PowerShell ve Otomasyon",
@@ -593,7 +593,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "3",
                             CommentCount = 0,
                             Content = "Web tasarımında renk ve tipografi, kullanıcı deneyiminin ve görsel estetiğin en kritik unsurlarından biridir. Doğru renk paleti ve tipografi seçimi, bir web sitesinin genel hissiyatını ve kullanıcıların algısını büyük ölçüde etkiler. Web tasarımında kullanılan renkler, markanın kimliğini yansıtırken, tipografi ise içeriğin okunabilirliğini ve kullanıcı etkileşimini artırır.\r\n\r\nRenklerin psikolojik etkileri göz önünde bulundurularak, her web sitesinde dikkatlice seçilmelidir. Örneğin, mavi güven ve profesyonelliği simgelerken, kırmızı dikkat çeker ve aciliyet hissi yaratır. Web tasarımcıları, kullanıcıları doğru yönlendirmek ve onlara olumlu bir deneyim sunmak için renkleri stratejik bir şekilde kullanmalıdır.\r\n\r\nTipografi ise web sitesinin içerik yapısını ve okunabilirliğini doğrudan etkiler. Büyük başlıklar, kullanıcının dikkatini çekmek için etkili bir yolken, küçük ve düzgün paragraflar, içeriğin kolayca sindirilmesini sağlar. Web tasarımında modern fontlar kullanmak, sitenin çağdaş ve profesyonel bir görünüm kazanmasına yardımcı olur.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4213),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9898),
                             Status = 0,
                             Thumbnail = "Article7.jpg",
                             Title = "Modern Web Tasarımında Renk ve Tipografi Kullanımı",
@@ -606,7 +606,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "3",
                             CommentCount = 0,
                             Content = "Günümüzde, mobil cihazların yaygın kullanımıyla birlikte responsive (duyarlı) web tasarımı, web projelerinin vazgeçilmez bir parçası haline gelmiştir. Responsive tasarım, bir web sitesinin farklı cihaz ekran boyutlarına uyum sağlamasını ifade eder. Bu sayede, kullanıcılar, hangi cihazı kullanırlarsa kullansınlar, web sitesinde rahatça gezinip içeriklere ulaşabilirler.\r\n\r\nResponsive tasarımın temelinde, esnek grid sistemleri, medya sorguları ve duyarlı görseller bulunur. Bu teknikler, web sitesinin hem masaüstü hem de mobil cihazlarda sorunsuz bir şekilde görüntülenmesini sağlar. Örneğin, bir web sayfasının üç sütunlu yapısı, mobil cihazlarda tek sütuna indirgenerek daha kullanıcı dostu bir hale gelir.\r\n\r\nMobil uyumluluk, arama motorları için de önemli bir faktördür. Google, mobil uyumlu web sitelerini arama sonuçlarında üst sıralarda gösterir. Bu nedenle, web tasarımcıları, kullanıcı deneyimini en üst düzeye çıkarmak ve SEO avantajı sağlamak için responsive tasarımı projelerine dahil etmelidir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4216),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9902),
                             Status = 0,
                             Thumbnail = "Article8.jpg",
                             Title = "Responsive Tasarım ve Mobil Uyumlu Web Siteleri",
@@ -619,7 +619,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "3",
                             CommentCount = 0,
                             Content = "Minimalizm, son yıllarda grafik ve web tasarımında popüler hale gelen bir akımdır. Bu yaklaşım, gereksiz detaylardan arınmış, sade ve net tasarımlar oluşturmayı amaçlar. Minimalist tasarım, kullanıcıların dikkatini dağıtan unsurları ortadan kaldırır ve içeriğin ön planda olmasını sağlar. \"Az çoktur\" prensibi, bu tasarım felsefesinin temelini oluşturur.\r\n\r\nMinimalist tasarımda kullanılan unsurlar genellikle sınırlı bir renk paleti, basit tipografi ve bolca beyaz alan içerir. Bu tasarım yaklaşımı, kullanıcıların dikkatini dağıtmadan, içerikleri daha hızlı ve kolay bir şekilde tüketmelerine olanak tanır. Özellikle kurumsal web siteleri, minimalist tasarımın sunduğu sadelik ve profesyonellikten faydalanır.\r\n\r\nAncak, minimalizm sadece sadelikten ibaret değildir. Her bir tasarım öğesi dikkatlice seçilmeli ve estetik bir denge oluşturulmalıdır. Minimalist bir web sitesi, hem görsel olarak tatmin edici hem de kullanıcı dostu olmalıdır. Bu sayede, hem markanın profesyonel imajı güçlendirilir hem de kullanıcı deneyimi artırılır.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4218),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9906),
                             Status = 0,
                             Thumbnail = "Article9.jpg",
                             Title = "Grafik Tasarımda Minimalizm: Az Çoktur",
@@ -632,7 +632,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "4",
                             CommentCount = 0,
                             Content = "Siber güvenlik, modern dijital dünyada en önemli konulardan biridir. Bilgi teknolojilerinin ve internet kullanımının hızla artması, veri güvenliği risklerini de beraberinde getirmiştir. Siber güvenlik, bilgisayar sistemlerini, ağları ve verileri kötü niyetli saldırılardan koruma amacını taşır. Bir işletme ya da birey, güvenlik açıklarını minimuma indirmek için siber güvenlik önlemlerini benimsemelidir.\r\n\r\nSiber güvenlik temelinde firewall'lar, antivirüs yazılımları, şifreleme ve çok faktörlü kimlik doğrulama gibi araçlar bulunur. Bu araçlar, verilerin yetkisiz erişimden korunmasını sağlar. Örneğin, firewall'lar internet üzerinden gelen tehditleri filtrelerken, şifreleme verilerin güvenli bir şekilde iletilmesini sağlar. Ayrıca, çok faktörlü kimlik doğrulama ile kullanıcılar, hesaplarına giriş yaparken ek güvenlik katmanları oluşturabilirler.\r\n\r\nSiber saldırılar, kişisel bilgilerin çalınmasından şirketlerin iş süreçlerini durdurmaya kadar geniş bir yelpazeye yayılabilir. Bu nedenle, her birey ve işletme, siber güvenlik konusunda bilinçli olmalı ve temel güvenlik uygulamalarını hayatlarına entegre etmelidir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4221),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9910),
                             Status = 0,
                             Thumbnail = "Article10.jpg",
                             Title = "Siber Güvenlik Temelleri: Bilmeniz Gerekenler",
@@ -645,7 +645,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "4",
                             CommentCount = 0,
                             Content = "Ransomware (fidye yazılımı), bilgisayar sistemlerini kilitleyen ve kullanıcılardan verilerini geri almak için fidye talep eden kötü amaçlı yazılımlardır. Bu tür saldırılar, son yıllarda artış göstermiş ve büyük şirketlerden bireylere kadar birçok hedefi etkilemiştir. Ransomware saldırıları, özellikle kritik verilerin şifrelenmesiyle kurbanları zor durumda bırakır.\r\n\r\nRansomware'den korunmanın en etkili yolu, düzenli olarak yedekleme yapmaktır. Verilerinizin düzenli olarak yedeklenmesi, bir saldırı durumunda verilerinizi geri yüklemenizi sağlar. Ayrıca, güncel antivirüs yazılımları ve güvenlik yamalarının kullanılması, fidye yazılımlarına karşı koruma sağlar. Özellikle bilinmeyen e-posta ekleri ve şüpheli bağlantılara tıklamaktan kaçınmak da bu tür saldırılardan korunmanın önemli bir yoludur.\r\n\r\nBir saldırıya maruz kalındığında, fidye ödemek yerine profesyonel siber güvenlik uzmanlarından destek almak en doğru yol olabilir. Ödeme yapmak, saldırganları cesaretlendirebilir ve gelecekte benzer saldırıların devam etmesine neden olabilir. Ransomware saldırılarıyla başa çıkmak için bilinçli ve hazırlıklı olmak çok önemlidir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4224),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9914),
                             Status = 0,
                             Thumbnail = "Article11.jpg",
                             Title = "Ransomware Saldırıları ve Korunma Yöntemleri",
@@ -658,7 +658,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "4",
                             CommentCount = 0,
                             Content = "Veri güvenliği, bir işletmenin ya da bireyin dijital varlıklarının korunması anlamına gelir. Özellikle hassas bilgiler, kişisel veriler ve finansal bilgiler gibi önemli verilerin çalınması, büyük kayıplara yol açabilir. Veri güvenliğini sağlamak, hem bireyler hem de şirketler için kritik bir sorumluluktur.\r\n\r\nVeri güvenliği, şifreleme, güvenli şifre kullanımı, yetkisiz erişimi engelleme ve veri yedekleme gibi uygulamaları içerir. Şifreleme, verilerin üçüncü şahıslar tarafından okunmasını engellerken, güvenli şifre kullanımı hesapların ele geçirilme riskini azaltır. Özellikle iş dünyasında, veri ihlalleri şirketlerin itibarını zedeleyebilir ve ciddi mali kayıplara yol açabilir.\r\n\r\nAyrıca, veri güvenliğini artırmak için düzenli olarak güvenlik denetimleri yapılmalı ve güvenlik açıkları tespit edilmelidir. Bu denetimler, siber tehditlere karşı bir savunma hattı oluşturur ve verilerin güvenli bir şekilde saklanmasını sağlar. Veri güvenliği, sadece teknik bir konu değil, aynı zamanda stratejik bir yönetim meselesidir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4227),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9920),
                             Status = 0,
                             Thumbnail = "Article12.jpg",
                             Title = "Veri Güvenliği: Hassas Bilgilerin Korunması",
@@ -671,7 +671,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "5",
                             CommentCount = 0,
                             Content = "Bulut bilişim, verilerin internet üzerinden depolanmasını, yönetilmesini ve işlenmesini sağlayan bir teknolojidir. Geleneksel yöntemlerde veriler yerel sunucularda veya bilgisayarlarda saklanırken, bulut bilişim sayesinde bu veriler bulut sunucularında güvenli bir şekilde saklanır ve internet bağlantısı olan her yerden erişilebilir hale gelir.\r\n\r\nBulut bilişimin en büyük avantajlarından biri, esnekliği ve ölçeklenebilirliğidir. İşletmeler, ihtiyaç duydukları kadar depolama ve işlem gücü kiralayabilirler ve gereksinim arttığında bu kaynakları hızlıca artırabilirler. Ayrıca, bulut bilişim sayesinde donanım maliyetleri düşer ve işletmeler, kendi veri merkezlerini yönetmek zorunda kalmazlar.\r\n\r\nVeri güvenliği, bulut bilişimin bir diğer önemli avantajıdır. Bulut sağlayıcıları, yüksek güvenlik standartlarına uygun veri merkezleri sunar ve veriler düzenli olarak yedeklenir. Bu sayede, işletmeler olası veri kayıplarına karşı korunmuş olur. Bulut bilişim, hem büyük işletmeler hem de küçük girişimler için büyük fırsatlar sunan bir teknolojidir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4230),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9923),
                             Status = 0,
                             Thumbnail = "Article13.jpg",
                             Title = "Bulut Bilişim Nedir ve Avantajları Nelerdir?",
@@ -684,7 +684,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "5",
                             CommentCount = 0,
                             Content = "Hibrit bulut, genel bulut ve özel bulut çözümlerinin bir kombinasyonudur. Genel bulut, bulut hizmetlerinin herkese açık bir şekilde sunulduğu modeldir ve genellikle maliyet avantajı sağlar. Özel bulut ise, bir işletmenin kendi veri merkezinde kurduğu ve sadece kendi ihtiyaçlarına hizmet eden bir yapıdır. Hibrit bulut, bu iki yapının en iyi yönlerini birleştirir.\r\n\r\nHibrit bulut çözümleri, işletmelere daha fazla esneklik ve kontrol sunar. Kritik ve hassas veriler özel bulutta saklanırken, daha az kritik iş yükleri genel buluta taşınabilir. Bu, hem maliyetlerin optimize edilmesini sağlar hem de veri güvenliğini artırır. Ayrıca, hibrit bulut yapısı, işletmelerin anlık talep artışlarına hızlıca yanıt vermesine olanak tanır.\r\n\r\nHibrit bulutun bir diğer avantajı, felaket kurtarma senaryolarında önemli bir rol oynamasıdır. Genel bulut sağlayıcıları, olağanüstü durumlarda verilerin güvenli bir şekilde yedeklenmesini ve kurtarılmasını sağlar. Bu nedenle, hibrit bulut çözümleri, modern iş dünyasında hızla benimsenen bir teknoloji haline gelmiştir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4235),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9927),
                             Status = 0,
                             Thumbnail = "Article14.jpg",
                             Title = "Hibrit Bulut: Hem Genel Hem Özel Bulutun Gücü",
@@ -697,7 +697,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "5",
                             CommentCount = 0,
                             Content = "Bulut bilişim, veri depolama ve işlem gücü sunmanın yanı sıra, veri güvenliği konusunda da büyük önem taşır. Verilerin internet üzerinden depolandığı bulut sistemlerinde, güvenlik tehditleri her zaman var olabilir. Bu nedenle, bulut bilişimde veri güvenliğini sağlamak, hem kullanıcıların hem de sağlayıcıların önceliği olmalıdır.\r\n\r\nBulut sağlayıcıları, verilerin güvenli bir şekilde saklanması ve yetkisiz erişimlerden korunması için çeşitli güvenlik önlemleri alır. Şifreleme, bu güvenlik önlemlerinin başında gelir. Veriler, hem aktarım sırasında hem de depolandıkları yerde şifrelenir. Ayrıca, çok faktörlü kimlik doğrulama ve güvenlik duvarları gibi ek önlemler, bulut bilişimde güvenliği artırır.\r\n\r\nKullanıcılar da kendi taraflarında güvenlik önlemleri almalıdır. Güçlü şifreler kullanmak, düzenli olarak hesapları gözden geçirmek ve güvenlik yamalarını güncellemek, veri güvenliğini artırmak için önemlidir. Sonuç olarak, bulut bilişimde güvenlik, sadece bir hizmet sağlayıcısının değil, aynı zamanda kullanıcıların da aktif rol oynaması gereken bir süreçtir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4286),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9931),
                             Status = 0,
                             Thumbnail = "Article15.jpg",
                             Title = "Bulut Bilişimde Veri Güvenliği Nasıl Sağlanır?",
@@ -710,7 +710,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "6",
                             CommentCount = 0,
                             Content = "Veritabanı tasarımı, yazılım projelerinin temel yapı taşlarından biridir. İyi bir veritabanı tasarımı, verilerin doğru ve verimli bir şekilde depolanmasını sağlar. Veritabanı tasarımında dikkat edilmesi gereken en önemli noktalardan biri, normalizasyon prensiplerine uygun hareket etmektir. Bu, verilerin gereksiz tekrarını önler ve depolama maliyetlerini azaltır.\r\n\r\nVeritabanı tasarımında ilişkisel yapıları doğru kurmak, verilerin tutarlı kalmasını sağlar. Tablo yapılarında birincil anahtarlar (primary keys) ve yabancı anahtarlar (foreign keys) kullanmak, verilerin birbirine bağlı olduğu yerlerde referans bütünlüğünü sağlar. Ayrıca, indeksleme, sorguların performansını artırarak veritabanı erişim sürelerini kısaltır.\r\n\r\nVeritabanı tasarımında bir diğer önemli konu ise veri güvenliğidir. Verilerin yetkisiz erişimlerden korunması için güvenlik mekanizmaları devreye alınmalıdır. Bu mekanizmalar arasında kullanıcı erişim haklarının doğru bir şekilde belirlenmesi ve şifreleme gibi yöntemler bulunur. İyi bir veritabanı tasarımı, hem performans hem de güvenlik açısından kritik bir rol oynar.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4290),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9935),
                             Status = 0,
                             Thumbnail = "Article16.jpg",
                             Title = "Veritabanı Tasarımında En İyi Uygulamalar",
@@ -723,7 +723,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "6",
                             CommentCount = 0,
                             Content = "Veritabanı seçimi, bir yazılım projesinin başarısını doğrudan etkileyen kararlardan biridir. Geleneksel olarak SQL (yapısal sorgulama dili) tabanlı veritabanları, yapılandırılmış verilerin depolanması için kullanılmıştır. Ancak, son yıllarda NoSQL (yapısal olmayan sorgulama dili) veritabanları, büyük veri ve yüksek performans gereksinimleri için popüler hale gelmiştir.\r\n\r\nSQL veritabanları, verilerin tablolar halinde depolandığı, ilişkisel bir yapı sunar. Bu yapı, verilerin düzenli ve tutarlı olmasını sağlar. Özellikle finansal uygulamalar ve kurumsal sistemlerde SQL veritabanları tercih edilir. Ancak, büyük ölçekli ve esnek veri yapıları gerektiren projelerde NoSQL veritabanları daha uygun olabilir.\r\n\r\nNoSQL veritabanları, verileri daha esnek bir şekilde depolayabilir ve yüksek performans sunar. Büyük veri ve gerçek zamanlı uygulamalar için ideal olan NoSQL veritabanları, ilişkisel olmayan yapıları ile dikkat çeker. Her iki veritabanı tipi de kendine özgü avantajlara sahiptir ve projenin ihtiyaçlarına göre bir seçim yapılmalıdır.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4293),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9938),
                             Status = 0,
                             Thumbnail = "Article17.jpg",
                             Title = "SQL vs NoSQL: Hangi Veritabanı Tipi Seçilmeli?",
@@ -736,7 +736,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "6",
                             CommentCount = 0,
                             Content = "Veritabanı yönetiminde yedekleme ve kurtarma stratejileri, verilerin güvenliğini sağlamak açısından büyük önem taşır. Olası veri kayıplarını önlemek ve verilerin sürekli olarak erişilebilir olmasını sağlamak için düzenli yedekleme planları oluşturulmalıdır. Bu stratejiler, hem küçük çaplı veri kayıplarını hem de büyük felaket senaryolarını kapsamalıdır.\r\n\r\nYedekleme stratejileri arasında tam yedekleme, artımlı yedekleme ve diferansiyel yedekleme yöntemleri bulunur. Tam yedekleme, veritabanının tüm verilerini belirli aralıklarla yedeklerken, artımlı yedekleme sadece son yedeklemeden bu yana değişen verileri yedekler. Diferansiyel yedekleme ise tam yedeklemeden bu yana değişen tüm verileri kapsar.\r\n\r\nVeritabanı yedeklerinin güvenli bir ortamda saklanması ve düzenli olarak test edilmesi de kritik öneme sahiptir. Kurtarma senaryoları üzerinde çalışmak, verilerin geri yüklenme sürelerini ve kurtarma prosedürlerini optimize eder. Bu stratejiler, veritabanı yönetiminin ayrılmaz bir parçasıdır ve iş sürekliliği açısından hayati bir rol oynar.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4296),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9942),
                             Status = 0,
                             Thumbnail = "Article18.jpg",
                             Title = "Veritabanı Yedekleme ve Kurtarma Stratejileri",
@@ -749,7 +749,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "7",
                             CommentCount = 0,
                             Content = "Yapay zeka (AI), makinelerin insanlar gibi düşünmesini ve kararlar almasını sağlayan bir teknolojidir. Yapay zeka sistemleri, büyük veri setlerini analiz ederek ve bu verilerden öğrenerek, belirli görevleri yerine getirme yeteneğine sahiptir. AI'nin temelinde makine öğrenimi, derin öğrenme ve doğal dil işleme gibi teknolojiler bulunur.\r\n\r\nMakine öğrenimi, yapay zekanın alt dallarından biridir ve makinelerin deneyimlerinden öğrenmesini sağlar. Bu öğrenme süreci, veriler üzerinde yapılan analizler ve algoritmalar aracılığıyla gerçekleşir. Örneğin, bir yapay zeka sistemi, geçmiş verilere dayalı tahminlerde bulunabilir ve bu tahminler doğrultusunda kararlar alabilir.\r\n\r\nYapay zeka teknolojisi, tıptan finansal hizmetlere, üretimden eğitime kadar birçok sektörde kullanılıyor. Otonom araçlar, akıllı asistanlar ve tıbbi teşhis sistemleri, yapay zekanın gücünü gösteren örneklerden sadece birkaçıdır. AI'nin geleceği, insan hayatını daha da kolaylaştıracak birçok yenilikçi uygulama ile şekilleniyor.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4299),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9946),
                             Status = 0,
                             Thumbnail = "Article19.jpg",
                             Title = "Yapay Zeka Nedir ve Nasıl Çalışır?",
@@ -762,7 +762,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "7",
                             CommentCount = 0,
                             Content = "Makine öğrenimi (ML), bilgisayarların açıkça programlanmadan öğrenmesini ve kararlar almasını sağlayan bir yapay zeka alanıdır. ML algoritmaları, veriler üzerinde analizler yaparak, model oluşturur ve bu model üzerinden tahminlerde bulunur. Özellikle büyük veri setleri ile çalışıldığında, ML'nin gücü daha da belirgin hale gelir.\r\n\r\nMakine öğrenimi, gözetimli öğrenme, gözetimsiz öğrenme ve pekiştirmeli öğrenme olmak üzere üç ana kategoriye ayrılır. Gözetimli öğrenmede, algoritmalar, etiketlenmiş veri setleri üzerinden eğitilir ve bu veriler üzerinden tahminler yapar. Gözetimsiz öğrenmede ise, algoritmalar verilerdeki kalıpları ve ilişkileri keşfetmeye çalışır. Pekiştirmeli öğrenme ise, algoritmaların ödül ve ceza sistemine göre öğrenmesini sağlar.\r\n\r\nMakine öğrenimi, tıp, finans, oyun geliştirme ve e-ticaret gibi birçok alanda kullanılmaktadır. Özellikle tahmin modelleri, öneri sistemleri ve görüntü tanıma gibi uygulamalar, ML'nin yaygın kullanım alanları arasında yer alır. Gelecekte makine öğreniminin etkisi, daha sofistike ve karmaşık uygulamalarla daha da artacaktır.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4302),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9951),
                             Status = 0,
                             Thumbnail = "Article20.jpg",
                             Title = "Makine Öğrenimi: Geleceğin Teknolojisi",
@@ -775,7 +775,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "7",
                             CommentCount = 0,
                             Content = "Yapay zeka teknolojilerinin hızlı gelişimi, beraberinde birçok etik sorunu da getirmiştir. AI sistemlerinin karar verme yetenekleri ve otonom davranışları, insan hayatını doğrudan etkileyebilecek sonuçlar doğurabilir. Bu nedenle, yapay zeka kullanımıyla ilgili etik kuralların belirlenmesi büyük önem taşımaktadır.\r\n\r\nAI'nin etik sorunları arasında veri gizliliği, önyargı ve sorumluluk gibi konular yer alır. Örneğin, bir yapay zeka sistemi, yanlış veya önyargılı verilerle eğitildiğinde, yanlış kararlar alabilir ve bu da büyük sorunlara yol açabilir. Ayrıca, otonom sistemlerin hatalı çalışması durumunda sorumluluğun kimde olacağı da tartışılan bir diğer konudur.\r\n\r\nEtik sorunların çözülmesi, yapay zekanın güvenilir ve sorumlu bir şekilde kullanılmasını sağlar. Bu konuda hem yazılım geliştiricilere hem de düzenleyici kurumlara büyük sorumluluk düşmektedir. AI'nin etik standartlara uygun bir şekilde geliştirilmesi, teknolojinin topluma olan faydasını maksimize edecektir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4305),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9955),
                             Status = 0,
                             Thumbnail = "Article21.jpg",
                             Title = "Yapay Zeka ve Etik: Karşılaşılan Zorluklar",
@@ -788,7 +788,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "8",
                             CommentCount = 0,
                             Content = "Mobil uygulama geliştirme, modern yazılım dünyasında en popüler alanlardan biridir. Akıllı telefonların ve tabletlerin yaygınlaşmasıyla, mobil uygulamalar hayatımızın vazgeçilmez bir parçası haline geldi. Bir mobil uygulama geliştirme süreci, fikir aşamasından uygulamanın yayınlanmasına kadar birçok adımı içerir.\r\n\r\nİlk aşamada, uygulamanın ne amaçla geliştirileceği ve hangi kullanıcı kitlesine hitap edeceği belirlenmelidir. Ardından, uygulamanın tasarımı ve kullanıcı arayüzü (UI) oluşturulur. Kullanıcı deneyimi (UX), mobil uygulamalarda büyük önem taşır. Kullanıcı dostu ve sezgisel bir tasarım, uygulamanın başarısını artırır.\r\n\r\nMobil uygulama geliştirme sürecinde yazılım dilleri de önemlidir. Android için Java veya Kotlin, iOS için Swift veya Objective-C kullanılır. Ayrıca, React Native veya Flutter gibi çapraz platform geliştirme araçları da kullanılabilir. Uygulamanın geliştirilmesinin ardından, test aşaması başlar ve tüm hatalar giderildikten sonra uygulama mağazalarına sunulur.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4310),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9985),
                             Status = 0,
                             Thumbnail = "Article22.jpg",
                             Title = "Mobil Uygulama Geliştirmenin Temelleri",
@@ -801,7 +801,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "8",
                             CommentCount = 0,
                             Content = "Mobil uygulama geliştirme sürecinde geliştiricilerin karşılaştığı en büyük karar noktalarından biri, iOS ve Android platformları arasında seçim yapmaktır. Her iki platform da geniş kullanıcı kitlesine sahip olmasına rağmen, bazı önemli farklar içerir. Bu farklar, geliştirme sürecini ve kullanıcı deneyimini doğrudan etkileyebilir.\r\n\r\nAndroid, açık kaynaklı bir platformdur ve daha geniş bir cihaz yelpazesiyle uyumlu çalışır. Bu da geliştiricilere daha fazla esneklik sağlar. Ancak, Android uygulama geliştirme süreci, iOS'a göre daha karmaşık olabilir. iOS, Apple tarafından geliştirilen kapalı bir ekosistemdir ve daha sınırlı bir cihaz portföyü sunar. Ancak, bu platformda uygulama geliştirme ve test süreçleri genellikle daha tutarlıdır.\r\n\r\nHer iki platformun da kendine özgü avantajları ve dezavantajları vardır. Geliştiriciler, hedef kitlelerine ve uygulama ihtiyaçlarına göre hangi platformu seçeceklerine karar vermelidir. Ayrıca, çapraz platform geliştirme araçları sayesinde, tek bir kod tabanı ile her iki platform için de uygulama geliştirilebilir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4313),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9989),
                             Status = 0,
                             Thumbnail = "Article23.jpg",
                             Title = "iOS ve Android Arasındaki Farklar",
@@ -814,7 +814,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "8",
                             CommentCount = 0,
                             Content = "Mobil uygulama performansı, kullanıcıların uygulama deneyimini doğrudan etkileyen en önemli faktörlerden biridir. Bir uygulama ne kadar iyi tasarlanmış olursa olsun, yavaş veya gecikmeli çalışıyorsa kullanıcılar bu uygulamayı kullanmayı bırakabilir. Bu nedenle, uygulama performansını artırmak, başarılı bir mobil uygulama için kritik öneme sahiptir.\r\n\r\nUygulama performansını artırmak için ilk olarak optimize edilmiş kod yazılması gereklidir. Karmaşık algoritmalar ve gereksiz veriler, uygulamanın yavaşlamasına neden olabilir. Ayrıca, arka planda gereksiz çalışan süreçler, uygulamanın kaynaklarını tüketir ve performansı olumsuz etkiler. Bu nedenle, kaynak yönetimi dikkatlice yapılmalıdır.\r\n\r\nVeri yüklemeleri ve API çağrıları da uygulama performansını etkileyen önemli unsurlardır. Veri transferlerini optimize etmek ve gereksiz ağ isteklerinden kaçınmak, uygulamanın hızını artırabilir. Son olarak, uygulamanın test aşamalarında performans sorunları tespit edilmeli ve iyileştirmeler yapılmalıdır.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4316),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9993),
                             Status = 0,
                             Thumbnail = "Article24.jpg",
                             Title = "Mobil Uygulama Performansını Artırma Yöntemleri",
@@ -827,7 +827,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "9",
                             CommentCount = 0,
                             Content = "Oyun geliştirme dünyasında, oyun motorları, geliştiricilerin projelerini hayata geçirmelerinde kritik bir rol oynar. İki popüler oyun motoru olan Unity ve Unreal Engine, dünya genelinde milyonlarca geliştirici tarafından tercih edilmektedir. Ancak, hangi oyun motorunun kullanılacağına karar vermek, projenin gereksinimlerine göre değişiklik gösterebilir.\r\n\r\nUnity, kullanıcı dostu arayüzü ve geniş platform desteği ile bilinir. Hem 2D hem de 3D oyunlar için güçlü araçlar sunar. Unity, mobil oyunlardan sanal gerçeklik projelerine kadar geniş bir yelpazede kullanılır ve özellikle yeni başlayanlar için ideal bir oyun motorudur. Ayrıca, Unity'nin büyük bir geliştirici topluluğu ve kapsamlı dokümantasyonu, öğrenme sürecini hızlandırır.\r\n\r\nÖte yandan Unreal Engine, yüksek kaliteli grafikler ve fotogerçekçi görseller sunar. Özellikle büyük bütçeli AAA oyun projelerinde tercih edilen Unreal Engine, güçlü bir grafik motoru ve gelişmiş fizik simülasyonlarıyla dikkat çeker. Unreal Engine, C++ dilini kullanarak derinlemesine oyun mekaniği oluşturmayı sağlar, ancak öğrenme eğrisi Unity'ye göre daha dik olabilir. Her iki motor da güçlü araçlar sunarken, seçiminizi projenizin türüne ve teknik gereksinimlerine göre yapmalısınız.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4319),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 384, DateTimeKind.Local).AddTicks(9996),
                             Status = 0,
                             Thumbnail = "Article25.jpg",
                             Title = "Oyun Motorları: Unity ve Unreal Engine Karşılaştırması",
@@ -840,7 +840,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "9",
                             CommentCount = 0,
                             Content = "Tabii, 9. kategori olan Oyun Geliştirme için devam edelim.\r\n9. Kategori: Oyun Geliştirme\r\nMakale 1: \"Oyun Motorları: Unity ve Unreal Engine Karşılaştırması\"\r\n\r\nOyun geliştirme dünyasında, oyun motorları, geliştiricilerin projelerini hayata geçirmelerinde kritik bir rol oynar. İki popüler oyun motoru olan Unity ve Unreal Engine, dünya genelinde milyonlarca geliştirici tarafından tercih edilmektedir. Ancak, hangi oyun motorunun kullanılacağına karar vermek, projenin gereksinimlerine göre değişiklik gösterebilir.\r\n\r\nUnity, kullanıcı dostu arayüzü ve geniş platform desteği ile bilinir. Hem 2D hem de 3D oyunlar için güçlü araçlar sunar. Unity, mobil oyunlardan sanal gerçeklik projelerine kadar geniş bir yelpazede kullanılır ve özellikle yeni başlayanlar için ideal bir oyun motorudur. Ayrıca, Unity'nin büyük bir geliştirici topluluğu ve kapsamlı dokümantasyonu, öğrenme sürecini hızlandırır.\r\n\r\nÖte yandan Unreal Engine, yüksek kaliteli grafikler ve fotogerçekçi görseller sunar. Özellikle büyük bütçeli AAA oyun projelerinde tercih edilen Unreal Engine, güçlü bir grafik motoru ve gelişmiş fizik simülasyonlarıyla dikkat çeker. Unreal Engine, C++ dilini kullanarak derinlemesine oyun mekaniği oluşturmayı sağlar, ancak öğrenme eğrisi Unity'ye göre daha dik olabilir. Her iki motor da güçlü araçlar sunarken, seçiminizi projenizin türüne ve teknik gereksinimlerine göre yapmalısınız.\r\nMakale 2: \"Oyun Tasarımında Hikaye Anlatımının Önemi\"\r\n\r\nBir oyun sadece görsellikten ibaret değildir; oyuncuyu içine çeken bir hikaye, oyunun başarısında önemli bir rol oynar. Oyun tasarımında güçlü bir hikaye, oyuncuların duygusal olarak bağ kurmasını sağlar ve onları oyunun dünyasına daha derinden çeker. Hikaye anlatımı, oyun karakterlerinin gelişimi, olay örgüsü ve oyuncunun karşılaştığı seçimlerle şekillenir.\r\n\r\nHikaye odaklı oyunlar, oyunculara sadece mekanik bir deneyim sunmaz, aynı zamanda onları duygusal bir yolculuğa çıkarır. Örneğin, RPG (rol yapma oyunu) türündeki oyunlar, oyuncuya karakteri üzerinde tam kontrol sağlayarak kararlarının sonuçlarını görmesine olanak tanır. Bu, oyuncuların oyunla daha fazla bağ kurmasını sağlar.\r\n\r\nOyun tasarımında hikaye anlatımını başarılı bir şekilde entegre etmek için, karakterlerin derinliği ve dünyasının zenginliği önemlidir. Ayrıca, oyunun sunduğu dünyaya uygun bir anlatı tarzı seçmek de kritiktir. Hikaye, oyuncunun oyun dünyasında yapacağı keşifler ve karşılaşacağı zorluklar ile paralel ilerlemelidir. İyi bir hikaye, oyuncunun oyuna tekrar tekrar dönmesini sağlayan güçlü bir motivasyon kaynağıdır.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4321),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local),
                             Status = 0,
                             Thumbnail = "Article26.jpg",
                             Title = "Oyun Tasarımında Hikaye Anlatımının Önemi",
@@ -853,7 +853,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "9",
                             CommentCount = 0,
                             Content = "Oyun geliştirme sürecinde test ve hata ayıklama (debugging) aşamaları, oyunun son kullanıcıya sorunsuz bir deneyim sunmasını sağlamak için hayati önem taşır. Oyun geliştirme sürecinde karşılaşılan hataların büyük bir kısmı, karmaşık oyun mekanikleri, performans sorunları ve platformlar arası uyumsuzluklar ile ilgilidir. Bu nedenle, her oyun projesinde detaylı bir test süreci yürütülmelidir.\r\n\r\nOyun geliştirme sürecinde iki temel test yöntemi bulunur: fonksiyonel test ve performans testi. Fonksiyonel test, oyunun tüm mekaniğinin doğru çalışıp çalışmadığını kontrol eder. Bu testler, oyuncu etkileşimlerinden, yapay zeka davranışlarına kadar oyunun her yönünü kapsar. Performans testi ise oyunun hangi platformlarda nasıl çalıştığını değerlendirir ve optimizasyon gereksinimlerini belirler.\r\n\r\nHata ayıklama süreci ise, oyun kodunda bulunan hataların tespit edilmesi ve düzeltilmesini içerir. Bu süreçte, oyun motorunun sunduğu hata ayıklama araçları ve loglama teknikleri kullanılarak hatalar belirlenir ve düzeltilir. Özellikle çok oyunculu oyunlarda test ve hata ayıklama süreci, oyun dengesi ve sunucu performansı açısından kritik öneme sahiptir. Başarılı bir test ve hata ayıklama süreci, oyunun yayınlandığı gün kullanıcıların sorunsuz bir deneyim yaşamasını sağlar.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4324),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(3),
                             Status = 0,
                             Thumbnail = "Article27.jpg",
                             Title = "Oyun Geliştirmede Test ve Hata Ayıklama Süreçleri",
@@ -866,7 +866,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "10",
                             CommentCount = 0,
                             Content = "Tabii, 10. kategori olan Veri Bilimi için devam edelim.\r\n10. Kategori: Veri Bilimi\r\nMakale 1: \"Veri Bilimine Giriş: Temel Kavramlar ve Teknikler\"\r\n\r\nVeri bilimi, günümüzün en hızlı büyüyen alanlarından biridir ve büyük miktarda veriyi analiz ederek değerli bilgiler elde etmeyi amaçlar. Veri bilimi, istatistik, matematik, bilgisayar bilimi ve iş analitiği gibi disiplinleri bir araya getirir. Veri bilimciler, büyük veri setlerini analiz etmek, anlamak ve iş stratejilerine dönüştürmek için çeşitli teknikler kullanır.\r\n\r\nVeri biliminin temelinde, verilerin toplanması, temizlenmesi ve analiz edilmesi süreci bulunur. Bu süreçte kullanılan yaygın tekniklerden bazıları, regresyon analizi, kümeleme ve sınıflandırma algoritmalarıdır. Ayrıca, makine öğrenimi yöntemleri de veri biliminde önemli bir yer tutar. Örneğin, gözetimli öğrenme teknikleri, geçmiş verilere dayanarak gelecekteki olayları tahmin etmeye yardımcı olabilir.\r\n\r\nVeri bilimi, birçok sektörde büyük değer yaratır. Finans, sağlık, perakende ve teknoloji gibi alanlarda, verilerin doğru bir şekilde analiz edilmesi, daha iyi kararlar alınmasına ve müşteri deneyimlerinin iyileştirilmesine yardımcı olur. Veri bilimine başlamak isteyenler için Python, R ve SQL gibi programlama dilleri ve veri görselleştirme araçları öğrenmeye değer becerilerdir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4327),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(9),
                             Status = 0,
                             Thumbnail = "Article28.jpg",
                             Title = "Veri Bilimine Giriş: Temel Kavramlar ve Teknikler",
@@ -879,7 +879,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "10",
                             CommentCount = 0,
                             Content = "Makine öğrenimi, veri biliminin en önemli alt dallarından biridir ve veri setlerinden öğrenerek tahmin modelleri oluşturmaya dayanır. Tahmin modelleme, gelecekteki olayları tahmin etmek için geçmiş verilere dayanarak matematiksel modeller oluşturma sürecidir. Bu teknik, finansal tahminlerden, müşteri davranışlarını analiz etmeye kadar geniş bir yelpazede kullanılır.\r\n\r\nMakine öğrenimi algoritmaları, veri bilimi projelerinde tahmin modellemesi yapmak için kullanılır. Örneğin, bir e-ticaret sitesinde müşterilerin alışveriş alışkanlıklarına dayanarak hangi ürünleri satın alacaklarını tahmin eden bir model geliştirebiliriz. Bu model, lojistik regresyon, karar ağaçları veya sinir ağları gibi algoritmalar kullanılarak oluşturulabilir.\r\n\r\nMakine öğrenimi modellerini oluştururken, verilerin doğru bir şekilde ön işlenmesi büyük önem taşır. Verilerin eksiksiz, doğru ve tutarlı olması, modelin doğruluğunu etkiler. Ayrıca, modellerin performansını değerlendirmek için çapraz doğrulama ve test veri setleri kullanmak gerekir. Doğru yapılandırılmış bir makine öğrenimi modeli, veri bilimi projelerinde büyük bir katma değer sağlar ve iş süreçlerini optimize eder.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4330),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(13),
                             Status = 0,
                             Thumbnail = "Article29.jpg",
                             Title = "Makine Öğrenimi ile Tahmin Modelleme: Bir Veri Bilimi Uygulaması",
@@ -892,7 +892,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "10",
                             CommentCount = 0,
                             Content = "Veri biliminde büyük veri analizi, giderek daha önemli bir hale gelmiştir. Büyük veri, geleneksel veri işleme araçlarıyla işlenemeyecek kadar büyük ve karmaşık veri kümelerini ifade eder. Bu tür verilerin işlenmesi için özel teknolojiler geliştirilmiştir ve bunların başında Hadoop ve Spark gelir.\r\n\r\nHadoop, açık kaynaklı bir büyük veri işleme çerçevesidir ve verileri paralel olarak işleyebilme yeteneği sayesinde büyük veri kümelerini hızlı bir şekilde analiz edebilir. Hadoop’un HDFS (Hadoop Distributed File System) adlı dosya sistemi, büyük veri kümelerinin dağıtık bir şekilde depolanmasını sağlar. Hadoop ayrıca MapReduce adı verilen bir programlama modelini kullanarak verileri işlemektedir.\r\n\r\nSpark ise Hadoop’a alternatif bir çözüm olarak geliştirilmiştir ve büyük veri işleme süreçlerini hızlandırmayı hedefler. Spark, bellekte veri işleyerek Hadoop’a göre çok daha hızlı sonuçlar üretebilir. Ayrıca, Spark’ın veri işleme yetenekleri, makine öğrenimi algoritmaları ve veri akışları için de uygundur. Spark, Hadoop ile entegre bir şekilde çalışabildiği gibi bağımsız olarak da kullanılabilir.\r\n\r\nHer iki teknoloji de büyük veri işleme süreçlerinde önemli roller oynar. Hadoop, büyük veri kümelerinin depolanması ve işlenmesi için ideal bir çözüm sunarken, Spark, daha hızlı veri işleme ve makine öğrenimi uygulamaları için tercih edilir. Projenin ihtiyaçlarına göre bu iki teknolojiden biri seçilmelidir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4335),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(17),
                             Status = 0,
                             Thumbnail = "Article30.jpg",
                             Title = "Büyük Veri Teknolojileri: Hadoop ve Spark'ın Karşılaştırması",
@@ -905,7 +905,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "11",
                             CommentCount = 0,
                             Content = "Yapay zeka (AI) ve robotik süreç otomasyonu (RPA), endüstriyel süreçlerin otomasyonunda devrim yaratmıştır. Geleneksel olarak insan gücüne dayanan birçok iş, artık yapay zeka ve robotik teknolojiler sayesinde daha hızlı, verimli ve hatasız bir şekilde gerçekleştirilebiliyor. Bu teknolojiler, üretimden müşteri hizmetlerine kadar geniş bir yelpazede kullanılıyor.\r\n\r\nYapay zeka ile desteklenen robotik süreç otomasyonu, belirli görevleri öğrenip tekrarlayarak zaman ve maliyet tasarrufu sağlar. Örneğin, bir üretim hattında tekrarlayan işler yapay zeka algoritmaları tarafından öğrenilir ve robotlar bu işleri yüksek bir doğrulukla yerine getirir. Bu sistemler, insan müdahalesi olmadan çalışma yeteneğine sahip olduğundan, 7/24 kesintisiz operasyon sağlarlar.\r\n\r\nRPA, iş dünyasında da giderek daha yaygın hale gelmiştir. Özellikle finans, sağlık ve lojistik sektörlerinde süreçleri optimize etmek için kullanılır. Örneğin, bir bankada kredi başvurularını işleyen RPA sistemleri, yapay zeka algoritmalarını kullanarak verileri analiz eder ve başvuruların onaylanma sürecini hızlandırır. Bu, iş gücü maliyetlerini azaltırken, işlem sürelerini önemli ölçüde kısaltır. Yapay zeka ve robotik süreç otomasyonu, geleceğin iş dünyasında temel bir rol oynayacaktır.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4339),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(21),
                             Status = 0,
                             Thumbnail = "Article31.jpg",
                             Title = "Yapay Zeka ile Robotik Süreç Otomasyonu: Endüstrinin Geleceği",
@@ -918,7 +918,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "11",
                             CommentCount = 0,
                             Content = "Robot teknolojileri, yalnızca fabrikalarla sınırlı kalmayıp, sağlık, tarım, eğitim ve günlük yaşamda da kullanılmaya başlamıştır. Modern robotlar, daha gelişmiş sensörlerle donatılarak çevrelerini algılayabilme ve bu verilere dayanarak bağımsız kararlar alabilme yeteneklerine sahiptir. Bu gelişmeler, robotların daha karmaşık görevleri yerine getirmesine olanak tanımaktadır.\r\n\r\nÖrneğin, sağlık alanında robotik cerrahi sistemleri, hassas operasyonların daha hızlı ve daha güvenli bir şekilde yapılmasını sağlar. Da Vinci Cerrahi Robotu gibi cihazlar, doktorlara minimal invaziv cerrahi işlemlerinde yardımcı olmakta ve iyileşme sürelerini kısaltmaktadır. Tarım sektöründe ise, tarım robotları hasat işlemlerini hızlandırmakta ve tarım ilaçlarının hassas bir şekilde uygulanmasını sağlamaktadır.\r\n\r\nAyrıca, otonom araçlar ve insansı robotlar gibi ileri düzey robotik teknolojiler, insan hayatını kolaylaştırmak için hızla gelişmektedir. Tesla gibi firmalar otonom araç teknolojilerinde önemli ilerlemeler kaydederken, Boston Dynamics’in robotları da endüstriyel süreçlerden arama kurtarma operasyonlarına kadar birçok alanda kullanılmaktadır. Robotların daha fazla öğrenme yeteneği kazanmasıyla, robotik teknolojilerin gelecekte daha da yaygınlaşacağı öngörülmektedir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4341),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(24),
                             Status = 0,
                             Thumbnail = "Article32.jpg",
                             Title = "Robotik Teknolojilerde Son Gelişmeler ve Uygulama Alanları",
@@ -931,7 +931,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "11",
                             CommentCount = 0,
                             Content = "Yapay zeka destekli otonom robotlar, insansı hareketler ve algılama yetenekleri ile donatılmış robotlardır. Bu robotlar, çevrelerini algılayabilmekte, bağımsız olarak hareket edebilmekte ve insanlarla etkileşime geçebilmektedir. Yapay zeka teknolojisi, bu robotların daha esnek ve zeki bir şekilde davranmasına olanak sağlar.\r\n\r\nOtonom robotlar, genellikle karmaşık görevleri yerine getirebilmek için yapay sinir ağları ve makine öğrenimi algoritmaları kullanır. Örneğin, bir otonom robot, nesneleri tanıyıp sınıflandırarak, belirli bir görevi yerine getirebilir. Ayrıca, bu robotlar, gerçek zamanlı veri analizi yaparak, çevresindeki değişikliklere uyum sağlayabilirler. Sensörler ve kameralar sayesinde robotlar, engelleri algılayarak güvenli bir şekilde hareket edebilirler.\r\n\r\nİnsansı robotlar ise, özellikle hizmet sektörü ve bakım hizmetlerinde kullanılmak üzere geliştirilmektedir. Bu robotlar, insanların yaptığı birçok fiziksel işi yerine getirebilirler. Örneğin, hasta bakımı veya yaşlı bakımı gibi alanlarda insansı robotlar, insanların günlük işlerini kolaylaştırabilir. Ayrıca, bu robotlar, öğrenme algoritmaları sayesinde sürekli olarak kendilerini geliştirebilmekte ve daha karmaşık görevleri yerine getirebilmektedirler. Yapay zeka destekli otonom robotların gelecekte birçok alanda insanlara yardımcı olacağı öngörülmektedir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4344),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(28),
                             Status = 0,
                             Thumbnail = "Article33.jpg",
                             Title = "Yapay Zeka Destekli Otonom Robotlar: İnsansı Hareketler ve Algılama Yetenekleri",
@@ -944,7 +944,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "12",
                             CommentCount = 0,
                             Content = "Bir bilgisayarın performansını belirleyen en temel bileşenler arasında işlemci, RAM (rastgele erişim belleği) ve depolama birimleri yer alır. İşlemci, bilgisayarın beyni olarak kabul edilir ve tüm verileri işleyerek uygulamaların çalışmasını sağlar. Günümüzde, işlemciler çok çekirdekli yapılarıyla daha hızlı işlem kapasiteleri sunmaktadır. RAM ise, işlemciye geçici veri sağlayarak uygulamaların hızlı bir şekilde çalışmasını destekler. Belleğin yetersiz olduğu durumlarda, bilgisayar yavaşlayabilir ve uygulamalar daha geç yanıt verebilir. Son olarak, depolama birimleri arasında SSD ve HDD seçenekleri bulunmaktadır. SSD’ler, geleneksel HDD’lere göre daha hızlı veri erişimi sunarak bilgisayarın genel performansını artırır. Bu temel donanım bileşenleri, bir bilgisayarın hızını ve verimliliğini doğrudan etkileyen unsurlardır.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4347),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(32),
                             Status = 0,
                             Thumbnail = "Article34.jpg",
                             Title = "Bilgisayar Donanımının Temel Bileşenleri: İşlemci, RAM ve Depolama",
@@ -957,7 +957,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "12",
                             CommentCount = 0,
                             Content = "Ekran kartı, özellikle oyun severler ve grafik işleme işi yapan profesyoneller için büyük önem taşır. Oyunlarda yüksek kare hızlarına ve kaliteli grafiklere ulaşmak, güçlü bir ekran kartı gerektirir. Ekran kartları, işlemcinin yükünü hafifleterek oyunlardaki görsel öğelerin daha hızlı işlenmesini sağlar. NVIDIA ve AMD gibi büyük markalar, farklı bütçe ve kullanım ihtiyaçlarına yönelik ekran kartları üretmektedir. Oyunlarda yüksek performans almak isteyen kullanıcılar, genellikle en az 6 GB bellek kapasitesine sahip kartları tercih etmelidir. Grafik tasarımı ya da video düzenleme işleri için ise yüksek CUDA çekirdekli ekran kartları ideal bir seçenek olabilir. Doğru ekran kartı seçimi, bilgisayar performansını artırmanın yanı sıra oyun ve grafik işleme deneyimini de en üst düzeye çıkarır.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4350),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(35),
                             Status = 0,
                             Thumbnail = "Article35.jpg",
                             Title = "Ekran Kartı Seçimi: Oyun ve Grafik İşleme İçin İdeal Kartlar",
@@ -970,7 +970,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "12",
                             CommentCount = 0,
                             Content = "Bilgisayarın performansını koruyabilmesi için etkili bir soğutma sistemi kullanılması şarttır. Bilgisayar bileşenleri, özellikle yoğun işlem gücü gerektiren oyunlar veya uygulamalar çalıştırıldığında aşırı ısınabilir. Bu nedenle, CPU ve GPU gibi donanımların ısısını düşürmek için çeşitli soğutma sistemleri geliştirilmiştir. Hava soğutma sistemleri, fanlar aracılığıyla sıcak havayı dışarı atarak temel bir soğutma sağlar. Ancak sıvı soğutma sistemleri, daha ileri düzeyde soğutma sunarak yüksek performanslı sistemlerde tercih edilir. Özellikle hız aşırtma (overclocking) yapılan bilgisayarlarda sıvı soğutma kullanılması önerilir. Doğru soğutma sistemi, bilgisayarın ömrünü uzatırken, yüksek performansın sürdürülebilmesine de olanak tanır.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4353),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(41),
                             Status = 0,
                             Thumbnail = "Article36.jpg",
                             Title = "Bilgisayar Soğutma Sistemleri: Hangi Seçenek Sizin İçin Doğru?",
@@ -983,7 +983,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "13",
                             CommentCount = 0,
                             Content = "İnsan bilgisayar etkileşimi (HCI) tasarımında renklerin rolü, kullanıcı deneyimini doğrudan etkileyen önemli bir faktördür. Renkler, kullanıcıların bir arayüzde nasıl hissettiğini, bir işlem sırasında nasıl davrandığını ve genel deneyimini etkiler. Örneğin, mavi renk genellikle güven ve sadakati temsil ederken, kırmızı renk dikkat çekmek veya bir uyarı vermek amacıyla kullanılır. Kullanıcı arayüzlerinde renklerin doğru kullanılması, kullanıcıların uygulama veya web sitesinde daha rahat gezinmelerini sağlar ve etkileşim oranlarını artırır. Ancak aşırı renk kullanımı veya yanlış renk seçimi, kullanıcıları bunaltabilir ve istenen etkileşimi engelleyebilir. Bu yüzden, kullanıcı deneyimi tasarımında renklerin stratejik bir şekilde kullanılması gerekir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4355),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(44),
                             Status = 0,
                             Thumbnail = "Article37.jpg",
                             Title = "Kullanıcı Deneyimi Tasarımında Renklerin Önemi",
@@ -996,7 +996,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "13",
                             CommentCount = 0,
                             Content = "Tabii, 13. kategori olan İnsan Bilgisayar Etkileşimi ile devam edelim.\r\n13. Kategori: İnsan Bilgisayar Etkileşimi\r\nMakale 1: \"Kullanıcı Deneyimi Tasarımında Renklerin Önemi\"\r\n\r\nİnsan Bilgisayar Etkileşimi (HCI) alanında renklerin önemi, kullanıcı deneyimini büyük ölçüde etkileyen bir faktördür. Renkler, kullanıcıların dikkatini çekmek, onları yönlendirmek ve duygusal tepkiler oluşturmak için kullanılır. Örneğin, mavi renk genellikle güven duygusu yaratırken, kırmızı tehlike veya hata belirtmek için tercih edilir. İyi bir kullanıcı deneyimi tasarımı, renklerin psikolojik etkilerini göz önünde bulundurarak oluşturulmalıdır. Doğru renk seçimi, kullanıcıların bir arayüzü daha kolay ve verimli bir şekilde kullanmalarını sağlar.\r\nMakale 2: \"Kullanıcı Arayüzlerinde Simetri ve Hiyerarşi\"\r\n\r\nKullanıcı arayüzü (UI) tasarımında simetri ve hiyerarşi, görsel düzenin önemli unsurlarıdır. Simetri, kullanıcıların bir arayüzü daha kolay kavramalarına yardımcı olurken, hiyerarşi bilgilerin önem sırasına göre sunulmasını sağlar. HCI araştırmaları, simetrik tasarımların kullanıcılar tarafından daha estetik bulunduğunu ve daha hızlı algılandığını göstermektedir. Hiyerarşi ise, kullanıcıların dikkatini en önemli unsurlara yönlendirir. Bu nedenle, simetri ve hiyerarşi kurallarını dikkate alarak tasarlanan arayüzler, kullanıcı dostu deneyimler sunar.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4360),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(47),
                             Status = 0,
                             Thumbnail = "Article38.jpg",
                             Title = "Kullanıcı Arayüzlerinde Simetri ve Hiyerarşi",
@@ -1009,7 +1009,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "13",
                             CommentCount = 0,
                             Content = "İnsan Bilgisayar Etkileşimi alanında geri bildirim, kullanıcıların sistemle etkileşimde bulunduğunda sistemin durumu hakkında bilgilendirilmelerini sağlayan kritik bir unsurdur. Bir butona tıklamak, bir form doldurmak ya da bir işlem başlatmak gibi kullanıcı aksiyonları sonucunda, sistemin kullanıcıya geri bildirim vermesi hem güven oluşturur hem de işlemin başarıyla tamamlandığını gösterir. Bu geri bildirimler, görsel (örneğin, yüklenme çubuğu), işitsel (bildirim sesi) ya da dokunsal (vibrasyon) olabilir. Etkili geri bildirimler, kullanıcıların sistemle daha rahat etkileşime girmesini sağlar ve olası hataları en aza indirir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4363),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(51),
                             Status = 0,
                             Thumbnail = "Article39.jpg",
                             Title = "HCI’de Geri Bildirimin Önemi ve Uygulamaları",
@@ -1022,7 +1022,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "14",
                             CommentCount = 0,
                             Content = "Siber tehditlerin giderek arttığı bir dünyada, güçlü ve karmaşık parolalar ilk savunma hattı olarak kabul edilir. Birçok kişi kolay hatırlanabilir parolalar kullanma eğiliminde olsa da, bu durum hackerlar için fırsat yaratır. Özellikle sosyal mühendislik saldırılarıyla, zayıf parolalar kolayca tahmin edilebilir. Parola yöneticileri kullanarak güçlü ve benzersiz parolalar oluşturmak, siber güvenliğin temel taşlarından biridir. Ayrıca, iki faktörlü kimlik doğrulama (2FA) gibi ek güvenlik katmanları kullanmak, hesapları daha da güvenli hale getirir. Bu tür uygulamalar, kullanıcıların siber saldırılara karşı daha iyi korunmasını sağlar.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4367),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(54),
                             Status = 0,
                             Thumbnail = "Article40.jpg",
                             Title = "Siber Saldırılara Karşı İlk Savunma Hattı: Güçlü Parolalar",
@@ -1035,7 +1035,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "14",
                             CommentCount = 0,
                             Content = "Sosyal mühendislik, teknolojik sistemlerden ziyade insanların zaaflarını hedef alan bir siber saldırı türüdür. Bu tür saldırılar, kullanıcıları kandırarak kritik bilgilerini (şifreler, kimlik bilgileri vb.) paylaşmalarını sağlamaya dayanır. Phishing (oltalama) saldırıları, en yaygın sosyal mühendislik tekniklerinden biridir. Saldırganlar, kullanıcıların güvenini kazanarak onları yanıltıcı e-postalar, mesajlar ya da web siteleri ile tuzağa düşürürler. Sosyal mühendislik saldırılarına karşı korunmak için kullanıcıların bilinçlendirilmesi ve şüpheli iletiler karşısında dikkatli olunması önemlidir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4370),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(57),
                             Status = 0,
                             Thumbnail = "Article41.jpg",
                             Title = "Sosyal Mühendislik Saldırıları: İnsan Faktörünü Hedef Alan Tehditler",
@@ -1048,7 +1048,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "14",
                             CommentCount = 0,
                             Content = "Dağıtılmış Hizmet Reddi (DDoS) saldırıları, bir sistemin kaynaklarını tüketerek hizmet veremez hale getirmeyi hedefler. DDoS saldırıları genellikle çok sayıda cihazın (botnet) eşzamanlı olarak bir hedefe yönlendirilmesiyle gerçekleştirilir. Bu tür saldırılar, özellikle büyük ölçekli web siteleri ve hizmet sağlayıcıları için ciddi sonuçlar doğurabilir; sistemlerin çökmesine ve uzun süreli hizmet kesintilerine neden olabilir. DDoS saldırılarına karşı korunmanın yolları arasında trafik filtreleme, yük dengeleme ve güvenlik duvarı yapılandırmaları gibi stratejiler bulunur. Bu önlemler, işletmelerin hizmet sürekliliğini sağlamada önemli rol oynar.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4373),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(62),
                             Status = 0,
                             Thumbnail = "Article42.jpg",
                             Title = "DDoS Saldırıları ve İşletmeler Üzerindeki Yıkıcı Etkileri",
@@ -1061,7 +1061,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "15",
                             CommentCount = 0,
                             Content = "Yazılım mühendisliğinde Agile metodolojisi, hızlı ve esnek yazılım geliştirme süreçlerini yönetmek için en yaygın kullanılan yaklaşımlardan biridir. Agile, özellikle değişen müşteri ihtiyaçlarına ve proje gereksinimlerine hızlı bir şekilde uyum sağlama yeteneğiyle öne çıkar. Kısa döngüler (sprintler) halinde yapılan çalışmalar, geliştiricilerin geri bildirimleri hızlıca alıp uygulamasına olanak tanır. Bu sayede, proje yönetimi daha şeffaf ve kontrol edilebilir hale gelir. Yazılım mühendisliği süreçlerinde Agile kullanımı, müşteri memnuniyetini artırırken proje maliyetlerini ve zaman kaybını da minimuma indirir.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4376),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(65),
                             Status = 0,
                             Thumbnail = "Article43.jpg",
                             Title = "Yazılım Geliştirme Süreçlerinde Agile Yönteminin Önemi",
@@ -1074,7 +1074,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "15",
                             CommentCount = 0,
                             Content = "Temiz kod, yazılım mühendisliğinde sürdürülebilir ve bakımı kolay kod yazma pratiğidir. Bir yazılımın işlevselliği kadar, okunabilirliği ve anlaşılabilirliği de önemlidir. Temiz kod, sadece geliştiricinin değil, gelecekte projeyi devralacak olan diğer yazılımcıların da hızlıca adapte olabilmesini sağlar. Kodun modüler, tekrar kullanılabilir ve iyi dökümante edilmiş olması, temiz kodun temel prensiplerindendir. Bu yaklaşım sayesinde, yazılım projeleri uzun vadede daha az hata içerir, bakım maliyetleri düşer ve geliştirme süreçleri hızlanır.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4379),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(71),
                             Status = 0,
                             Thumbnail = "Article44.jpg",
                             Title = "Yazılım Mühendisliğinde Clean Code (Temiz Kod) Yaklaşımı",
@@ -1087,7 +1087,7 @@ namespace BlogProject.REPO.Migrations
                             CategoryId = "15",
                             CommentCount = 0,
                             Content = "Yazılım mühendisliğinde kalite güvencesi, yazılımın güvenilir ve hatasız çalışmasını sağlamak için kritik bir adımdır. Test otomasyonu, bu sürecin önemli bir parçasıdır ve manuel testlerin yerini alarak daha hızlı ve etkili bir şekilde hataların tespit edilmesine olanak tanır. Otomatik testler, yazılımın her yeni versiyonunda test süreçlerinin tekrar edilmesini sağlar, bu da geliştirme döngüsünde hataların erken aşamada bulunmasına yardımcı olur. Unit testler, entegrasyon testleri ve sistem testleri gibi farklı test seviyeleri, yazılımın kalite standartlarını korumada önemli bir rol oynar.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4383),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(75),
                             Status = 0,
                             Thumbnail = "Article45.jpg",
                             Title = "Yazılım Mühendisliğinde Test Otomasyonu ve Kalite Güvencesi",
@@ -1129,7 +1129,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "1",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4520),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(207),
                             Description = "Yazılım geliştirme ve programlama dilleri üzerine içerikler.",
                             Name = "Yazılım",
                             Status = 0
@@ -1137,7 +1137,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "2",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4523),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(214),
                             Description = "Sistem yönetimi ve ağ altyapıları üzerine bilgiler.",
                             Name = "Sistem",
                             Status = 0
@@ -1145,7 +1145,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "3",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4525),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(217),
                             Description = "Web tasarımı ve grafik tasarım trendleri hakkında içerikler.",
                             Name = "Web Grafik",
                             Status = 0
@@ -1153,7 +1153,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "4",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4527),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(242),
                             Description = "Siber güvenlik, veri koruma ve sistem güvenliği üzerine bilgiler.",
                             Name = "Güvenlik",
                             Status = 0
@@ -1161,7 +1161,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "5",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4529),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(245),
                             Description = "Bulut bilişim ve bulut teknolojileri üzerine bilgiler.",
                             Name = "Bulut Sistemler",
                             Status = 0
@@ -1169,7 +1169,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "6",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4531),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(248),
                             Description = "Veritabanı yönetim sistemleri ve veri işleme teknikleri üzerine içerikler.",
                             Name = "Veritabanı",
                             Status = 0
@@ -1177,7 +1177,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "7",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4533),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(254),
                             Description = "Yapay zeka, makine öğrenimi ve derin öğrenme hakkında içerikler.",
                             Name = "Yapay Zeka",
                             Status = 0
@@ -1185,7 +1185,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "8",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4536),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(257),
                             Description = "Mobil uygulama geliştirme, Android ve iOS platformları üzerine bilgiler.",
                             Name = "Mobil Uygulama",
                             Status = 0
@@ -1193,7 +1193,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "9",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4540),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(260),
                             Description = "Oyun motorları, oyun geliştirme teknikleri ve oyun tasarımı üzerine içerikler.",
                             Name = "Oyun Geliştirme",
                             Status = 0
@@ -1201,7 +1201,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "10",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4542),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(263),
                             Description = "Veri analitiği, veri işleme ve büyük veri teknolojileri hakkında içerikler.",
                             Name = "Veri Bilimi",
                             Status = 0
@@ -1209,7 +1209,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "11",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4545),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(266),
                             Description = "Yapay zeka, robotik süreç otomasyonu ve robot teknolojileri üzerine bilgiler.",
                             Name = "Yapay Zeka ve Robotik",
                             Status = 0
@@ -1217,7 +1217,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "12",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4547),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(269),
                             Description = "Bilgisayar donanımı, sistem bileşenleri ve teknik detaylar hakkında bilgiler.",
                             Name = "Donanım",
                             Status = 0
@@ -1225,7 +1225,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "13",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4549),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(272),
                             Description = "Kullanıcı deneyimi (UX) ve insan-bilgisayar etkileşimi üzerine bilgiler.",
                             Name = "İnsan Bilgisayar Etkileşimi",
                             Status = 0
@@ -1233,7 +1233,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "14",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4552),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(275),
                             Description = "Siber tehditler ve güvenlik açıkları hakkında içerikler.",
                             Name = "Siber Tehditler",
                             Status = 0
@@ -1241,7 +1241,7 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "15",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(4554),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(280),
                             Description = "Yazılım geliştirme süreçleri, yazılım mühendisliği prensipleri üzerine bilgiler.",
                             Name = "Yazılım Mühendisliği",
                             Status = 0
@@ -1294,60 +1294,60 @@ namespace BlogProject.REPO.Migrations
                         {
                             Id = "1",
                             AppUserId = "7",
-                            Approved = false,
+                            Approved = true,
                             ArticleId = "1",
                             Content = "C# dilinin OOP özelliklerini bu kadar net ve anlaşılır bir şekilde açıklamanız gerçekten çok faydalı oldu. Özellikle polimorfizm ve soyutlama kavramlarını bu kadar detaylı anlamak, projelerimde daha modüler yapılar kurmama yardımcı olacak.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(6409),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(2206),
                             Status = 0
                         },
                         new
                         {
                             Id = "2",
                             AppUserId = "8",
-                            Approved = false,
+                            Approved = true,
                             ArticleId = "1",
                             Content = "Makaledeki encapsulation (kapsülleme) ve inheritance (kalıtım) kavramları üzerine verdiğiniz örnekler çok açıklayıcıydı. C# dilinde daha önce bu kavramları yüzeysel biliyordum ama şimdi projelerimde daha etkin kullanabileceğimi düşünüyorum. Teşekkürler!",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(6416),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(2211),
                             Status = 0
                         },
                         new
                         {
                             Id = "3",
                             AppUserId = "11",
-                            Approved = false,
+                            Approved = true,
                             ArticleId = "5",
                             Content = "Hyper-V ile sanallaştırmanın nasıl donanım maliyetlerini düşürdüğünü çok güzel açıklamışsınız. Bu teknolojiyi kullanarak test ortamları oluşturmanın ne kadar kolay olduğunu öğrendim. Geliştirme ve test süreçlerimde kesinlikle kullanacağım.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(6419),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(2215),
                             Status = 0
                         },
                         new
                         {
                             Id = "4",
                             AppUserId = "6",
-                            Approved = false,
+                            Approved = true,
                             ArticleId = "5",
                             Content = "Felaket kurtarma planları oluştururken Hyper-V'nin ne kadar esnek ve etkili olduğunu vurgulamanız çok iyi olmuş. Sanal makinelerle çalışmak, IT yönetimi için büyük bir avantaj. Makale sayesinde bu teknolojiyi daha iyi anladım ve sistemlerimde kullanmayı düşünüyorum.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(6422),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(2220),
                             Status = 0
                         },
                         new
                         {
                             Id = "5",
                             AppUserId = "10",
-                            Approved = false,
+                            Approved = true,
                             ArticleId = "18",
                             Content = "Yedekleme stratejilerinin detaylı bir şekilde ele alınması çok faydalı oldu. Özellikle artımlı ve diferansiyel yedekleme arasındaki farkı öğrenmek benim için önemliydi. Şirketimizde veritabanı yönetimi yaparken bu bilgileri uygulayacağım.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(6425),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(2224),
                             Status = 0
                         },
                         new
                         {
                             Id = "6",
                             AppUserId = "11",
-                            Approved = false,
+                            Approved = true,
                             ArticleId = "18",
                             Content = "Yedekleme stratejilerinin sadece planlanmasının yeterli olmadığını, aynı zamanda kurtarma senaryolarının da düzenli olarak test edilmesi gerektiğini vurgulamanız çok önemli. Veri güvenliği için bu makalede önerilen yöntemleri uygulamaya başlayacağım.",
-                            CreateDate = new DateTime(2024, 9, 19, 17, 50, 49, 922, DateTimeKind.Local).AddTicks(6428),
+                            CreateDate = new DateTime(2024, 9, 20, 22, 58, 23, 385, DateTimeKind.Local).AddTicks(2227),
                             Status = 0
                         });
                 });
@@ -1382,28 +1382,28 @@ namespace BlogProject.REPO.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "a02760c9-e021-4def-80a6-e07006e2bc37",
+                            ConcurrencyStamp = "583b6187-b741-4e1c-be84-76a03db8d039",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "357cd6e5-fbc5-41fa-a16a-e3fde69e888a",
+                            ConcurrencyStamp = "909c0b3a-549b-4ca6-af90-05a4a3fcf778",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "9ced3b5c-d196-4c81-ba43-03ce85b07026",
+                            ConcurrencyStamp = "19f8a308-fb4f-4bf4-8f95-ae9675d4a3ef",
                             Name = "Verifieduser",
                             NormalizedName = "VERIFIEDUSER"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "15d8d94b-eaf4-4cb3-a5b2-11b9cfa0a16d",
+                            ConcurrencyStamp = "bbd8327b-7ca8-458e-940f-d339400362c0",
                             Name = "Newuser",
                             NormalizedName = "NEWUSER"
                         });

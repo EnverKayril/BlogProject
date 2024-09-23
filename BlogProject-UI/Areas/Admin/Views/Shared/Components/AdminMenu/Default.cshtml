@@ -22,6 +22,10 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-comments"></i></div>
                     Yorumlar
                 </a>
+                <a class="nav-link" asp-area="Admin" asp-controller="Comment" asp-action="Index">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-comments"></i></div>
+                    Onay Bekleyen Yorumlar
+                </a>
                 @if (Model.Roles.Any(r => r.Equals("Admin")))
                 {
                 <div class="sb-sidenav-menu-heading">Kullanıcılar</div>

@@ -22,6 +22,7 @@ namespace BlogProject.REPO.Configurations
                 AppUserId = "7",
                 ArticleId = "1",
                 CreateDate = DateTime.Now,
+                Approved = true,
                 Status = CORE.CoreModels.Enums.EntityStatus.Created,
                 Content = "C# dilinin OOP özelliklerini bu kadar net ve anlaşılır bir şekilde açıklamanız gerçekten çok faydalı oldu. Özellikle polimorfizm ve soyutlama kavramlarını bu kadar detaylı anlamak, projelerimde daha modüler yapılar kurmama yardımcı olacak."
             };
@@ -32,6 +33,7 @@ namespace BlogProject.REPO.Configurations
                 AppUserId = "8",
                 ArticleId = "1",
                 CreateDate = DateTime.Now,
+                Approved = true,
                 Status = CORE.CoreModels.Enums.EntityStatus.Created,
                 Content = "Makaledeki encapsulation (kapsülleme) ve inheritance (kalıtım) kavramları üzerine verdiğiniz örnekler çok açıklayıcıydı. C# dilinde daha önce bu kavramları yüzeysel biliyordum ama şimdi projelerimde daha etkin kullanabileceğimi düşünüyorum. Teşekkürler!"
             };
@@ -42,6 +44,7 @@ namespace BlogProject.REPO.Configurations
                 AppUserId = "11",
                 ArticleId = "5",
                 CreateDate = DateTime.Now,
+                Approved = true,
                 Status = CORE.CoreModels.Enums.EntityStatus.Created,
                 Content = "Hyper-V ile sanallaştırmanın nasıl donanım maliyetlerini düşürdüğünü çok güzel açıklamışsınız. Bu teknolojiyi kullanarak test ortamları oluşturmanın ne kadar kolay olduğunu öğrendim. Geliştirme ve test süreçlerimde kesinlikle kullanacağım."
             };
@@ -52,6 +55,7 @@ namespace BlogProject.REPO.Configurations
                 AppUserId = "6",
                 ArticleId = "5",
                 CreateDate = DateTime.Now,
+                Approved = true,
                 Status = CORE.CoreModels.Enums.EntityStatus.Created,
                 Content = "Felaket kurtarma planları oluştururken Hyper-V'nin ne kadar esnek ve etkili olduğunu vurgulamanız çok iyi olmuş. Sanal makinelerle çalışmak, IT yönetimi için büyük bir avantaj. Makale sayesinde bu teknolojiyi daha iyi anladım ve sistemlerimde kullanmayı düşünüyorum."
             };
@@ -62,6 +66,7 @@ namespace BlogProject.REPO.Configurations
                 AppUserId = "10",
                 ArticleId = "18",
                 CreateDate = DateTime.Now,
+                Approved = true,
                 Status = CORE.CoreModels.Enums.EntityStatus.Created,
                 Content = "Yedekleme stratejilerinin detaylı bir şekilde ele alınması çok faydalı oldu. Özellikle artımlı ve diferansiyel yedekleme arasındaki farkı öğrenmek benim için önemliydi. Şirketimizde veritabanı yönetimi yaparken bu bilgileri uygulayacağım."
             };
@@ -72,6 +77,7 @@ namespace BlogProject.REPO.Configurations
                 AppUserId = "11",
                 ArticleId = "18",
                 CreateDate = DateTime.Now,
+                Approved = true,
                 Status = CORE.CoreModels.Enums.EntityStatus.Created,
                 Content = "Yedekleme stratejilerinin sadece planlanmasının yeterli olmadığını, aynı zamanda kurtarma senaryolarının da düzenli olarak test edilmesi gerektiğini vurgulamanız çok önemli. Veri güvenliği için bu makalede önerilen yöntemleri uygulamaya başlayacağım."
             };
