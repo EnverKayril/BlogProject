@@ -23,6 +23,57 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             return View(comments);
         }
 
+        public async Task<IActionResult> UnApprovedComments()
+        {
+            var unApprovedComments = await _service.CommentService.GetCommentsWithArticleAndUserAsync(true);
+            return View(unApprovedComments);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UnApprovedCommentsGetDetail(string id)
+        {
+            var unApprovedComment = await _service.CommentService.GetCommentByIdWithArticleAndUserAsync(id);
+            if (unApprovedComment == null)
+            {
+                return NotFound();
+            }
+
+            var comment = new CommentWithUserDTO
+            {
+                CommentId = unApprovedComment.CommentId,
+                CommentContent = unApprovedComment.CommentContent,
+                CreateDate = unApprovedComment.CreateDate,
+                Approved = unApprovedComment.Approved,
+                UserName = unApprovedComment.UserName,
+                ArticleTitle = unApprovedComment.ArticleTitle
+            };
+
+            return View(comment);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UnApprovedCommentsGetDetail(string id, CommentWithUserDTO model, string action)
+        {
+            var comment = await _service.CommentService.GetCommentByIdAsync(id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            if (action == "Onayla")
+            {
+                comment.Approved = true;
+                await _service.CommentService.UpdateCommentAsync(comment);
+            }
+            else if (action == "Sil")
+            {
+                await _service.CommentService.DeleteCommentAsync(id);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> Create(string ArticleId, string UserId, string Message)
         {
@@ -73,6 +124,5 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             await _service.CommentService.UpdateCommentAsync(comment);
             return RedirectToAction("Index");
         }
-
     }
 }

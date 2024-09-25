@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +21,12 @@ namespace BlogProject.REPO.Repositories
             _appDbContext = context;
         }
 
-        public async Task<IEnumerable<Comment>> GetCommentsByArticleId(string articleId)
+		public async Task<int> CountAsync(Expression<Func<Comment, bool>> predicate)
+		{
+			return await _appDbContext.Comments.CountAsync(predicate);
+		}
+
+		public async Task<IEnumerable<Comment>> GetCommentsByArticleId(string articleId)
         {
             return await _appDbContext.Comments.Where(c => c.ArticleId == articleId).ToListAsync();
         }

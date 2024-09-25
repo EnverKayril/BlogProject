@@ -1,0 +1,51 @@
+﻿<div class="sidebar mt-5">
+    <div class="widget user-info text-center">
+        <img src="/img/UserImages/@Model.Photo" alt="@Model.UserName" class="rounded-circle mb-3" style="width: 100px; height: 100px;" />
+        <h5>@Model.UserName</h5>
+
+        <form asp-controller="AppUser" asp-action="ChangePhoto" method="post" enctype="multipart/form-data" class="mt-3">
+            <div class="d-flex justify-content-center">
+                <!-- Fotoğrafı seçme ve güncelleme butonları aynı yapıda -->
+                <button type="button" class="btn btn-outline-primary btn-sm me-2" onclick="document.getElementById('photo').click()">Fotoğrafı Seç</button>
+                <input type="file" id="photo" name="photo" class="d-none" onchange="enableUploadButton()" />
+
+                <button type="submit" id="uploadBtn" class="btn btn-outline-primary btn-sm" disabled>Güncelle</button>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Hesabım -->
+    <div class="widget account-info mt-4">
+        <a class="widget-header" asp-controller="AppUser" asp-action="UserSettings"><h5>Hesap Bilgileri</h5></a>
+    </div>
+
+    <!-- Makalelerim -->
+    <div class="widget account-info mt-4">
+        <a class="widget-header" asp-controller="AppUser" asp-action="UserArticles"><h5>Makalelerim</h5></a>
+    </div>
+
+    <!-- Yorumlarım -->
+    <div class="widget account-info mt-4">
+        <a class="widget-header" asp-controller="AppUser" asp-action="UserComments"><h5>Yorumlarım</h5></a>
+    </div>
+</div>
+
+<script>
+    function enableUploadButton() {
+        const uploadBtn = document.getElementById('uploadBtn');
+        const photoInput = document.getElementById('photo');
+
+        // Butonu etkinleştir
+        uploadBtn.disabled = false;
+
+        // Eğer bir dosya seçildiyse, buton rengini mavi yap
+        if (photoInput.files && photoInput.files.length > 0) {
+            uploadBtn.classList.remove('btn-outline-primary');
+            uploadBtn.classList.add('btn-primary');
+        } else {
+            uploadBtn.classList.add('btn-outline-primary');
+            uploadBtn.classList.remove('btn-primary');
+        }
+    }
+</script>

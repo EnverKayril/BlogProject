@@ -160,10 +160,6 @@ namespace BlogProject_UI.Areas.Admin.Controllers
                 return RedirectToAction("Index");
 
             }
-            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-            {
-                Console.WriteLine(error.ErrorMessage);
-            }
             return View(model);
         }
 
@@ -194,6 +190,20 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             {
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UserSettings()
+        {
+            var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+            var userDTO = new AppUserDTO
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Photo = user.Photo
+            };
+            return View(userDTO);
         }
     }
 }

@@ -1,0 +1,80 @@
+﻿@model BlogProject_UI.Models.VMs.SearchResultViewModel
+
+<h2>"@ViewBag.Query" Arama Sonuçları</h2>
+
+@if (Model == null || (!Model.Articles.Any() && !Model.Categories.Any() && !Model.Users.Any()))
+{
+    <h3>Sonuç Bulunamadı.</h3>
+}
+else
+{
+    @if (Model.Articles.Any())
+    {
+        <h3>Makaleler</h3>
+        <ul>
+            @foreach (var article in Model.Articles)
+            {
+                <article class="mb-4">
+                    <h3>@article.Title</h3>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">@article.UserName</li>
+                        <li class="list-inline-item">@article.CreateDate.ToString("MMM dd, yyyy")</li>
+                    </ul>
+                    <a asp-controller="Article" asp-action="Detail" asp-route-id="@article.Id" class="btn btn-outline-primary mt-2">Keşfet</a>
+                </article>
+            }
+        </ul>
+    }
+    else
+    {
+        <h4>Makaleler bulunamadı.</h4>
+    }
+
+    @if (Model.Categories.Any())
+    {
+        <h3>Kategoriler</h3>
+        <ul>
+            @foreach (var category in Model.Categories)
+            {
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="card-title">@category.Name</h3>
+                        <p class="card-text">@category.Description</p>
+                        <a asp-controller="Category" asp-action="Detail" asp-route-id="@category.Id" class="btn btn-outline-primary">Keşfet</a>
+                    </div>
+                </div>
+            }
+        </ul>
+    }
+    else
+    {
+        <h4>Kategoriler bulunamadı.</h4>
+    }
+
+    @if (Model.Users.Any())
+    {
+        <h3>Kullanıcılar</h3>
+        <ul>
+            @foreach (var user in Model.Users)
+            {
+                <div class="card mb-4">
+                    <div class="card-body d-flex align-items-center">
+                        <img src="/img/UserImages/@user.Photo" alt="@user.UserName" class="rounded-circle mr-3" style="width: 50px; height: 50px;" />
+
+                        <div>
+                            <h5 class="card-title mb-1">@user.UserName</h5>
+                        </div>
+
+                        <div class="ml-auto">
+                            <a asp-controller="AppUser" asp-action="Detail" asp-route-id="@user.Id" class="btn btn-outline-primary">Keşfet</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </ul>
+    }
+    else
+    {
+        <h4>Kullanıcılar bulunamadı.</h4>
+    }
+}

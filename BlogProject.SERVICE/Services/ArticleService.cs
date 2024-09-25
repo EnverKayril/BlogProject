@@ -113,7 +113,8 @@ namespace BlogProject.SERVICE.Services
                     UserName = x.AppUser.UserName,
                     Status = x.Status,
                     ViewsCount = x.ViewsCount,
-                    CommentCount = x.Comments.Count
+                    CommentCount = x.Comments.Count,
+                    UserProfileImage = x.AppUser.Photo
                 },
                 where: x => x.Status != EntityStatus.Deleted && x.AppUserId == userId,
                 join: x => x.Include(x => x.AppUser)
@@ -165,9 +166,30 @@ namespace BlogProject.SERVICE.Services
                     Thumbnail = article.Thumbnail ?? "default-thumbnail.jpg",
                     CreateDate = article.CreateDate,
                     UserName = article.AppUser.UserName,
-                    CategoryName = article.Category.Name
+                    CategoryName = article.Category.Name,
+                    UserPhoto = article.AppUser.Photo
                 },
                 where: article => (categoryId == null || article.CategoryId == categoryId) && article.Status != EntityStatus.Deleted,
+                join: article => article.Include(a => a.AppUser).Include(a => a.Category));
+
+            return articles.ToList();
+        }
+
+        public async Task<List<ArticleDTO>> GetArticlesByUserIdAsync(string userId)
+        {
+            var articles = await _unitOfWork.ArticleRepo.GetFilteredModelListAysnc(
+                select: article => new ArticleDTO
+                {
+                    Id = article.Id,
+                    Title = article.Title,
+                    Content = article.Content.Length > 100 ? article.Content.Substring(0, 100) + "..." : article.Content,
+                    Thumbnail = article.Thumbnail ?? "default-thumbnail.jpg",
+                    CreateDate = article.CreateDate,
+                    UserName = article.AppUser.UserName,
+                    CategoryName = article.Category.Name,
+                    UserPhoto = article.AppUser.Photo
+                },
+                where: article => article.AppUserId == userId && article.Status != EntityStatus.Deleted,
                 join: article => article.Include(a => a.AppUser).Include(a => a.Category));
 
             return articles.ToList();

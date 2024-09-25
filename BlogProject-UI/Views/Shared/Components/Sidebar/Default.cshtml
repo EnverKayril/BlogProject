@@ -1,13 +1,32 @@
 ﻿@model BlogProject_UI.Models.VMs.SidebarViewModel
 
 <div class="sidebar mt-5">
-	<!-- Search Widget -->
 	<div class="widget search p-0">
-		<div class="input-group">
-			<input type="text" class="form-control" id="expire" placeholder="Type &amp; hit enter to search">
-			<span class="input-group-addon"><i class="fa fa-search px-3"></i></span>
-		</div>
+		<form asp-controller="Home" asp-action="SearchResults" method="get">
+			<div class="input-group">
+				<input type="text" class="form-control" name="query" placeholder="Bir şeyler arayın...">
+				<div class="input-group-append">
+					<button class="btn btn-outline-primary" type="submit">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</form>
 	</div>
+
+
+	<div class="widget category">
+		<a class="widget-header" asp-controller="Home" asp-action="Index"><h5>En Çok Yorum Alan Makaleler</h5></a>
+		<ul class="category-list">
+			@foreach (var article in Model.MostCommentedArticles)
+			{
+				<li>
+					<a asp-controller="Article" asp-action="Detail" asp-route-id="@article.ArticleId">@article.ShortTitle<span class="float-right"><i class="fa fa-comments-o"></i> @article.CommentCount</span></a>
+				</li>
+			}
+		</ul>
+	</div>
+
 	<div class="widget category">
 		<a class="widget-header" asp-controller="Category" asp-action="Index"><h5>Kategoriler</h5></a>
 		<ul class="category-list">
@@ -19,16 +38,28 @@
 			}
 		</ul>
 	</div>
-	<!-- Archive Widget -->
-	<div class="widget archive">
-		<!-- Widget Header -->
-		<h5 class="widget-header">Archives</h5>
-		<ul class="archive-list">
-			<li><a href="ad-list-view.html">January 2017</a></li>
-			<li><a href="ad-list-view.html">February 2017</a></li>
-			<li><a href="ad-list-view.html">March 2017</a></li>
-			<li><a href="ad-list-view.html">April 2017</a></li>
-			<li><a href="ad-list-view.html">May 2017</a></li>
+
+	<div class="widget category">
+		<a class="widget-header" asp-controller="AppUser" asp-action="Index"><h5>Yazarlar</h5></a>
+		<ul class="category-list">
+			@foreach (var appUser in Model.RandomAppUsers)
+			{
+				<li>
+					<a asp-controller="AppUser" asp-action="Detail" asp-route-id="@appUser.AppUserId">@appUser.AppUserName</a>
+				</li>
+			}
+		</ul>
+	</div>
+
+	<div class="widget category">
+		<a class="widget-header"><h5>Son Yorumlar</h5></a>
+		<ul class="category-list">
+			@foreach (var comment in Model.RecentComments)
+			{
+				<li>
+					<a asp-controller="Article" asp-action="Detail" asp-route-id="@comment.ArticleId">@comment.ShortContent</a>
+				</li>
+			}
 		</ul>
 	</div>
 </div>

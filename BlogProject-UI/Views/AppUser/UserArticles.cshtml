@@ -1,0 +1,18 @@
+﻿<div class="">
+    <div class="row">
+        <div class="col-lg-8 mt-5">
+            <h5>Makalelerim</h5>
+            <ul class="list-group">
+                @foreach (var article in Model)
+                {
+                    <li class="list-group-item">
+                        <a asp-controller="Article" asp-action="Detail" asp-route-id="@article.Id">@article.Title</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-lg-4">
+            @await Component.InvokeAsync("UserSettingsSidebar")
+        </div>
+    </div>
+</div>

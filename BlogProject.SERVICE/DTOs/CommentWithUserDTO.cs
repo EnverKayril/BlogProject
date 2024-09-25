@@ -30,6 +30,5 @@ namespace BlogProject.SERVICE.DTOs
         public bool Approved { get; set; }
         [DisplayName("Durum")]
         public EntityStatus Status { get; set; }
-
     }
 }

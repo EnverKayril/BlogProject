@@ -15,10 +15,9 @@ namespace BlogProject_UI.ViewComponents
 
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
+			// Kategoriler
 			var categories = await _service.CategoryService.GetAllCategoriesAsync();
-
 			var categoryViewModels = new List<CategoryWithArticleCountViewModel>();
-
 			foreach (var category in categories)
 			{
 				var articleCount = await _service.ArticleService.CountByCategoryId(category.Id);
@@ -30,17 +29,71 @@ namespace BlogProject_UI.ViewComponents
 					ArticleCount = articleCount
 				});
 			}
-
-            var random = new Random();
+            var randomCategory = new Random();
             var randomCategories = categoryViewModels
-                .OrderBy(c => random.Next())
+                .OrderBy(c => randomCategory.Next())
                 .Take(6)
                 .ToList();
 
-            var sidebarViewModel = new SidebarViewModel
+			// Makaleler
+			var articles = await _service.ArticleService.GetAllArticlesAsync();
+			var articleViewModel = new List<MostCommentedArticleViewModel>();
+			foreach (var article in articles)
 			{
-                Categories = randomCategories
-            };
+				var commentCount = await _service.CommentService.CountByArticleId(article.Id);
+
+				articleViewModel.Add(new MostCommentedArticleViewModel
+				{
+					ArticleId = article.Id,
+					ArticleTitle = article.Title,
+					CommentCount = commentCount
+				});
+			}
+			var mostCommentedArticles = articleViewModel
+				.OrderByDescending(a => a.CommentCount)
+				.Take(6)
+				.ToList();
+
+			// Kullanıcılar
+			var users = await _service.AppUserService.GetAllAppUserAsync();
+			var appUserViewModel = new List<RandomAppUserViewModel>();
+			foreach (var appUser in users)
+			{
+				appUserViewModel.Add(new RandomAppUserViewModel
+				{
+					AppUserId = appUser.Id,
+					AppUserName = appUser.UserName,
+					ProfilePicture = appUser.Photo
+				});
+			}
+			var randomAppUser = new Random();
+			var randomAppUsers = appUserViewModel
+				.OrderBy (c => randomAppUser.Next())
+				.Take(6)
+				.ToList();
+
+			// Yorumlar
+			var comments = await _service.CommentService.GetAllCommentsAsync();
+
+			var recentComments = comments
+				.OrderByDescending(c => c.CreateDate)
+				.Take(6)
+				.Select(c => new RecentCommentViewModel
+				{
+					CommentId = c.Id,
+					CommentContent = c.Content,
+					ArticleId = c.ArticleId,
+					CommentDate = c.CreateDate
+				})
+				.ToList();
+
+			var sidebarViewModel = new SidebarViewModel
+			{
+				Categories = randomCategories,
+				MostCommentedArticles = mostCommentedArticles,
+				RandomAppUsers = randomAppUsers,
+				RecentComments = recentComments
+			};
 
 			return View(sidebarViewModel);
 		}

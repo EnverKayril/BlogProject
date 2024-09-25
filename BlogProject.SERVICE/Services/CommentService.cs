@@ -33,7 +33,12 @@ namespace BlogProject.SERVICE.Services
             return await _unitOfWork.CommentRepo.CountAsync();
         }
 
-        public int CreateComment(CommentCreateDTO commentCreateDTO)
+		public async Task<int> CountByArticleId(string id)
+		{
+            return await _unitOfWork.CommentRepo.CountAsync(c => c.ArticleId == id);
+		}
+
+		public int CreateComment(CommentCreateDTO commentCreateDTO)
         {
             var comment = _mapper.Map<Comment>(commentCreateDTO);
             return _unitOfWork.CommentRepo.Add(comment);
@@ -134,11 +139,52 @@ namespace BlogProject.SERVICE.Services
             return _mapper.Map<CommentDTO>(comment);
         }
 
+        public async Task<CommentWithUserDTO> GetCommentByIdWithArticleAndUserAsync(string id)
+        {
+            var comments = await _unitOfWork.CommentRepo.GetFilteredModelListAysnc(
+                select: comment => new CommentWithUserDTO
+                {
+                    CommentId = comment.Id,
+                    CommentContent = comment.Content,
+                    CreateDate = comment.CreateDate,
+                    Approved = comment.Approved,
+                    Status = comment.Status,
+                    ArticleTitle = comment.Article.Title,
+                    UserName = comment.AppUser.UserName
+                },
+                where: comment => comment.Id == id && comment.Status != EntityStatus.Deleted,
+                join: query => query.Include(c => c.AppUser)
+                                    .Include(c => c.Article)
+            );
+
+            return comments.FirstOrDefault();
+        }
+
         public async Task<List<CommentWithUserDTO>> GetCommentsWithArticleAndUserAsync()
         {
             var comments = await _unitOfWork.CommentRepo.GetCommentsWithArticleAndUserAsync();
 
             var commentDTO = comments.Select(comment => new CommentWithUserDTO
+            {
+                CommentId = comment.CommentId,
+                CommentContent = comment.CommentContent,
+                CreateDate = comment.CreateDate,
+                UserName = comment.UserName,
+                ArticleTitle = comment.ArticleTitle,
+                Status = comment.Status,
+                Approved = comment.Approved
+            }).ToList();
+
+            return commentDTO;
+        }
+
+        public async Task<List<CommentWithUserDTO>> GetCommentsWithArticleAndUserAsync(bool onlyUnapproved)
+        {
+            var comments = await _unitOfWork.CommentRepo.GetCommentsWithArticleAndUserAsync();
+
+            var filteredComments = comments.Where(comment => !comment.Approved && comment.Status != EntityStatus.Deleted).ToList();
+
+            var commentDTO = filteredComments.Select(comment => new CommentWithUserDTO
             {
                 CommentId = comment.CommentId,
                 CommentContent = comment.CommentContent,

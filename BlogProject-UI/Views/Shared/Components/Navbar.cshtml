@@ -15,6 +15,9 @@
                 <a class="nav-link" asp-controller="Category" asp-action="Index">Kategoriler</a>
             </li>
             <li class="nav-item @@home">
+                <a class="nav-link" asp-controller="AppUser" asp-action="Index">Yazarlar</a>
+            </li>
+            <li class="nav-item @@home">
                 <a class="nav-link" asp-controller="Home" asp-action="About">Hakkımızda</a>
             </li>
         </ul>
@@ -37,7 +40,7 @@
                         @User.Identity.Name.Substring(0, 1).ToUpper()@User.Identity.Name.Substring(1).ToLower()
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" asp-area="Admin" asp-controller="Account" asp-action="Profile">Hesabım</a>
+                        <a class="dropdown-item" asp-controller="AppUser" asp-action="UserSettings">Hesabım</a>
                         <div class="dropdown-divider"></div>
                         <form asp-area="Admin" asp-controller="Authorization" asp-action="Logout" method="post">
                             <button type="submit" class="dropdown-item">Çıkış Yap</button>

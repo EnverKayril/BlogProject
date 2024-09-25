@@ -1,0 +1,27 @@
+﻿@model IEnumerable<BlogProject.SERVICE.DTOs.AppUserDTO>
+
+@{
+    ViewData["Title"] = "Yazarlar";
+}
+
+<div class="author-header d-flex justify-content-center align-items-center mt-5 mb-5">
+    <h1>Yazarlar</h1>
+</div>
+<div>
+    @foreach (var user in Model)
+    {
+        <div class="card mb-4">
+            <div class="card-body d-flex align-items-center">
+                <img src="/img/UserImages/@user.Photo" alt="@user.UserName" class="rounded-circle mr-3" style="width: 50px; height: 50px;" />
+                
+                <div>
+                    <h5 class="card-title mb-1">@user.UserName</h5>
+                </div>
+
+                <div class="ml-auto">
+                    <a asp-controller="AppUser" asp-action="Detail" asp-route-id="@user.Id" class="btn btn-outline-primary">Keşfet</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -19,7 +19,7 @@ namespace BlogProject.SERVICE.DTOs
         [DisplayName("Telefon Numarası")]
         public string PhoneNumber { get; set; }
         [DisplayName("Rolü")]
-        public List<string> Roles { get; set; }
+        public List<string>? Roles { get; set; }
         [DisplayName("Email Onayı")]
         public bool? EmailConfirmed { get; set; }
         [DisplayName("Resim")]

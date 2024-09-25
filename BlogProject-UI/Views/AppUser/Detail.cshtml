@@ -1,9 +1,10 @@
-﻿@model BlogProject_UI.Models.VMs.CategoryDetailViewModel
-
+﻿@model BlogProject_UI.Models.VMs.UserWithArticlesViewModel
 
 <div class="author-header d-flex justify-content-center align-items-center mt-5 mb-5">
-    <h1>@Model.Category.Name</h1>
+    <img src="~/img/UserImages/@Model.UserPhoto" alt="@Model.UserName" class="rounded-circle mr-3" style="width: 50px; height: 50px;" />
+    <h1>@Model.UserName</h1>
 </div>
+
 <div class="mt-5">
     @foreach (var article in Model.Articles)
     {
@@ -14,7 +15,9 @@
 
             <h3>@article.Title</h3>
             <ul class="list-inline">
-                <li class="list-inline-item">@article.UserName</li>
+                <li class="list-inline-item">
+                        @Model.UserName
+                </li>
                 <li class="list-inline-item">@article.CreateDate.ToString("MMM dd, yyyy")</li>
             </ul>
 

@@ -86,4 +86,6 @@
             theme: 'bootstrap4'
         });
     });
+
 })();
+

@@ -31,5 +31,6 @@ namespace BlogProject.SERVICE.DTOs
         public string UserName { get; set; }
         public int ViewCount { get; set; }
         public EntityStatus Status { get; set; }
+        public string UserPhoto { get; set; }
     }
 }

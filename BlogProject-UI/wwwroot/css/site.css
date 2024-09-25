@@ -190,3 +190,37 @@ p {
     justify-content: center;
 }
 
+.sidebar {
+    max-height: 800px;
+    overflow-y: auto;
+    padding-right: 10px;
+    position: sticky;
+    top: 20px;
+    margin-bottom: 50px;
+}
+.sidebar::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+body {
+    overflow-y: auto;
+}
+
+.sidebar {
+    
+}
+
+.user-link {
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.15s cubic-bezier(1, 0.8, 0.25, 1);
+}
+
+    .user-link:hover {
+        text-decoration: underline;
+        color: #000;
+        font-weight: bold;
+    }
+

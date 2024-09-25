@@ -11,6 +11,7 @@ namespace BlogProject.SERVICE.Services.IServices
     public interface ICommentService
     {
         Task<CommentDTO> GetCommentByIdAsync(string id);
+        Task<CommentWithUserDTO> GetCommentByIdWithArticleAndUserAsync(string id);
         Task<IEnumerable<CommentDTO>> GetAllCommentsAsync();
         Task<IEnumerable<CommentDTO>> GetAllActiveCommentsAsync();
         Task<IEnumerable<CommentWithUserDTO>> GetAllCommentsByUserIdAsync(string userId);
@@ -20,6 +21,8 @@ namespace BlogProject.SERVICE.Services.IServices
         Task<int> UpdateCommentAsync(CommentDTO commentDTO);
         Task<int> DeleteCommentAsync(string id);
         Task<int> CountAsync();
+        Task<int> CountByArticleId(string id);
         Task<List<CommentWithUserDTO>> GetCommentsWithArticleAndUserAsync();
+        Task<List<CommentWithUserDTO>> GetCommentsWithArticleAndUserAsync(bool onlyUnapproved);
     }
 }

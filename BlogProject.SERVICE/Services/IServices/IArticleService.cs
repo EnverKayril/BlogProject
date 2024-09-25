@@ -24,6 +24,7 @@ namespace BlogProject.SERVICE.Services.IServices
         Task<List<ArticleWithUserDTO>> GetAllArticlesWithUserAsync();
         Task<List<Article>> GetArticlesWithCategoryAndUserAsync();
         Task<List<ArticleDTO>> GetArticlesForHomePageAsync(string categoryId = null);
+        Task<List<ArticleDTO>> GetArticlesByUserIdAsync(string userId);
         Task<ArticleDetailDTO> GetArticleDetailByIdAsync(string id);
     }
 }

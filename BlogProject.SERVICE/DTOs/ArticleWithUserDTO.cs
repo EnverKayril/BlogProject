@@ -37,5 +37,6 @@ namespace BlogProject.SERVICE.DTOs
         public int ViewsCount { get; set; }
         [DisplayName("Yorum Sayısı")]
         public int CommentCount { get; set; }
+        public string UserProfileImage { get; set; }
     }
 }
