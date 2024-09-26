@@ -1,18 +1,89 @@
-﻿<div class="container">
+﻿@model IEnumerable<BlogProject.SERVICE.DTOs.CommentDTO>
+
+<div class="container">
     <div class="row">
-        <div class="col-lg-8 mt-5">
-            <h5>Yorumlarım</h5>
-            <ul class="list-group">
-                @foreach (var comment in Model)
-                {
-                    <li class="list-group-item">
-                        @comment.CommentContent
-                    </li>
-                }
-            </ul>
+        <div class="table-container col-lg-8 mt-5">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Yorumlarım
+            </div>
+            <div class="card-body">
+                <div class="table-responsive mt-3">
+                    <table class="table table-bordered" id="userArticlesTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.First().Content)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Approved)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().CreateDate)</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                @foreach (var comment in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-controller="Article" asp-action="Detail" asp-route-id="@comment.ArticleId" style="text-decoration: none; color: black;">
+                                                @comment.Content
+                                            </a>
+                                        </td>
+
+                                        <td>
+                                            <label class="email-checkbox">
+                                                <input type="checkbox" @(comment.Approved ? "checked" : "") disabled>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </td>
+                                        <td>@comment.CreateDate.ToShortDateString()</td>
+                                        @if (comment.Approved == false && comment.Status == BlogProject.CORE.CoreModels.Enums.EntityStatus.Deleted)
+                                        {
+                                            <td>
+                                                <span class="text-muted">Yorumunuz Onaylanmamıştır</span>
+                                            </td>
+                                        }
+                                        else if (comment.Approved == false && comment.Status != BlogProject.CORE.CoreModels.Enums.EntityStatus.Deleted)
+                                        {
+                                            <td>
+                                                <span class="text-muted">Yorumunuz Onay Aşamasındadır</span>
+                                            </td>
+                                        }
+                                        else if (comment.Approved == true && comment.Status == BlogProject.CORE.CoreModels.Enums.EntityStatus.Deleted)
+                                        {
+                                            <td>
+                                                <span class="text-muted">Yorumunuz Silindi</span>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td style="white-space: nowrap;">
+                                                <a class="btn btn-outline-primary" asp-controller="Comment" asp-action="Edit" asp-route-id="@comment.Id">Düzenle</a> |
+                                                <a class="btn btn-outline-danger" asp-controller="Comment" asp-action="Delete" asp-route-id="@comment.Id">Sil</a>
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="col-lg-4">
             @await Component.InvokeAsync("UserSettingsSidebar")
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#userArticlesTable').DataTable({
+                language: {
+                    url: '/locales/tr.json'
+                }
+            });
+        });
+    </script>
+}

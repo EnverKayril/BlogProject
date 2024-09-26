@@ -16,7 +16,6 @@
         Yorumlar
     </div>
     <div class="card-body">
-        <a class="btn btn-primary me-0" asp-action="Create">Yorum Ekle</a>
         <div class="table-responsive mt-3">
             <table class="table table-bordered" id="commentsTable" width="100%" cellspacing="0">
                 <thead>
@@ -48,7 +47,6 @@
                                 <td>@comment.CreateDate.ToShortDateString()</td>
                                 <td>@comment.Status</td>
                                 <td>
-                                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@comment.CommentId">Düzenle</a> |
                                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@comment.CommentId">Sil</a>
                                 </td>
                             </tr>

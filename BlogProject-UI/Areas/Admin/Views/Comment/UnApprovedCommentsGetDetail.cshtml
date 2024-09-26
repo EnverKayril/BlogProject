@@ -32,28 +32,23 @@
             <textarea class="form-control" id="commentContent" rows="4" readonly>@Model.CommentContent</textarea>
         </div>
 
-        <form asp-action="UnApprovedCommentsGetDetail" method="post">
-            <input type="hidden" name="id" value="@Model.CommentId" />
-            <input type="hidden" name="action" value="Onayla" />
+        <div class="d-flex">
+            <form asp-action="UnApprovedCommentsGetDetail" method="post" style="margin-right: 10px;">
+                <input type="hidden" name="id" value="@Model.CommentId" />
+                <input type="hidden" name="action" value="Onayla" />
 
-            <div class="form-group form-check mb-3">
-                <input type="checkbox" class="form-check-input" id="approvedCheck" asp-for="Approved" checked />
-                <label class="form-check-label" for="approvedCheck">Yorumu Onayla</label>
-            </div>
-
-            <div class="form-group mb-3">
-                <button type="submit" class="btn btn-primary">Onayla</button>
-            </div>
-        </form>
-
-        <form asp-action="UnApprovedCommentsGetDetail" method="post">
-            <input type="hidden" name="id" value="@Model.CommentId" />
-            <input type="hidden" name="action" value="Sil" />
-
-            <div class="form-group mb-3">
-                <button type="submit" class="btn btn-danger">Sil</button>
-            </div>
-        </form>
+                <div class="form-group mb-3">
+                    <button type="submit" class="btn btn-outline-primary">Onayla</button>
+                </div>
+            </form>
+            <form asp-action="UnApprovedCommentsGetDetail" method="post">
+                <input type="hidden" name="id" value="@Model.CommentId" />
+                <input type="hidden" name="action" value="Sil" />
+                <div class="form-group mb-3">
+                    <button type="submit" class="btn btn-outline-danger">Sil</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

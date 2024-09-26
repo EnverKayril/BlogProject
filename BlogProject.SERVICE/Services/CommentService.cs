@@ -204,7 +204,39 @@ namespace BlogProject.SERVICE.Services
             _mapper.Map(commentDTO, comment);
             comment.UpdateDate = DateTime.Now;
             comment.Status = EntityStatus.Updated;
+            comment.Approved = false;
             return await _unitOfWork.CommentRepo.UpdateAsync(comment);
         }
+
+        public async Task<int> ApproveCommentAsync(string commentId)
+        {
+            var comment = await _unitOfWork.CommentRepo.GetByIdAsync(commentId);
+            comment.Approved = true;
+            return await _unitOfWork.CommentRepo.UpdateAsync(comment);
+        }
+
+        public async Task<List<CommentDTO>> GetCommentsWithArticleAndUserByIdAsync(string userId)
+        {
+            var comments = await _unitOfWork.CommentRepo.GetAllAsync();
+
+            var userComments = comments.Where(comment => comment.AppUserId == userId).ToList();
+
+            var commentDTO = userComments.Select(comment => new CommentDTO
+            {
+                Id = comment.Id,
+                ArticleId = comment.ArticleId,
+                Content = comment.Content,
+                AppUserId = comment.AppUserId,
+                CreateDate = comment.CreateDate,
+                UpdateDate = comment.UpdateDate,
+                Approved = comment.Approved,
+                Status = comment.Status,
+                UserName = comment.AppUser.UserName,
+                UserPhoto = comment.AppUser.Photo
+            }).ToList();
+
+            return commentDTO;
+        }
+
     }
 }

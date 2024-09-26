@@ -224,3 +224,40 @@ body {
         font-weight: bold;
     }
 
+#userArticlesTable {
+    border-collapse: collapse !important;
+    width: 100%;
+    border: 1px solid #ddd !important;
+    background-color: white;
+}
+
+#userArticlesTable {
+    border-collapse: collapse !important;
+    width: 100%;
+    border: 1px solid #ddd !important;
+    background-color: white;
+    /* Tablo dýþýna gölge ekleyelim */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Üstten biraz boþluk verelim */
+}
+
+    /* Satýr aralarýndaki çizgilerin belirgin olmasý için */
+    #userArticlesTable td, #userArticlesTable th {
+        border: 1px solid #ddd !important;
+        padding: 8px !important;
+    }
+
+    /* Satýr renklendirmeleri */
+    #userArticlesTable tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #userArticlesTable tr:hover {
+        background-color: #ddd;
+    }
+
+/* Tabloyu çevreleyen hat */
+.table-container {
+    padding: 15px; /* Tablo ile kenar arasýnda biraz boþluk */
+    border-radius: 8px; /* Kenarlarý yuvarlak yapalým */
+}

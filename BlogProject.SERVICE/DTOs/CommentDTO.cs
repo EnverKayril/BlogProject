@@ -19,7 +19,7 @@ namespace BlogProject.SERVICE.DTOs
         [Required(ErrorMessage = "{0} boş geçilmemelidir.")]
         public string Content { get; set; }
         [DisplayName("Kullanıcı Id")]
-        public string AppUserId { get; set; }
+        public string? AppUserId { get; set; }
         [DisplayName("Oluşturulma Tarihi")]
         public DateTime CreateDate { get; set; }
         [DisplayName("Değişiklik Tarihi")]
@@ -27,8 +27,9 @@ namespace BlogProject.SERVICE.DTOs
         [DisplayName("Onay")]
         public bool Approved { get; set; }
         [DisplayName("Durum")]
-        public EntityStatus Status { get; set; }
-        public string UserName { get; set; }
-        public string UserPhoto { get; set; }
+        public EntityStatus? Status { get; set; }
+        [DisplayName("Kullanıcı Adı")]
+        public string? UserName { get; set; }
+        public string? UserPhoto { get; set; }
     }
 }

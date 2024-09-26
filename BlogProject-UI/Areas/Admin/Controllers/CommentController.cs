@@ -63,7 +63,7 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             if (action == "Onayla")
             {
                 comment.Approved = true;
-                await _service.CommentService.UpdateCommentAsync(comment);
+                await _service.CommentService.ApproveCommentAsync(comment.Id);
             }
             else if (action == "Sil")
             {

@@ -78,7 +78,7 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             };
 
             await _service.ArticleService.CreateArticleAsync(article);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         [HttpGet]

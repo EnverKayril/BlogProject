@@ -24,5 +24,7 @@ namespace BlogProject.SERVICE.Services.IServices
         Task<int> CountByArticleId(string id);
         Task<List<CommentWithUserDTO>> GetCommentsWithArticleAndUserAsync();
         Task<List<CommentWithUserDTO>> GetCommentsWithArticleAndUserAsync(bool onlyUnapproved);
+        Task<List<CommentDTO>> GetCommentsWithArticleAndUserByIdAsync(string userId);
+        Task<int> ApproveCommentAsync(string commentId);
     }
 }

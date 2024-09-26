@@ -1,0 +1,58 @@
+﻿@model BlogProject.SERVICE.DTOs.RegisterDTO
+
+@{
+    Layout = "_UserLoginLayout";
+    ViewBag.Title = "Kayıt Ol";
+}
+
+<div class="container bg-white">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header"><h3 class="text-center font-weight-light my-4">Kayıt Ol</h3></div>
+                <div class="card-body">
+                    <form asp-action="Register" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="UserName"></label>
+                            <input class="form-control" asp-for="UserName" placeholder="Lütfen kullanıcı adınızı giriniz." />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Email"></label>
+                            <input class="form-control" asp-for="Email" type="email" placeholder="Lütfen e-posta adresinizi giriniz." />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="PhoneNumber"></label>
+                            <input class="form-control" asp-for="PhoneNumber" placeholder="Lütfen telefon numaranızı giriniz." />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="Password"></label>
+                            <input class="form-control" asp-for="Password" type="password" placeholder="Lütfen şifrenizi giriniz." />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="small mb-1" asp-for="ConfirmPassword"></label>
+                            <input class="form-control" asp-for="ConfirmPassword" type="password" placeholder="Lütfen şifrenizi tekrar giriniz." />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                            <button class="btn btn-primary" type="submit">Kayıt Ol</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center py-3">
+                    <div class="small"><a asp-area="Admin" asp-controller="Authorization" asp-action="Login" class="text-decoration-none">Zaten hesabınız var mı? Giriş Yapın</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

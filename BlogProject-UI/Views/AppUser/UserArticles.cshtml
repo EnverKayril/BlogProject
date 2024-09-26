@@ -1,18 +1,77 @@
-﻿<div class="">
+﻿@model IEnumerable<BlogProject.SERVICE.DTOs.ArticleWithUserDTO>
+
+<div class="container">
     <div class="row">
-        <div class="col-lg-8 mt-5">
-            <h5>Makalelerim</h5>
-            <ul class="list-group">
-                @foreach (var article in Model)
-                {
-                    <li class="list-group-item">
-                        <a asp-controller="Article" asp-action="Detail" asp-route-id="@article.Id">@article.Title</a>
-                    </li>
-                }
-            </ul>
+        <div class="table-container col-lg-8 mt-5">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Makalelerim
+            </div>
+            <div class="card-body">
+                <div class="table-responsive mt-3">
+                    <table class="table table-bordered" id="userArticlesTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Kategori</th>
+                                <th>Başlık</th>
+                                <th>Güncellenme Tarihi</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                @foreach (var article in Model)
+                                {
+                                    <tr>
+                                        <td>@article.CategoryName</td>
+                                        <td>
+                                            <a asp-controller="Article" asp-action="Detail" asp-route-id="@article.Id" style="text-decoration:           none; color: black;">
+                                                @article.Title
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @if (article.UpdateDate.HasValue)
+                                            {
+                                                @article.UpdateDate.Value.ToShortDateString()
+                                            }
+                                            else
+                                            {
+                                                @article.CreateDate.ToShortDateString()
+                                            }
+                                        </td>
+                                        <td style="white-space: nowrap;">
+                                            <a class="btn btn-outline-primary btn-sm" asp-controller="Article" asp-action="Edit" asp-route-id="@article.Id">Düzenle</a> |
+                                            <a class="btn btn-outline-danger btn-sm" asp-controller="Article" asp-action="Delete" asp-route-id="@article.Id">Sil</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center">Henüz makale eklemediniz.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="col-lg-4">
             @await Component.InvokeAsync("UserSettingsSidebar")
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#userArticlesTable').DataTable({
+                language: {
+                    url: '/locales/tr.json'
+                }
+            });
+        });
+    </script>
+}

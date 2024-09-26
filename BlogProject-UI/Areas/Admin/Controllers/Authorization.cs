@@ -1,4 +1,5 @@
-﻿using BlogProject.SERVICE.DTOs;
+﻿using BlogProject.CORE.CoreModels.Models;
+using BlogProject.SERVICE.DTOs;
 using BlogProject.SERVICE.Utilities.IUnitOfWorks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -114,6 +115,37 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterDTO model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new AppUser
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    Photo = "DefaultUser.jpg"
+                };
+
+                var result = await _service.UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await _service.UserManager.AddToRoleAsync(user, "Newuser");
+                    await _service.SignInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home", new { area = "Home" });
+                }
+            }
+            return View(model);
+        }
 
     }
 }

@@ -55,36 +55,27 @@ namespace BlogProject_UI.Controllers
                 PhoneNumber = user.PhoneNumber,
                 Photo = user.Photo
             };
-
-            var viewModel = new UserProfileViewModel
-            {
-                AppUserDTO = userDTO,
-                UserPasswordChangeDTO = new UserPasswordChanceDTO()
-            };
-
             ViewBag.ShowSidebar = false;
-            return View(viewModel);
+            return View(userDTO);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UserSettings(UserProfileViewModel model)
+        public async Task<IActionResult> UserSettings(AppUserDTO model)
         {
             var userId = _service.UserManager.GetUserId(HttpContext.User);
             var user = await _service.AppUserService.GetAppUserByIdAsync(userId);
 
             if (ModelState.IsValid)
             {
-                user.UserName = model.AppUserDTO.UserName;
-                user.Email = model.AppUserDTO.Email;
-                user.PhoneNumber = model.AppUserDTO.PhoneNumber;
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+                user.PhoneNumber = model.PhoneNumber;
 
                 await _service.AppUserService.UpdateAppUserAsync(user);
 
-                ViewBag.ShowSidebar = false;
                 return RedirectToAction("UserSettings");
             }
 
-            ViewBag.ShowSidebar = false;
             return View(model);
         }
 
@@ -135,10 +126,17 @@ namespace BlogProject_UI.Controllers
         public async Task<IActionResult> UserComments()
         {
             var user = await _service.UserManager.GetUserAsync(HttpContext.User);
-            var comments = await _service.CommentService.GetAllCommentsByUserIdAsync(user.Id);
+            var userComments = await _service.CommentService.GetCommentsWithArticleAndUserByIdAsync(user.Id);
 
             ViewBag.ShowSidebar = false;
-            return View(comments);
+            return View(userComments);
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            ViewBag.ShowSidebar = false;
+            return View(new UserPasswordChanceDTO());
         }
 
         [HttpPost]
@@ -146,11 +144,7 @@ namespace BlogProject_UI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("UserSettings", new UserProfileViewModel
-                {
-                    AppUserDTO = new AppUserDTO(),
-                    UserPasswordChangeDTO = model
-                });
+                return View(model);
             }
 
             var user = await _service.UserManager.GetUserAsync(HttpContext.User);
@@ -163,17 +157,7 @@ namespace BlogProject_UI.Controllers
             if (!result.Succeeded)
             {
                 ModelState.AddModelError("", "Şifre değiştirilemedi. Lütfen tekrar deneyin.");
-                return View("UserSettings", new UserProfileViewModel
-                {
-                    AppUserDTO = new AppUserDTO
-                    {
-                        UserName = user.UserName,
-                        Email = user.Email,
-                        PhoneNumber = user.PhoneNumber,
-                        Photo = user.Photo
-                    },
-                    UserPasswordChangeDTO = model
-                });
+                return View(model);
             }
 
             return RedirectToAction("UserSettings");
