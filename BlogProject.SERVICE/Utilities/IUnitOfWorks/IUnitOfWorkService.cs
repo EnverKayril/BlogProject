@@ -1,5 +1,6 @@
 ﻿using BlogProject.CORE.CoreModels.Models;
 using BlogProject.SERVICE.IRepositories;
+using BlogProject.SERVICE.Services;
 using BlogProject.SERVICE.Services.IServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -21,5 +22,6 @@ namespace BlogProject.SERVICE.Utilities.IUnitOfWorks
         UserManager<AppUser> UserManager { get; }
         RoleManager<Role> RoleManager { get; }
         SignInManager<AppUser> SignInManager { get; }
+        IEmailSender EmailSender { get; }
     }
 }

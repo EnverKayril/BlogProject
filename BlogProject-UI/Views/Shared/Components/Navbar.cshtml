@@ -1,5 +1,5 @@
 ﻿<nav class="navbar navbar-expand-lg navbar-light navigation pb-5">
-    <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
         <img src="~/img/Logo/Logo.jpg" alt="Logo" style="height: 39px; width: auto;">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -9,23 +9,23 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto main-nav ">
             <li class="nav-item @@home">
-                <a class="nav-link" asp-controller="Home" asp-action="Index">Anasayfa</a>
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
             </li>
             <li class="nav-item @@home">
-                <a class="nav-link" asp-controller="Category" asp-action="Index">Kategoriler</a>
+                <a class="nav-link" asp-area="" asp-controller="Category" asp-action="Index">Kategoriler</a>
             </li>
             <li class="nav-item @@home">
-                <a class="nav-link" asp-controller="AppUser" asp-action="Index">Yazarlar</a>
+                <a class="nav-link" asp-area="" asp-controller="AppUser" asp-action="Index">Yazarlar</a>
             </li>
             <li class="nav-item @@home">
-                <a class="nav-link" asp-controller="Home" asp-action="About">Hakkımızda</a>
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">Hakkımızda</a>
             </li>
         </ul>
 
         <ul class="navbar-nav ml-auto mt-10">
             @if (User.Identity.IsAuthenticated)
             {
-                @if (User.Identity.Name == "Admin" || User.Identity.Name == "Editor")
+                @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
                 {
                     <li class="nav-item @@home">
                         <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Sayfası</a>
@@ -40,7 +40,7 @@
                         @User.Identity.Name.Substring(0, 1).ToUpper()@User.Identity.Name.Substring(1).ToLower()
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" asp-controller="AppUser" asp-action="UserSettings">Hesabım</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="AppUser" asp-action="UserSettings">Hesabım</a>
                         <div class="dropdown-divider"></div>
                         <form asp-area="Admin" asp-controller="Authorization" asp-action="Logout" method="post">
                             <button type="submit" class="dropdown-item">Çıkış Yap</button>
@@ -60,3 +60,12 @@
         </ul>
     </div>
 </nav>
+@if (User.Identity.IsAuthenticated)
+{
+    if (User.IsInRole("Newuser"))
+    {
+        <div style="background-color: #fdfd96; color: #333; padding: 10px; text-align: center; position: relative; width: 100vw; left: 50%; transform: translateX(-50%); margin-top: 10px;">
+            Hesabınız neredeyse hazır! Makalelerinizi paylaşmak ve yorum yazmak için son bir adım kaldı. <a asp-area="" asp-controller="AppUser" asp-action="UserSettings" style="color: #333;">Hemen hesabınızı onaylayın</a> ve topluluğumuza katılın!
+        </div>
+    }
+}

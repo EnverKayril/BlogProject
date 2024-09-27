@@ -73,10 +73,12 @@ namespace BlogProject_UI.Controllers
 
                 await _service.AppUserService.UpdateAppUserAsync(user);
 
-                return RedirectToAction("UserSettings");
+				ViewBag.ShowSidebar = false;
+				return RedirectToAction("UserSettings");
             }
 
-            return View(model);
+			ViewBag.ShowSidebar = false;
+			return View(model);
         }
 
         [HttpGet]
@@ -87,7 +89,8 @@ namespace BlogProject_UI.Controllers
             {
                 Photo = user.Photo
             };
-            return View(userDTO);
+			ViewBag.ShowSidebar = false;
+			return View(userDTO);
         }
 
         [HttpPost]
@@ -108,8 +111,8 @@ namespace BlogProject_UI.Controllers
                 user.Photo = newPhoto;
                 await _service.UserManager.UpdateAsync(user);
             }
-
-            return RedirectToAction("UserSettings", "AppUser");
+			ViewBag.ShowSidebar = false;
+			return RedirectToAction("UserSettings", "AppUser");
         }
 
         [HttpGet]
@@ -144,7 +147,8 @@ namespace BlogProject_UI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+				ViewBag.ShowSidebar = false;
+				return View(model);
             }
 
             var user = await _service.UserManager.GetUserAsync(HttpContext.User);
@@ -156,11 +160,56 @@ namespace BlogProject_UI.Controllers
             var result = await _service.UserManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
             if (!result.Succeeded)
             {
-                ModelState.AddModelError("", "Şifre değiştirilemedi. Lütfen tekrar deneyin.");
+				ViewBag.ShowSidebar = false;
+				ModelState.AddModelError("", "Şifre değiştirilemedi. Lütfen tekrar deneyin.");
                 return View(model);
             }
+			ViewBag.ShowSidebar = false;
+			return RedirectToAction("UserSettings");
+        }
 
-            return RedirectToAction("UserSettings");
+        [HttpGet]
+        public IActionResult ConfirmEmail()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Contact()
+        {
+            var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+
+            var model = new ContactViewModel();
+
+            if (user != null)
+            {
+                model.UserName = user.UserName;
+                model.Email = user.Email;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Contact(ContactViewModel model)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Authorization", new { area = "Admin" });
+            }
+
+            if (ModelState.IsValid)
+            {
+                string subject = model.Subject;
+                string message = $"Kullanıcı Adı: {model.UserName}\nE-posta: {model.Email}\n\nMesaj:\n{model.Message}";
+
+                await _service.EmailSender.SendEmailAsync("admin@example.com", subject, message);
+
+                TempData["Message"] = "Mesajınız başarıyla gönderildi.";
+                return RedirectToAction("Contact");
+            }
+
+            return View(model);
         }
     }
 }

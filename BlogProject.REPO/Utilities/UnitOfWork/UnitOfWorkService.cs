@@ -22,8 +22,9 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
         private readonly RoleManager<Role> _roleManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ImageHelper _imageHelper;
+        private readonly IEmailSender _emailSender;
 
-        public UnitOfWorkService(IUnitOfWork unitOfWorkService, IMapper mapper, UserManager<AppUser> userManager, RoleManager<Role> roleManager, SignInManager<AppUser> signInManager, ImageHelper imageHelper)
+        public UnitOfWorkService(IUnitOfWork unitOfWorkService, IMapper mapper, UserManager<AppUser> userManager, RoleManager<Role> roleManager, SignInManager<AppUser> signInManager, ImageHelper imageHelper, IEmailSender emailSender)
         {
             _unitOfWork = unitOfWorkService;
             _mapper = mapper;
@@ -32,6 +33,7 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
             _signInManager = signInManager;
             _signInManager = signInManager;
             _imageHelper = imageHelper;
+            _emailSender = emailSender;
 
             CategoryService = new CategoryService(_unitOfWork, _mapper);
             AppUserService = new AppUserService(_unitOfWork, _mapper, _userManager);
@@ -50,5 +52,7 @@ namespace BlogProject.REPO.Utilities.UnitOfWork
         public SignInManager<AppUser> SignInManager => _signInManager;
 
         public RoleManager<Role> RoleManager => _roleManager;
+
+        public IEmailSender EmailSender => _emailSender;
     }
 }

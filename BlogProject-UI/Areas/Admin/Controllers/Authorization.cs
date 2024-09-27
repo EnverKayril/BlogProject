@@ -1,8 +1,12 @@
 ﻿using BlogProject.CORE.CoreModels.Models;
 using BlogProject.SERVICE.DTOs;
+using BlogProject.SERVICE.Utilities;
 using BlogProject.SERVICE.Utilities.IUnitOfWorks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
+using System.Net;
 
 namespace BlogProject_UI.Areas.Admin.Controllers
 {
@@ -135,17 +139,80 @@ namespace BlogProject_UI.Areas.Admin.Controllers
                     Photo = "DefaultUser.jpg"
                 };
 
+                if (string.IsNullOrEmpty(user.Email))
+                {
+                    throw new ArgumentNullException(nameof(user.Email), "E-posta adresi boş olamaz");
+                }
+
                 var result = await _service.UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
                     await _service.UserManager.AddToRoleAsync(user, "Newuser");
+
+                    var token = await _service.UserManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    var confirmationLink = Url.Action("ConfirmEmail", "Authorization", new { userId = user.Id, token = token }, Request.Scheme);
+
+                    await _service.EmailSender.SendEmailAsync(user.Email, "Email Doğrulama", $"Lütfen e-postanızı doğrulamak için şu linke tıklayın: {confirmationLink}");
+
                     await _service.SignInManager.SignInAsync(user, isPersistent: false);
+
+                    TempData["Message"] = "Kayıt başarılı! Oturum açıldı ve doğrulama e-postası gönderildi.";
                     return RedirectToAction("Index", "Home", new { area = "Home" });
                 }
             }
+
+            ModelState.AddModelError("", "Kayıt başarısız. Lütfen bilgilerinizi kontrol edin.");
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var user = await _service.UserManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _service.UserManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                await _service.UserManager.RemoveFromRoleAsync(user, "Newuser");
+                await _service.UserManager.AddToRoleAsync(user, "Verifieduser");
+
+                await _service.SignInManager.RefreshSignInAsync(user);
+
+                return RedirectToAction("ConfirmEmail", "AppUser", new { area = "Home" });
+            }
+
+            return View("Error");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ResendConfirmationEmail()
+        {
+            var user = await _service.UserManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var token = await _service.UserManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationLink = Url.Action("ConfirmEmail", "Authorization", new { userId = user.Id, token }, Request.Scheme);
+
+            await _service.EmailSender.SendEmailAsync(user.Email, "Email Doğrulama", $"Lütfen e-postanızı doğrulamak için şu linke tıklayın: {confirmationLink}");
+
+            ViewBag.IsConfirmationEmailSent = true;
+
+            return RedirectToAction("UserSettings", "AppUser", new { area = "Home" });
+        }
     }
 }

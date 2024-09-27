@@ -8,6 +8,7 @@ using BlogProject.SERVICE.IRepositories;
 using BlogProject.SERVICE.Mappers;
 using BlogProject.SERVICE.Services;
 using BlogProject.SERVICE.Services.IServices;
+using BlogProject.SERVICE.Utilities;
 using BlogProject.SERVICE.Utilities.ILogging;
 using BlogProject.SERVICE.Utilities.IUnitOfWorks;
 using Microsoft.AspNetCore.Identity;
@@ -23,7 +24,6 @@ namespace BlogProject_UI
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
-
 
             // Add Identity services
             builder.Services.AddIdentity<AppUser, Role>(options =>
@@ -47,6 +47,7 @@ namespace BlogProject_UI
             builder.Services.AddScoped<IArticleService, ArticleService>();
             builder.Services.AddScoped<ICommentService, CommentService>();
             builder.Services.AddScoped<IAppUserService, AppUserService>();
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
             builder.Services.AddScoped<UserManager<AppUser>>();
             builder.Services.AddTransient<ImageHelper>();
 
@@ -100,5 +101,6 @@ namespace BlogProject_UI
 
             app.Run();
         }
+
     }
 }

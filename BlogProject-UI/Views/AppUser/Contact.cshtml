@@ -1,0 +1,48 @@
+﻿@model BlogProject_UI.Models.VMs.ContactViewModel
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h2>İletişim</h2>
+            <form method="post" asp-action="Contact">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="form-group mb-3">
+                        <label>Kullanıcı Adı</label>
+                        <input asp-for="UserName" class="form-control" readonly />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>E-posta</label>
+                        <input asp-for="Email" class="form-control" readonly />
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">Mesaj gönderebilmek için lütfen <a class="user-name font-weight-bold" asp-area="Admin" asp-controller="Authorization" asp-action="Login" style="text-decoration:none; color:black">giriş yapın</a>.</div>
+                }
+
+                <div class="form-group mb-3">
+                    <label>Mesaj Başlığı</label>
+                    <input asp-for="Subject" class="form-control" />
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Mesaj İçeriği</label>
+                    <textarea asp-for="Message" class="form-control"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary" @(User.Identity.IsAuthenticated ? "" : "disabled")>Gönder</button>
+            </form>
+
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success mt-3">
+                    @TempData["Message"]
+                </div>
+            }
+        </div>
+    </div>
+</div>
