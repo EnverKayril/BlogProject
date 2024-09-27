@@ -22,10 +22,11 @@ namespace BlogProject_UI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Veri Tabaný Baðlantýsý
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
-            // Add Identity services
+            // Identity Servisleri
             builder.Services.AddIdentity<AppUser, Role>(options =>
             {
                 options.Password.RequiredLength = 3;
@@ -37,10 +38,10 @@ namespace BlogProject_UI
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
 
-            // Logger
+            // Logger Servisi
             builder.Services.AddScoped<ILogging, Logging>();
 
-            // Repositories and Services
+            // Repositories ve Servisler
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -51,12 +52,14 @@ namespace BlogProject_UI
             builder.Services.AddScoped<UserManager<AppUser>>();
             builder.Services.AddTransient<ImageHelper>();
 
-            // Add AutoMapper
-            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            builder.Services.AddSession();
+            // AutoMapper
             builder.Services.AddAutoMapper(typeof(Mapping));
 
-            // Cookie configuration
+            // Session ve Razor Runtime Compilation
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            builder.Services.AddSession();
+
+            // Cookie Ayarlarý (Remember Me ve Oturum Süresi)
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = new PathString("/Admin/Authorization/Login");
@@ -68,14 +71,13 @@ namespace BlogProject_UI
                     SameSite = SameSiteMode.Strict,
                     SecurePolicy = CookieSecurePolicy.SameAsRequest
                 };
-                options.SlidingExpiration = true;
-                options.ExpireTimeSpan = TimeSpan.FromDays(7);
+                options.SlidingExpiration = true; // Kullanýcý aktifse cookie süresini uzat
+                options.ExpireTimeSpan = TimeSpan.FromDays(7); // Oturum 7 gün hatýrlanacak
                 options.AccessDeniedPath = new PathString("/Admin/Authorization/AccessDenied");
             });
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -89,7 +91,6 @@ namespace BlogProject_UI
             app.UseAuthentication();
             app.UseAuthorization();
 
-            // Routing
             app.MapAreaControllerRoute(
                 name: "Admin",
                 areaName: "Admin",
@@ -101,6 +102,5 @@ namespace BlogProject_UI
 
             app.Run();
         }
-
     }
 }

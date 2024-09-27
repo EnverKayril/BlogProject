@@ -22,14 +22,14 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             _imageHelper = imageHelper;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Editor")]
         public async Task<IActionResult> Index()
         {
             var model = await _service.AppUserService.GetAllAppUserAsync();
             return View(model);
         }
 
-        [Authorize(Roles = "Admin, Editor, verifieduser")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetDetail(string id)
         {
@@ -113,7 +113,7 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             return View(model);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ViewResult> ChangeDetails()
         {
@@ -192,6 +192,7 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> UserSettings()
         {

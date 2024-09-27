@@ -52,10 +52,7 @@ namespace BlogProject_UI.Areas.Admin.Controllers
                     return View();
                 }
             }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
         [Authorize]
@@ -195,7 +192,6 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             return View("Error");
         }
 
-
         [HttpPost]
         public async Task<IActionResult> ResendConfirmationEmail()
         {
@@ -213,6 +209,76 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             ViewBag.IsConfirmationEmailSent = true;
 
             return RedirectToAction("UserSettings", "AppUser", new { area = "Home" });
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordDTO model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _service.UserManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    var token = await _service.UserManager.GeneratePasswordResetTokenAsync(user);
+                    var resetLink = Url.Action("ResetPassword", "Authorization", new { token = token, email = model.Email }, Request.Scheme);
+                    await _service.EmailSender.SendEmailAsync(model.Email, "Şifre Sıfırlama", $"Şifrenizi sıfırlamak için <a href='{resetLink}'>buraya tıklayın</a>.");
+
+                    TempData["Message"] = "Şifre sıfırlama linki e-posta adresinize gönderildi.";
+                    return RedirectToAction("Login");
+                }
+
+                ModelState.AddModelError("", "Bu e-posta adresine kayıtlı bir kullanıcı bulunamadı.");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword(string token, string email)
+        {
+            if (token == null || email == null)
+            {
+                ModelState.AddModelError("", "Geçersiz şifre sıfırlama bağlantısı.");
+                return RedirectToAction("Login");
+            }
+
+            var model = new ResetPasswordDTO { Token = token, Email = email };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDTO model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _service.UserManager.FindByEmailAsync(model.Email);
+            if (user != null)
+            {
+                var resetPassResult = await _service.UserManager.ResetPasswordAsync(user, model.Token, model.Password);
+                if (resetPassResult.Succeeded)
+                {
+                    TempData["Message"] = "Şifreniz başarıyla sıfırlandı.";
+                    return RedirectToAction("Login");
+                }
+
+                foreach (var error in resetPassResult.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View();
+            }
+
+            ModelState.AddModelError("", "Geçersiz işlem.");
+            return View();
         }
     }
 }

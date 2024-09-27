@@ -57,7 +57,6 @@ namespace BlogProject_UI.Areas.Admin.Controllers
                     }
                 }
 
-                // Kategorileri yeniden yükleyin ve hata durumunda sayfayı geri gönderin
                 var categories = await _service.CategoryService.GetAllCategoriesAsync();
                 ViewBag.CategoryList = new SelectList(categories, "Id", "Name");
                 return View(articleCreateDTO);

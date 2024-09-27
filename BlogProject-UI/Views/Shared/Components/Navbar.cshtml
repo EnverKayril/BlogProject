@@ -1,41 +1,51 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light navigation pb-5">
+﻿<nav class="navbar navbar-expand-lg navbar-light">
+    <!-- Logo -->
     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
         <img src="~/img/Logo/Logo.jpg" alt="Logo" style="height: 39px; width: auto;">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+
+    <!-- Hamburger Menüsü -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Menü Öğeleri -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto main-nav ">
-            <li class="nav-item @@home">
+        <!-- Ortalanmış Menü Öğeleri -->
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
             </li>
-            <li class="nav-item @@home">
+            <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-controller="Category" asp-action="Index">Kategoriler</a>
             </li>
-            <li class="nav-item @@home">
+            <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-controller="AppUser" asp-action="Index">Yazarlar</a>
             </li>
-            <li class="nav-item @@home">
+            <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">Hakkımızda</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="AppUser" asp-action="Contact">İletişim</a>
             </li>
         </ul>
 
-        <ul class="navbar-nav ml-auto mt-10">
+        <!-- Sağ Taraf: Kullanıcı Durumu -->
+        <ul class="navbar-nav ms-auto">
             @if (User.Identity.IsAuthenticated)
             {
                 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
                 {
-                    <li class="nav-item @@home">
+                    <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Sayfası</a>
                     </li>
                 }
-                <li class="nav-item @@home">
+                <li class="nav-item">
                     <a class="nav-link" asp-area="Admin" asp-controller="Article" asp-action="Create">Kendi Bloğunu Oluştur</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         @User.Identity.Name.Substring(0, 1).ToUpper()@User.Identity.Name.Substring(1).ToLower()
                     </a>
@@ -60,12 +70,3 @@
         </ul>
     </div>
 </nav>
-@if (User.Identity.IsAuthenticated)
-{
-    if (User.IsInRole("Newuser"))
-    {
-        <div style="background-color: #fdfd96; color: #333; padding: 10px; text-align: center; position: relative; width: 100vw; left: 50%; transform: translateX(-50%); margin-top: 10px;">
-            Hesabınız neredeyse hazır! Makalelerinizi paylaşmak ve yorum yazmak için son bir adım kaldı. <a asp-area="" asp-controller="AppUser" asp-action="UserSettings" style="color: #333;">Hemen hesabınızı onaylayın</a> ve topluluğumuza katılın!
-        </div>
-    }
-}

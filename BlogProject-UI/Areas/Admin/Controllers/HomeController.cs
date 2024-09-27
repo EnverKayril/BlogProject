@@ -8,7 +8,7 @@ using System.Diagnostics;
 namespace BlogProject_UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin, Editor, verifieduser")]
+    [Authorize(Roles = "Admin, Editor")]
     public class HomeController : Controller
     {
         private readonly IUnitOfWorkService _service;

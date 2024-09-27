@@ -20,8 +20,15 @@ namespace BlogProject_UI.Controllers
 
         public async Task<IActionResult> Detail(string id)
         {
-
             var article = await _service.ArticleService.GetArticleByIdAsync(id);
+
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            article.ViewCount += 1;
+            await _service.ArticleService.UpdateArticleAsync(article);
 
             var user = await _service.AppUserService.GetAppUserByIdAsync(article.AppUserId);
             var comments = await _service.CommentService.GetAllCommentsByArticleIdAsync(id);

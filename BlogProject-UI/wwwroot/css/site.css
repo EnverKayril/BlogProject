@@ -261,3 +261,55 @@ body {
     padding: 15px; /* Tablo ile kenar arasýnda biraz boþluk */
     border-radius: 8px; /* Kenarlarý yuvarlak yapalým */
 }
+
+/* Navbar arka planýný beyaz yap ve yazý stilini ayarla */
+.navbar {
+    background-color: #ffffff; /* Arka plan beyaz */
+    font-family: Arial, sans-serif; /* Yazý karakteri Arial */
+    padding: 10px 0; /* Üst ve alt boþluk ekleyelim */
+}
+
+/* Navbar linklerinin rengi ve stili */
+.navbar-nav .nav-link {
+    color: #333; /* Link rengi */
+    font-weight: 500; /* Kalýnlýk */
+    text-transform: uppercase; /* Büyük harflerle yazý */
+    letter-spacing: 0.5px; /* Harfler arasý boþluk */
+    padding: 10px 15px; /* Linkler için padding */
+}
+
+    /* Hover efekti */
+    .navbar-nav .nav-link:hover {
+        color: #007bff; /* Hover rengi */
+        text-decoration: none; /* Hoverda alt çizgi olmasýn */
+    }
+
+/* Menü öðelerini ortalama */
+.navbar-nav {
+    margin: 0 auto; /* Ortala */
+}
+
+/* Hamburger menü ikonu */
+.navbar-toggler {
+    border: none; /* Kenarlarýný kaldýr */
+}
+
+/* Dropdown menü stilleri */
+.navbar .dropdown-menu {
+    background-color: #fff; /* Arka plan beyaz */
+    border: 1px solid #ccc; /* Kenarlarý gri */
+}
+
+    .navbar .dropdown-menu .dropdown-item {
+        color: #333; /* Yazý rengi */
+    }
+
+        .navbar .dropdown-menu .dropdown-item:hover {
+            background-color: #007bff; /* Hover rengi */
+            color: #fff; /* Yazý rengi beyaz */
+        }
+
+.navbar-nav.ms-auto {
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+}
