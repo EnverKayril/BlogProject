@@ -1,6 +1,5 @@
 ﻿using BlogProject.CORE.CoreModels.BaseModels;
 using BlogProject.REPO.Contexts;
-using BlogProject.REPO.Utilities.Logging;
 using BlogProject.SERVICE.IRepositories.BaseRepos;
 using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Mvc;

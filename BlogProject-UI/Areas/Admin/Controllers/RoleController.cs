@@ -17,46 +17,83 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             _service = service;
         }
 
-        [Authorize(Roles = "Admin, Editor")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var roles = await _service.RoleManager.Roles.ToListAsync();
-            return View(roles);
+            try
+            {
+                var roles = await _service.RoleManager.Roles.ToListAsync();
+                return View(roles);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in RoleController.Index");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
-        [Authorize(Roles = "Admin, Editor")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> AssignRole(string userId)
         {
-            var user = await _service.UserManager.Users.SingleOrDefaultAsync(u => u.Id == userId);
-            var roles = await _service.RoleManager.Roles.ToListAsync();
-            var userroles = await _service.UserManager.GetRolesAsync(user);
-
-            var model = new AssignRoleViewModel
+            try
             {
-                UserId = userId,
-                Roles = new SelectList(roles, "Name", "Name", userroles.FirstOrDefault()),
-                SelectedRole = userroles.FirstOrDefault()
-            };
-            return View(model);
+                var user = await _service.UserManager.Users.SingleOrDefaultAsync(u => u.Id == userId);
+                if (user == null)
+                {
+                    return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 404 });
+                }
+                var roles = await _service.RoleManager.Roles.ToListAsync();
+                var userRoles = await _service.UserManager.GetRolesAsync(user);
+                var model = new AssignRoleViewModel
+                {
+                    UserId = userId,
+                    Roles = new SelectList(roles, "Name", "Name", userRoles.FirstOrDefault()),
+                    SelectedRole = userRoles.FirstOrDefault()
+                };
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in RoleController.AssignRole [GET]");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
-        [Authorize(Roles = "Admin, Editor")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AssignRole(AssignRoleViewModel model)
         {
-            var user = await _service.UserManager.FindByIdAsync(model.UserId);
+            try
+            {
+                var user = await _service.UserManager.FindByIdAsync(model.UserId);
+                if (user == null)
+                {
+                    return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 404 });
+                }
 
-            var userRoles = await _service.UserManager.GetRolesAsync(user);
+                var userRoles = await _service.UserManager.GetRolesAsync(user);
 
-            var removeRolesResult = await _service.UserManager.RemoveFromRolesAsync(user, userRoles);
+                var removeRolesResult = await _service.UserManager.RemoveFromRolesAsync(user, userRoles);
+                if (!removeRolesResult.Succeeded)
+                {
+                    return View(model);
+                }
 
-            var addRoleResult = await _service.UserManager.AddToRoleAsync(user, model.SelectedRole);
-
-            return RedirectToAction("Index", "AppUser");
+                var addRoleResult = await _service.UserManager.AddToRoleAsync(user, model.SelectedRole);
+                if (!addRoleResult.Succeeded)
+                {
+                    return View(model);
+                }
+                return RedirectToAction("Index", "AppUser");
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in RoleController.AssignRole");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
-
-
     }
 }

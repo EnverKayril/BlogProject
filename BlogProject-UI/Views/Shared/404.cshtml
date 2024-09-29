@@ -1,7 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Error - GeneralError";
+    ViewData["Title"] = "404 - Not Found";
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,9 +42,9 @@
             background-clip: text;
         }
 
-            p span {
-                font-size: 1.2em;
-            }
+        p span {
+            font-size: 1.2em;
+        }
 
         code {
             color: #bdbdbd;
@@ -53,23 +54,23 @@
             margin: 0 30px 25px;
         }
 
-            code span {
-                color: #f0c674;
-            }
+        code span {
+            color: #f0c674;
+        }
 
-            code i {
-                color: #b5bd68;
-            }
+        code i {
+            color: #b5bd68;
+        }
 
-            code em {
-                color: #b294bb;
-                font-style: unset;
-            }
+        code em {
+            color: #b294bb;
+            font-style: unset;
+        }
 
-            code b {
-                color: #81a2be;
-                font-weight: 500;
-            }
+        code b {
+            color: #81a2be;
+            font-weight: 500;
+        }
 
         a {
             color: #8abeb7;
@@ -89,10 +90,10 @@
 </head>
 <body>
 
-    <p>HTTP: <span>Bir Hata Oldu</span></p>
-    <code><span>hata</span>.<em>genel</em> = true;</code>
-    <code><span>if</span> (<b>ne_oldu_bilmiyoruz</b>) {<span>bir_daha_dene()</span>;}</code>
-    <code><span>else if (<b>beklenmedik_bir_hata</b>)</span> {<em>uyarı_ver</em>(<i>"Bir şeyler ters gitti. Hemen düzeltmeye çalışıyoruz."</i>); <span>pencere</span>.<em>konum</em> = anasayfa;}</code>
+    <p>HTTP: <span>404</span></p>
+    <code><span>bu_sayfa</span>.<em>bulunamadı</em> = true;</code>
+    <code><span>if</span> (<b>yanlış_yazdın</b>) {<span>yeniden_dene()</span>;}</code>
+    <code><span>else if (<b>biz_hata_yaptık</b>)</span> {<em>uyarı_ver</em>(<i>"Bu sefer hata bizde... Üzgünüz."</i>); <span>pencere</span>.<em>konum</em> = anasayfa;}</code>
     <center><a href="/">Anasayfaya Dön</a></center>
 
     <!-- JavaScript -->
@@ -102,8 +103,8 @@
             var i = 0;
             document.getElementsByTagName("code")[n].innerHTML = "";
 
-            setTimeout(function () {
-                var se = setInterval(function () {
+            setTimeout(function() {
+                var se = setInterval(function() {
                     i++;
                     document.getElementsByTagName("code")[n].innerHTML =
                         str.slice(0, i) + "|";

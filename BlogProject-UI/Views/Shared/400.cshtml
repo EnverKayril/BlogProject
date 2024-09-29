@@ -1,7 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Error - GeneralError";
+    ViewData["Title"] = "400 - BadRequest";
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,10 +90,10 @@
 </head>
 <body>
 
-    <p>HTTP: <span>Bir Hata Oldu</span></p>
-    <code><span>hata</span>.<em>genel</em> = true;</code>
-    <code><span>if</span> (<b>ne_oldu_bilmiyoruz</b>) {<span>bir_daha_dene()</span>;}</code>
-    <code><span>else if (<b>beklenmedik_bir_hata</b>)</span> {<em>uyarı_ver</em>(<i>"Bir şeyler ters gitti. Hemen düzeltmeye çalışıyoruz."</i>); <span>pencere</span>.<em>konum</em> = anasayfa;}</code>
+    <p>HTTP: <span>400</span></p>
+    <code><span>istek</span>.<em>geçersiz</em> = true;</code>
+    <code><span>if</span> (<b>yanlış_istek</b>) {<span>yeniden_dene()</span>;}</code>
+    <code><span>else if (<b>yanlış_başvuru</b>)</span> {<em>uyarı_ver</em>(<i>"Geçersiz bir istek gönderdiniz."</i>); <span>pencere</span>.<em>konum</em> = anasayfa;}</code>
     <center><a href="/">Anasayfaya Dön</a></center>
 
     <!-- JavaScript -->

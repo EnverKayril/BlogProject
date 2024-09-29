@@ -15,15 +15,22 @@ namespace BlogProject_UI.Controllers
 			_service = service;
 		}
 
-		public async Task<IActionResult> Index(int p = 1)
-		{
-            var articles = (await _service.ArticleService.GetArticlesForHomePageAsync()).OrderByDescending(a => a.CreateDate);
+        public async Task<IActionResult> Index(int p = 1)
+        {
+            try
+            {
+                var articles = (await _service.ArticleService.GetArticlesForHomePageAsync()).OrderByDescending(a => a.CreateDate);
+                var pagedarticles = articles.ToPagedList(p, 5);
+                return View(pagedarticles);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in HomeController.Index");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
+        }
 
-            var pagedarticles = articles.ToPagedList(p, 5);
-			return View(pagedarticles);
-		}
-
-		public IActionResult Privacy()
+        public IActionResult Privacy()
 		{
 			return View();
 		}
@@ -47,37 +54,44 @@ namespace BlogProject_UI.Controllers
         [HttpGet]
         public async Task<IActionResult> SearchResults(string query)
         {
-            if (string.IsNullOrEmpty(query))
+            try
             {
-                return View(new SearchResultViewModel());
+                if (string.IsNullOrEmpty(query))
+                {
+                    return View(new SearchResultViewModel());
+                }
+                var articles = await _service.ArticleService.GetAllArticlesAsync();
+                var filteredArticles = articles
+                    .Where(a => a.Title.Contains(query, StringComparison.OrdinalIgnoreCase)
+                                || a.Content.Contains(query, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                var categories = await _service.CategoryService.GetAllCategoriesAsync();
+                var filteredCategories = categories
+                    .Where(c => c.Name.Contains(query, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                var users = await _service.AppUserService.GetAllAppUserAsync();
+                var filteredUsers = users
+                    .Where(u => u.UserName.Contains(query, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                var model = new SearchResultViewModel
+                {
+                    Articles = filteredArticles,
+                    Categories = filteredCategories,
+                    Users = filteredUsers
+                };
+
+                ViewBag.Query = query;
+
+                return View(model);
             }
-
-            var articles = await _service.ArticleService.GetAllArticlesAsync();
-            var filteredArticles = articles
-                .Where(a => a.Title.Contains(query, StringComparison.OrdinalIgnoreCase)
-                            || a.Content.Contains(query, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-            var categories = await _service.CategoryService.GetAllCategoriesAsync();
-            var filteredCategories = categories
-                .Where(c => c.Name.Contains(query, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-            var users = await _service.AppUserService.GetAllAppUserAsync();
-            var filteredUsers = users
-                .Where(u => u.UserName.Contains(query, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-            var model = new SearchResultViewModel
+            catch (Exception ex)
             {
-                Articles = filteredArticles,
-                Categories = filteredCategories,
-                Users = filteredUsers
-            };
-
-            ViewBag.Query = query;
-
-            return View(model);
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in HomeController.SearchResults");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
     }
 }

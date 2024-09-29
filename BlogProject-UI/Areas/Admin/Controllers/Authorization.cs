@@ -29,45 +29,60 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(UserLoginDTO userLoginDTO)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Warn("Geçersiz giriş denemesi: ModelState is not valid.");
+                return View();
+            }
+
+            try
             {
                 var user = await _service.UserManager.FindByEmailAsync(userLoginDTO.Email);
+
                 if (user != null)
                 {
                     var result = await _service.SignInManager.PasswordSignInAsync(user, userLoginDTO.Password, userLoginDTO.RememberMe, false);
 
                     if (result.Succeeded)
                     {
+                        NLog.LogManager.GetCurrentClassLogger().Info($"Kullanıcı giriş yaptı: {user.Email}");
                         return RedirectToAction("Index", "Home", new { area = "" });
                     }
                     else
                     {
-                        ModelState.AddModelError("", "E-Posta adresiniz veya şifreniz yanlış.");
+                        NLog.LogManager.GetCurrentClassLogger().Warn($"Başarısız giriş denemesi: {user.Email}");
+
                         return View();
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "E-Posta adresiniz veya şifreniz yanlış.");
+                    NLog.LogManager.GetCurrentClassLogger().Warn($"Kullanıcı bulunamadı: {userLoginDTO.Email}");
                     return View();
                 }
             }
-            return View();
-        }
-
-        [Authorize]
-        [HttpGet]
-        public ViewResult AccessDenied()
-        {
-            return View();
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Login işlemi sırasında bir hata oluştu.");
+                return View();
+            }
         }
 
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            await _service.SignInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home", new { Area = "" });
+            try
+            {
+                await _service.SignInManager.SignOutAsync();
+                NLog.LogManager.GetCurrentClassLogger().Info($"Kullanıcı çıkış yaptı: {User.Identity.Name}");
+                return RedirectToAction("Index", "Home", new { Area = "" });
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Logout işlemi sırasında bir hata oluştu.");
+                return RedirectToAction("Index", "Home", new { Area = "" });
+            }
         }
 
         [Authorize]
@@ -83,36 +98,47 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _service.UserManager.GetUserAsync(HttpContext.User);
-                var isVerified = await _service.UserManager.CheckPasswordAsync(user, userPasswordChanceDTO.CurrentPassword);
-                if (isVerified)
+                try
                 {
-                    var result = await _service.UserManager.ChangePasswordAsync(user, userPasswordChanceDTO.CurrentPassword, userPasswordChanceDTO.NewPassword);
-                    if (result.Succeeded)
+                    var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+                    var isVerified = await _service.UserManager.CheckPasswordAsync(user, userPasswordChanceDTO.CurrentPassword);
+
+                    if (isVerified)
                     {
-                        await _service.UserManager.UpdateSecurityStampAsync(user);
-                        await _service.SignInManager.SignOutAsync();
-                        await _service.SignInManager.PasswordSignInAsync(user, userPasswordChanceDTO.NewPassword, true, false);
-                        return RedirectToAction("Index");
+                        var result = await _service.UserManager.ChangePasswordAsync(user, userPasswordChanceDTO.CurrentPassword, userPasswordChanceDTO.NewPassword);
+
+                        if (result.Succeeded)
+                        {
+                            await _service.UserManager.UpdateSecurityStampAsync(user);
+                            await _service.SignInManager.SignOutAsync();
+                            await _service.SignInManager.PasswordSignInAsync(user, userPasswordChanceDTO.NewPassword, true, false);
+
+                            NLog.LogManager.GetCurrentClassLogger().Info($"Kullanıcı şifresini değiştirdi: {user.UserName}");
+
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            NLog.LogManager.GetCurrentClassLogger().Warn($"Kullanıcı şifre değiştirme hatası: {user.UserName}, Hatalar: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+
+                            return View(userPasswordChanceDTO);
+                        }
                     }
                     else
                     {
-                        foreach (var error in result.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
+                        NLog.LogManager.GetCurrentClassLogger().Warn($"Kullanıcı yanlış şifre girdi: {user.UserName}");
                         return View(userPasswordChanceDTO);
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    ModelState.AddModelError("", "Lütfen girmiş olduğunuz şifrenizi kontrol ediniz.");
+                    NLog.LogManager.GetCurrentClassLogger().Error(ex, "Şifre değiştirme işlemi sırasında bir hata oluştu.");
                     return View(userPasswordChanceDTO);
                 }
             }
             else
             {
-                return View();
+                return View(userPasswordChanceDTO);
             }
         }
 
@@ -127,40 +153,46 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new AppUser
+                try
                 {
-                    Id = Guid.NewGuid().ToString(),
-                    UserName = model.UserName,
-                    Email = model.Email,
-                    PhoneNumber = model.PhoneNumber,
-                    Photo = "DefaultUser.jpg"
-                };
+                    var user = new AppUser
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        UserName = model.UserName,
+                        Email = model.Email,
+                        PhoneNumber = model.PhoneNumber,
+                        Photo = "DefaultUser.jpg"
+                    };
 
-                if (string.IsNullOrEmpty(user.Email))
-                {
-                    throw new ArgumentNullException(nameof(user.Email), "E-posta adresi boş olamaz");
+                    if (string.IsNullOrEmpty(user.Email))
+                    {
+                        throw new ArgumentNullException(nameof(user.Email), "E-posta adresi boş olamaz");
+                    }
+
+                    var result = await _service.UserManager.CreateAsync(user, model.Password);
+
+                    if (result.Succeeded)
+                    {
+                        await _service.UserManager.AddToRoleAsync(user, "Newuser");
+
+                        var token = await _service.UserManager.GenerateEmailConfirmationTokenAsync(user);
+                        var confirmationLink = Url.Action("ConfirmEmail", "Authorization", new { userId = user.Id, token = token }, Request.Scheme);
+                        await _service.EmailSender.SendEmailAsync(user.Email, "Email Doğrulama", $"Lütfen e-postanızı doğrulamak için şu linke tıklayın: {confirmationLink}");
+
+                        NLog.LogManager.GetCurrentClassLogger().Info($"Kullanıcı kaydedildi ve doğrulama e-postası gönderildi: {user.Email}");
+
+                        await _service.SignInManager.SignInAsync(user, isPersistent: false);
+
+                        return RedirectToAction("Index", "Home", new { area = "Home" });
+                    }
+
+                    NLog.LogManager.GetCurrentClassLogger().Warn($"Kullanıcı kaydı başarısız: {user.Email}");
                 }
-
-                var result = await _service.UserManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
+                catch (Exception ex)
                 {
-                    await _service.UserManager.AddToRoleAsync(user, "Newuser");
-
-                    var token = await _service.UserManager.GenerateEmailConfirmationTokenAsync(user);
-
-                    var confirmationLink = Url.Action("ConfirmEmail", "Authorization", new { userId = user.Id, token = token }, Request.Scheme);
-
-                    await _service.EmailSender.SendEmailAsync(user.Email, "Email Doğrulama", $"Lütfen e-postanızı doğrulamak için şu linke tıklayın: {confirmationLink}");
-
-                    await _service.SignInManager.SignInAsync(user, isPersistent: false);
-
-                    TempData["Message"] = "Kayıt başarılı! Oturum açıldı ve doğrulama e-postası gönderildi.";
-                    return RedirectToAction("Index", "Home", new { area = "Home" });
+                    NLog.LogManager.GetCurrentClassLogger().Error(ex, "Kayıt işlemi sırasında bir hata oluştu.");
                 }
             }
-
-            ModelState.AddModelError("", "Kayıt başarısız. Lütfen bilgilerinizi kontrol edin.");
             return View(model);
         }
 
@@ -169,45 +201,57 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         {
             if (userId == null || token == null)
             {
+                NLog.LogManager.GetCurrentClassLogger().Warn("E-posta doğrulama sırasında userId veya token null geldi.");
                 return RedirectToAction("Index", "Home");
             }
 
             var user = await _service.UserManager.FindByIdAsync(userId);
             if (user == null)
             {
+                NLog.LogManager.GetCurrentClassLogger().Warn($"E-posta doğrulama sırasında kullanıcı bulunamadı. userId: {userId}");
                 return NotFound();
             }
 
             var result = await _service.UserManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
+                NLog.LogManager.GetCurrentClassLogger().Info($"Kullanıcı e-posta doğrulandı. userId: {user.Id}");
+
                 await _service.UserManager.RemoveFromRoleAsync(user, "Newuser");
                 await _service.UserManager.AddToRoleAsync(user, "Verifieduser");
-
                 await _service.SignInManager.RefreshSignInAsync(user);
-
                 return RedirectToAction("ConfirmEmail", "AppUser", new { area = "Home" });
             }
-
+            NLog.LogManager.GetCurrentClassLogger().Warn($"E-posta doğrulama başarısız oldu. userId: {user.Id}");
             return View("Error");
         }
 
+        [Authorize]
+        [HttpPost]
         [HttpPost]
         public async Task<IActionResult> ResendConfirmationEmail()
         {
             var user = await _service.UserManager.GetUserAsync(User);
             if (user == null)
             {
+                NLog.LogManager.GetCurrentClassLogger().Warn("Kullanıcı oturum açmamışken doğrulama e-postası yeniden gönderilmeye çalışıldı.");
                 return RedirectToAction("Login", "Account");
             }
 
             var token = await _service.UserManager.GenerateEmailConfirmationTokenAsync(user);
             var confirmationLink = Url.Action("ConfirmEmail", "Authorization", new { userId = user.Id, token }, Request.Scheme);
 
-            await _service.EmailSender.SendEmailAsync(user.Email, "Email Doğrulama", $"Lütfen e-postanızı doğrulamak için şu linke tıklayın: {confirmationLink}");
-
+            try
+            {
+                await _service.EmailSender.SendEmailAsync(user.Email, "Email Doğrulama", $"Lütfen e-postanızı doğrulamak için şu linke tıklayın: {confirmationLink}");
+                NLog.LogManager.GetCurrentClassLogger().Info($"Doğrulama e-postası yeniden gönderildi. userId: {user.Id}");
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, $"Doğrulama e-postası gönderimi başarısız oldu. userId: {user.Id}");
+                return View("UserSettings");
+            }
             ViewBag.IsConfirmationEmailSent = true;
-
             return RedirectToAction("UserSettings", "AppUser", new { area = "Home" });
         }
 
@@ -222,20 +266,29 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _service.UserManager.FindByEmailAsync(model.Email);
-                if (user != null)
+                try
                 {
-                    var token = await _service.UserManager.GeneratePasswordResetTokenAsync(user);
-                    var resetLink = Url.Action("ResetPassword", "Authorization", new { token = token, email = model.Email }, Request.Scheme);
-                    await _service.EmailSender.SendEmailAsync(model.Email, "Şifre Sıfırlama", $"Şifrenizi sıfırlamak için <a href='{resetLink}'>buraya tıklayın</a>.");
+                    var user = await _service.UserManager.FindByEmailAsync(model.Email);
+                    if (user != null)
+                    {
+                        var token = await _service.UserManager.GeneratePasswordResetTokenAsync(user);
+                        var resetLink = Url.Action("ResetPassword", "Authorization", new { token = token, email = model.Email }, Request.Scheme);
 
-                    TempData["Message"] = "Şifre sıfırlama linki e-posta adresinize gönderildi.";
-                    return RedirectToAction("Login");
+                        await _service.EmailSender.SendEmailAsync(model.Email, "Şifre Sıfırlama", $"Şifrenizi sıfırlamak için <a href='{resetLink}'>buraya tıklayın</a>.");
+
+                        return RedirectToAction("Login");
+                    }
+                    else
+                    {
+                        return RedirectToAction("ForgotPassword");
+                    }
                 }
-
-                ModelState.AddModelError("", "Bu e-posta adresine kayıtlı bir kullanıcı bulunamadı.");
+                catch (Exception ex)
+                {
+                    NLog.LogManager.GetCurrentClassLogger().Error(ex, "ForgotPassword işleminde hata oluştu.");
+                    return RedirectToAction("ForgotPassword");
+                }
             }
-
             return View(model);
         }
 
@@ -244,13 +297,13 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         {
             if (token == null || email == null)
             {
-                ModelState.AddModelError("", "Geçersiz şifre sıfırlama bağlantısı.");
-                return RedirectToAction("Login");
+                return RedirectToAction("Error", "Home", new { statusCode = 400 });
             }
 
             var model = new ResetPasswordDTO { Token = token, Email = email };
             return View(model);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> ResetPassword(ResetPasswordDTO model)
@@ -266,19 +319,13 @@ namespace BlogProject_UI.Areas.Admin.Controllers
                 var resetPassResult = await _service.UserManager.ResetPasswordAsync(user, model.Token, model.Password);
                 if (resetPassResult.Succeeded)
                 {
-                    TempData["Message"] = "Şifreniz başarıyla sıfırlandı.";
                     return RedirectToAction("Login");
                 }
 
-                foreach (var error in resetPassResult.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-                return View();
+                return RedirectToAction("Error", "Home", new { statusCode = 500 });
             }
 
-            ModelState.AddModelError("", "Geçersiz işlem.");
-            return View();
+            return RedirectToAction("Error", "Home", new { statusCode = 404 });
         }
     }
 }

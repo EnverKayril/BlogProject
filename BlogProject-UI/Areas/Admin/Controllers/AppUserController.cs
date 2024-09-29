@@ -4,6 +4,7 @@ using BlogProject.SERVICE.DTOs;
 using BlogProject.SERVICE.Mappers;
 using BlogProject.SERVICE.Utilities.IUnitOfWorks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,18 +26,39 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         [Authorize(Roles = "Admin, Editor")]
         public async Task<IActionResult> Index()
         {
-            var model = await _service.AppUserService.GetAllAppUserAsync();
-            return View(model);
+            try
+            {
+                var model = await _service.AppUserService.GetAllAppUserAsync();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                var logger = NLog.LogManager.GetCurrentClassLogger();
+                logger.Error(ex, "Error occurred in AppUserController.Index");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetDetail(string id)
         {
-            var appUser = await _service.AppUserService.GetAppUserByIdAsync(id);
-            return View(appUser);
-        }
+            try
+            {
+                var appUser = await _service.AppUserService.GetAppUserByIdAsync(id);
 
+                if (appUser == null)
+                {
+                    return View(new AppUserDTO());
+                }
+                return View(appUser);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.GetDetail");
+                return View(new AppUserDTO());
+            }
+        }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
@@ -49,75 +71,116 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AppUserCreateDTO model)
         {
-            var appUser = new AppUser
+            if (!ModelState.IsValid)
             {
-                Id = Guid.NewGuid().ToString(),
-                UserName = model.UserName,
-                Email = model.Email,
-                PhoneNumber = model.PhoneNumber,
-                Photo = await _imageHelper.ImageUpload(model.PhotoFile, "UserImages")
-            };
-
-            var result = await _service.UserManager.CreateAsync(appUser, model.Password);
-            if (result is not null)
-            {
-                return RedirectToAction("Index");
+                return View(model);
             }
-            return View(model);
+
+            try
+            {
+                var appUser = new AppUser
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    Photo = await _imageHelper.ImageUpload(model.PhotoFile, "UserImages")
+                };
+
+                var result = await _service.UserManager.CreateAsync(appUser, model.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.Create");
+                return View(model);
+            }
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            var model = await _service.AppUserService.GetAppUserByIdAsync(id.ToString());
-            return View(model);
+            try
+            {
+                var model = await _service.AppUserService.GetAppUserByIdAsync(id);
+
+                if (model == null)
+                {
+                    return RedirectToAction("Error", "Error", new { statusCode = 404 });
+                }
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.Edit (GET)");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(string id, AppUserDTO model, IFormFile? photo)
         {
-            var user = await _service.AppUserService.GetAppUserByIdAsync(id.ToString());
-            var oldPhoto = user.Photo;
-
-            if (ModelState.IsValid)
+            try
             {
-                if (photo == null)
+                var user = await _service.AppUserService.GetAppUserByIdAsync(id);
+                if (user == null)
                 {
-                    model.Photo = oldPhoto;
+                    return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 404 });
                 }
-                else
-                {
-                    model.Photo = await _imageHelper.ImageUpload(photo, "UserImages");
 
-                    if (oldPhoto != null && oldPhoto != "DefaultUser.jpg")
+                var oldPhoto = user.Photo;
+
+                if (ModelState.IsValid)
+                {
+                    if (photo == null)
                     {
-                        _imageHelper.DeleteImage(oldPhoto, "UserImages");
+                        model.Photo = oldPhoto;
                     }
+                    else
+                    {
+                        model.Photo = await _imageHelper.ImageUpload(photo, "UserImages");
+
+                        if (!string.IsNullOrEmpty(oldPhoto) && oldPhoto != "DefaultUser.jpg")
+                        {
+                            _imageHelper.DeleteImage(oldPhoto, "UserImages");
+                        }
+                    }
+
+                    user.UserName = model.UserName;
+                    user.Email = model.Email;
+                    user.PhoneNumber = model.PhoneNumber;
+                    user.Photo = model.Photo;
+                    await _service.AppUserService.UpdateAppUserAsync(user);
+                    return RedirectToAction("Index");
                 }
-
-                user.UserName = model.UserName;
-                user.Email = model.Email;
-                user.PhoneNumber = model.PhoneNumber;
-                user.Photo = model.Photo;
-
-                await _service.AppUserService.UpdateAppUserAsync(user);
-                return RedirectToAction("Index");
-
+                return View(model);
             }
-            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            catch (Exception ex)
             {
-                Console.WriteLine(error.ErrorMessage);
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.Edit (POST)");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
             }
-            return View(model);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<ViewResult> ChangeDetails()
+        public async Task<IActionResult> ChangeDetails()
         {
             var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+
+            if (user == null)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error("User not found in ChangeDetails (GET)");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 404 });
+            }
+
             var userDTO = new AppUserDTO
             {
                 UserName = user.UserName,
@@ -133,32 +196,51 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         public async Task<IActionResult> ChangeDetails(AppUserDTO model, IFormFile? photo)
         {
             var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+
+            if (user == null)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error("User not found in ChangeDetails (POST)");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 404 });
+            }
+
             var oldPhoto = user.Photo;
 
             if (ModelState.IsValid)
             {
-                if (photo == null)
+                try
                 {
-                    model.Photo = oldPhoto;
-                }
-                else
-                {
-                    model.Photo = await _imageHelper.ImageUpload(photo, "UserImages");
-
-                    if (oldPhoto != null && oldPhoto != "DefaultUser.jpg")
+                    if (photo != null)
                     {
-                        _imageHelper.DeleteImage(oldPhoto, "UserImages");
+                        model.Photo = await _imageHelper.ImageUpload(photo, "UserImages");
+
+                        if (oldPhoto != null && oldPhoto != "DefaultUser.jpg")
+                        {
+                            _imageHelper.DeleteImage(oldPhoto, "UserImages");
+                        }
+                        else
+                        {
+                            return View(model);
+                        }
                     }
+                    else
+                    {
+                        model.Photo = oldPhoto;
+                    }
+
+                    user.UserName = model.UserName;
+                    user.Email = model.Email;
+                    user.PhoneNumber = model.PhoneNumber;
+                    user.Photo = model.Photo;
+
+                    await _service.UserManager.UpdateAsync(user);
+                    NLog.LogManager.GetCurrentClassLogger().Info("User details updated successfully for user: " + user.UserName);
+                    return RedirectToAction("Index");
                 }
-
-                user.UserName = model.UserName;
-                user.Email = model.Email;
-                user.PhoneNumber = model.PhoneNumber;
-                user.Photo = model.Photo;
-
-                await _service.UserManager.UpdateAsync(user);
-                return RedirectToAction("Index");
-
+                catch (Exception ex)
+                {
+                    NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred while updating user details");
+                    return View(model);
+                }
             }
             return View(model);
         }
@@ -167,8 +249,23 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
-            var model = await _service.AppUserService.GetAppUserByIdAsync(id.ToString());
-            return View(model);
+            try
+            {
+                var user = await _service.AppUserService.GetAppUserByIdAsync(id);
+
+                if (user == null)
+                {
+                    NLog.LogManager.GetCurrentClassLogger().Error($"User with ID {id} not found in Delete (GET)");
+                    return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 404 });
+                }
+
+                return View(user);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, $"Error occurred in Delete (GET) for User ID: {id}");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
         [Authorize(Roles = "Admin")]
@@ -179,16 +276,32 @@ namespace BlogProject_UI.Areas.Admin.Controllers
             {
                 var user = await _service.UserManager.FindByIdAsync(id);
 
-                await _service.UserManager.DeleteAsync(user);
+                if (user == null)
+                {
+                    NLog.LogManager.GetCurrentClassLogger().Error($"User with ID {id} not found in Delete (POST)");
+                    return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 404 });
+                }
+
+                var result = await _service.UserManager.DeleteAsync(user);
+
+                if (!result.Succeeded)
+                {
+                    NLog.LogManager.GetCurrentClassLogger().Error($"Error occurred while deleting user with ID: {id}");
+                    return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+                }
+
                 if (user.Photo != "DefaultUser.jpg")
                 {
                     _imageHelper.DeleteImage(user.Photo, "UserImages");
                 }
+
+                NLog.LogManager.GetCurrentClassLogger().Info($"User with ID {id} successfully deleted");
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View(model);
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, $"Error occurred in Delete (POST) for User ID: {id}");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
             }
         }
 
@@ -196,15 +309,32 @@ namespace BlogProject_UI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> UserSettings()
         {
-            var user = await _service.UserManager.GetUserAsync(HttpContext.User);
-            var userDTO = new AppUserDTO
+            try
             {
-                UserName = user.UserName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                Photo = user.Photo
-            };
-            return View(userDTO);
+                var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+
+                if (user == null)
+                {
+                    NLog.LogManager.GetCurrentClassLogger().Error("User not found in UserSettings.");
+                    return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 404 });
+                }
+
+                var userDTO = new AppUserDTO
+                {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    Photo = user.Photo
+                };
+
+                NLog.LogManager.GetCurrentClassLogger().Info($"User settings accessed for User ID: {user.Id}");
+                return View(userDTO);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in UserSettings.");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
     }
 }

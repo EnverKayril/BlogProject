@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Error - GeneralError";
+    ViewData["Title"] = "403 - Forbidden";
     Layout = null;
 }
 <!DOCTYPE html>
@@ -89,10 +89,10 @@
 </head>
 <body>
 
-    <p>HTTP: <span>Bir Hata Oldu</span></p>
-    <code><span>hata</span>.<em>genel</em> = true;</code>
-    <code><span>if</span> (<b>ne_oldu_bilmiyoruz</b>) {<span>bir_daha_dene()</span>;}</code>
-    <code><span>else if (<b>beklenmedik_bir_hata</b>)</span> {<em>uyarı_ver</em>(<i>"Bir şeyler ters gitti. Hemen düzeltmeye çalışıyoruz."</i>); <span>pencere</span>.<em>konum</em> = anasayfa;}</code>
+    <p>HTTP: <span>403</span></p>
+    <code><span>yetki</span>.<em>yetersiz</em> = true;</code>
+    <code><span>if</span> (<b>izinsiz_giriş</b>) {<span>geri_dön()</span>;}</code>
+    <code><span>else if (<b>yanlış_kapı</b>)</span> {<em>uyarı_ver</em>(<i>"Bu alana giriş izniniz yok."</i>); <span>pencere</span>.<em>konum</em> = anasayfa;}</code>
     <center><a href="/">Anasayfaya Dön</a></center>
 
     <!-- JavaScript -->

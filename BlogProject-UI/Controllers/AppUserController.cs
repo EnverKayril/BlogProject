@@ -2,6 +2,7 @@
 using BlogProject.SERVICE.DTOs;
 using BlogProject.SERVICE.Utilities.IUnitOfWorks;
 using BlogProject_UI.Models.VMs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogProject_UI.Controllers
@@ -19,8 +20,16 @@ namespace BlogProject_UI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var users = await _service.AppUserService.GetAllAppUserAsync();
-            return View(users);
+            try
+            {
+                var users = await _service.AppUserService.GetAllAppUserAsync();
+                return View(users);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.Index");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
         public async Task<IActionResult> Detail(string id)
@@ -39,102 +48,169 @@ namespace BlogProject_UI.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> UserSettings()
         {
-            var user = await _service.UserManager.GetUserAsync(HttpContext.User);
-            if (user == null)
+            try
             {
-                return RedirectToAction("Login", "Authorization");
+                var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+                if (user == null)
+                {
+                    return RedirectToAction("Login", "Authorization");
+                }
+                var userDTO = new AppUserDTO
+                {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    Photo = user.Photo
+                };
+                ViewBag.ShowSidebar = false;
+                return View(userDTO);
             }
-
-            var userDTO = new AppUserDTO
+            catch (Exception ex)
             {
-                UserName = user.UserName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                Photo = user.Photo
-            };
-            ViewBag.ShowSidebar = false;
-            return View(userDTO);
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.UserSettings");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> UserSettings(AppUserDTO model)
         {
-            var userId = _service.UserManager.GetUserId(HttpContext.User);
-            var user = await _service.AppUserService.GetAppUserByIdAsync(userId);
-
-            if (ModelState.IsValid)
+            try
             {
-                user.UserName = model.UserName;
-                user.Email = model.Email;
-                user.PhoneNumber = model.PhoneNumber;
+                var userId = _service.UserManager.GetUserId(HttpContext.User);
+                var user = await _service.AppUserService.GetAppUserByIdAsync(userId);
+                if (user == null)
+                {
+                    return RedirectToAction("Login", "Authorization");
+                }
+                if (ModelState.IsValid)
+                {
+                    user.UserName = model.UserName;
+                    user.Email = model.Email;
+                    user.PhoneNumber = model.PhoneNumber;
+                    ViewBag.ShowSidebar = false;
+                    await _service.AppUserService.UpdateAppUserAsync(user);
 
-                await _service.AppUserService.UpdateAppUserAsync(user);
-
-				ViewBag.ShowSidebar = false;
-				return RedirectToAction("UserSettings");
+                    return RedirectToAction("UserSettings");
+                }
+                ViewBag.ShowSidebar = false;
+                return View(model);
             }
-
-			ViewBag.ShowSidebar = false;
-			return View(model);
-        }
-
-        [HttpGet]
-        public async Task<ViewResult> ChangePhoto()
-        {
-            var user = await _service.UserManager.GetUserAsync(HttpContext.User);
-            var userDTO = new AppUserDTO
+            catch (Exception ex)
             {
-                Photo = user.Photo
-            };
-			ViewBag.ShowSidebar = false;
-			return View(userDTO);
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.UserSettings (POST)");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> ChangePhoto()
+        {
+            try
+            {
+                var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+                if (user == null)
+                {
+                    return RedirectToAction("Login", "Authorization");
+                }
+                var userDTO = new AppUserDTO
+                {
+                    Photo = user.Photo
+                };
+                return View(userDTO);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.ChangePhoto (GET)");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
+        }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ChangePhoto(IFormFile? photo)
         {
-            var user = await _service.UserManager.GetUserAsync(HttpContext.User);
-            var oldPhoto = user.Photo;
-
-            if (photo != null)
+            try
             {
-                var newPhoto = await _imageHelper.ImageUpload(photo, "UserImages");
-
-                if (oldPhoto != null && oldPhoto != "DefaultUser.jpg")
+                var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+                if (user == null)
                 {
-                    _imageHelper.DeleteImage(oldPhoto, "UserImages");
+                    return RedirectToAction("Login", "Authorization");
                 }
+                var oldPhoto = user.Photo;
+                if (photo != null)
+                {
+                    var newPhoto = await _imageHelper.ImageUpload(photo, "UserImages");
 
-                user.Photo = newPhoto;
-                await _service.UserManager.UpdateAsync(user);
+                    if (oldPhoto != null && oldPhoto != "DefaultUser.jpg")
+                    {
+                        _imageHelper.DeleteImage(oldPhoto, "UserImages");
+                    }
+
+                    user.Photo = newPhoto;
+                    await _service.UserManager.UpdateAsync(user);
+                }
+                return RedirectToAction("UserSettings", "AppUser");
             }
-			ViewBag.ShowSidebar = false;
-			return RedirectToAction("UserSettings", "AppUser");
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.ChangePhoto (POST)");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> UserArticles()
         {
-            var user = await _service.UserManager.GetUserAsync(HttpContext.User);
-            var articles = await _service.ArticleService.GetAllArticlesByUserIdAsync(user.Id);
+            try
+            {
+                var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+                if (user == null)
+                {
+                    return RedirectToAction("Login", "Authorization");
+                }
 
-            ViewBag.ShowSidebar = false;
-            return View(articles);
+                var articles = await _service.ArticleService.GetAllArticlesByUserIdAsync(user.Id);
+                ViewBag.ShowSidebar = false;
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.UserArticles");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> UserComments()
         {
-            var user = await _service.UserManager.GetUserAsync(HttpContext.User);
-            var userComments = await _service.CommentService.GetCommentsWithArticleAndUserByIdAsync(user.Id);
-
-            ViewBag.ShowSidebar = false;
-            return View(userComments);
+            try
+            {
+                var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+                if (user == null)
+                {
+                    return RedirectToAction("Login", "Authorization");
+                }
+                var userComments = await _service.CommentService.GetCommentsWithArticleAndUserByIdAsync(user.Id);
+                ViewBag.ShowSidebar = false;
+                return View(userComments);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.UserComments");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult ChangePassword()
         {
@@ -142,32 +218,39 @@ namespace BlogProject_UI.Controllers
             return View(new UserPasswordChanceDTO());
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ChangePassword(UserPasswordChanceDTO model)
         {
             if (!ModelState.IsValid)
             {
-				ViewBag.ShowSidebar = false;
-				return View(model);
-            }
-
-            var user = await _service.UserManager.GetUserAsync(HttpContext.User);
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Authorization");
-            }
-
-            var result = await _service.UserManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
-            if (!result.Succeeded)
-            {
-				ViewBag.ShowSidebar = false;
-				ModelState.AddModelError("", "Şifre değiştirilemedi. Lütfen tekrar deneyin.");
+                ViewBag.ShowSidebar = false;
                 return View(model);
             }
-			ViewBag.ShowSidebar = false;
-			return RedirectToAction("UserSettings");
+            try
+            {
+                var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+                if (user == null)
+                {
+                    return RedirectToAction("Login", "Authorization");
+                }
+                var result = await _service.UserManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+                if (!result.Succeeded)
+                {
+                    ViewBag.ShowSidebar = false;
+                    return View(model);
+                }
+                ViewBag.ShowSidebar = false;
+                return RedirectToAction("UserSettings");
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.ChangePassword");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult ConfirmEmail()
         {
@@ -177,39 +260,116 @@ namespace BlogProject_UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Contact()
         {
-            var user = await _service.UserManager.GetUserAsync(HttpContext.User);
-
-            var model = new ContactViewModel();
-
-            if (user != null)
+            try
             {
-                model.UserName = user.UserName;
-                model.Email = user.Email;
-            }
+                var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+                var model = new ContactViewModel();
 
-            return View(model);
+                if (user != null)
+                {
+                    model.UserName = user.UserName;
+                    model.Email = user.Email;
+                }
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.Contact (GET)");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Contact(ContactViewModel model)
         {
-            if (!User.Identity.IsAuthenticated)
+            try
             {
-                return RedirectToAction("Login", "Authorization", new { area = "Admin" });
-            }
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return RedirectToAction("Login", "Authorization");
+                }
 
-            if (ModelState.IsValid)
+                if (ModelState.IsValid)
+                {
+                    string subject = model.Subject;
+                    string message = $"Kullanıcı Adı: {model.UserName}\nE-posta: {model.Email}\n\nMesaj:\n{model.Message}";
+
+                    await _service.EmailSender.SendEmailAsync("admin@example.com", subject, message);
+                    return RedirectToAction("Contact");
+                }
+
+                return View(model);
+            }
+            catch (Exception ex)
             {
-                string subject = model.Subject;
-                string message = $"Kullanıcı Adı: {model.UserName}\nE-posta: {model.Email}\n\nMesaj:\n{model.Message}";
-
-                await _service.EmailSender.SendEmailAsync("admin@example.com", subject, message);
-
-                TempData["Message"] = "Mesajınız başarıyla gönderildi.";
-                return RedirectToAction("Contact");
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.Contact (POST)");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
             }
+        }
 
-            return View(model);
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> DeleteMyAccount()
+        {
+            var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authorization");
+            }
+            ViewBag.ShowSidebar = false;
+            return View(user);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> DeleteMyAccount(string userId, string Email, string Password)
+        {
+            try
+            {
+                // Kullanıcıyı al
+                var user = await _service.UserManager.GetUserAsync(HttpContext.User);
+
+                if (user == null || user.Id != userId)
+                {
+                    return RedirectToAction("Error", "Error", new { statusCode = 403 });
+                }
+
+                // E-posta doğrulaması
+                if (!string.Equals(user.Email, Email, StringComparison.OrdinalIgnoreCase))
+                {
+                    ModelState.AddModelError("", "E-posta adresi yanlış.");
+                    return View(user);
+                }
+
+                // Şifre doğrulaması
+                var passwordCheck = await _service.UserManager.CheckPasswordAsync(user, Password);
+                if (!passwordCheck)
+                {
+                    ModelState.AddModelError("", "Şifre yanlış.");
+                    return View(user);
+                }
+
+                if (user.Photo != null && user.Photo != "DefaultUser.jpg")
+                {
+                    _imageHelper.DeleteImage(user.Photo, "UserImages");
+                }
+
+                // Kullanıcıyı sil
+                var result = await _service.UserManager.DeleteAsync(user);
+                if (!result.Succeeded)
+                {
+                    return View();
+                }
+
+                await _service.SignInManager.SignOutAsync();
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in AppUserController.DeleteMyAccount (POST)");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
     }
 }

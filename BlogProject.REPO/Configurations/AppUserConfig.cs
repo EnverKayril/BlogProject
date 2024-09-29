@@ -37,16 +37,20 @@ namespace BlogProject.REPO.Configurations
             // Note that these relationships are configured with no navigation properties
 
             // Each User can have many UserClaims
-            builder.HasMany<AppUserClaim>().WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
+            builder.HasMany<AppUserClaim>().WithOne().HasForeignKey(uc => uc.UserId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
             // Each User can have many UserLogins
-            builder.HasMany<AppUserLogin>().WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
+            builder.HasMany<AppUserLogin>().WithOne().HasForeignKey(ul => ul.UserId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
             // Each User can have many UserTokens
-            builder.HasMany<AppUserToken>().WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
+            builder.HasMany<AppUserToken>().WithOne().HasForeignKey(ut => ut.UserId).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
             // Each User can have many entries in the UserRole join table
-            builder.HasMany<AppUserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+            builder.HasMany<AppUserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(u => u.Articles).WithOne(a => a.AppUser).HasForeignKey(a => a.AppUserId).OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(u => u.Comments).WithOne(c => c.AppUser).HasForeignKey(c => c.AppUserId).OnDelete(DeleteBehavior.Cascade);
 
             var adminUser = new AppUser
             {

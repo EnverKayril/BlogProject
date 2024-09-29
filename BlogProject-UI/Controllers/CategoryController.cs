@@ -15,25 +15,42 @@ namespace BlogProject_UI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var categories = await _service.CategoryService.GetAllCategoriesAsync();
-            var sortedcategories = categories.OrderBy(c => c.Name);
-            return View(sortedcategories);
-        }
-
-        public async Task<IActionResult> Detail(string Id)
-        {
-            var category = await _service.CategoryService.GetCategoryByIdAsync(Id);
-
-            var articles = await _service.ArticleService.GetArticlesForHomePageAsync(Id);
-
-            var model = new CategoryDetailViewModel
+            try
             {
-                Category = category,
-                Articles = articles
-            };
-
-            return View(model);
+                var categories = await _service.CategoryService.GetAllCategoriesAsync();
+                var sortedCategories = categories.OrderBy(c => c.Name);
+                return View(sortedCategories);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in CategoryController.Index");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
         }
 
+        public async Task<IActionResult> Detail(string id)
+        {
+            try
+            {
+                var category = await _service.CategoryService.GetCategoryByIdAsync(id);
+                if (category == null)
+                {
+                    return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 404 });
+                }
+
+                var articles = await _service.ArticleService.GetArticlesForHomePageAsync(id);
+                var model = new CategoryDetailViewModel
+                {
+                    Category = category,
+                    Articles = articles
+                };
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Error occurred in CategoryController.Detail");
+                return RedirectToAction("HandleStatusCode", "Error", new { statusCode = 500 });
+            }
+        }
     }
 }
