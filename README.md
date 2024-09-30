@@ -1,5 +1,5 @@
 # BLOG PROJECT
-![Anasayfa](https://ibb.co/x7hznZW)
+![Blog](https://github.com/user-attachments/assets/da98603c-f2e6-4148-8ca6-1429c06be38e)
 ## Genel Özellikler
 - **Üyelik Sistemi**: E-posta ile kayıt ve mail doğrulama işlemleri.
 - **Kullanıcı Profili Yönetimi**: Kullanıcılar profil bilgilerini güncelleyebilir ve hesaplarını silebilir. Hesap silme işlemi tüm kullanıcı içerikleri ile birlikte gerçekleşir.
